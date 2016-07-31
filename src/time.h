@@ -331,7 +331,7 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime);
  * reference is maintained relative to the primary Epoch. This type of use
  * is not currently supported by this library, since tm_epoch is a global 
  * which is used by a number of functions. Passing tm_epoch around is going
- * to make it far more expensive as it it. 
+ * to make it far more expensive than it already is. 
  * 
  * These implementations are here for the sake of completeness. If you 
  * don't actually used the functions, the compiler with get rid of them. 
@@ -351,7 +351,7 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime);
 /**
  * Set the epoch time from an external real time source. 
  * 
- * Note that for follow to work, both the new epoch and the old one 
+ * Note that for 'follow' to work, both the new epoch and the old one 
  * should be representable against the old epoch.
  * 
  * @param *rtime Pointer to the time_real_t in which the desired epoch
