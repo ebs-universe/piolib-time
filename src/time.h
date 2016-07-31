@@ -323,10 +323,28 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime);
 /**
  * @name Epoch Manipulation Functions
  * 
- * Functions to manipule Real time. Use these functions sparingly, 
- * and usually only when dealing with user-generated or externally
- * generated information.
+ * Functions to manipule the Epoch. These functions should be avoided in 
+ * all but the most demanding of applications. The default configuration
+ * of the library uses the Unix Epoch and can handle times upto 2038 AD. 
  * 
+ * Variable Epochs will most likely be useful in cases where a second time 
+ * reference is maintained relative to the primary Epoch. This type of use
+ * is not currently supported by this library, since tm_epoch is a global 
+ * which is used by a number of functions. Passing tm_epoch around is going
+ * to make it far more expensive as it it. 
+ * 
+ * These implementations are here for the sake of completeness. If you 
+ * don't actually used the functions, the compiler with get rid of them. 
+ * 
+ * In the future, it may be possible to adapt these implementations to 
+ * provide one or more of the following : 
+ * 
+ *    - A variable epoch operating alongside a high resolution system
+ *      clock. The high resolution of the clock will shorten the epoch 
+ *      validity for the same size of the clock.
+ *    - Allow the use of these functions to maintain secondary / 
+ *      multiple epochs. An example use case could be the maintenance 
+ *      of TLE Epochs. 
  */
 /**@{*/ 
 
