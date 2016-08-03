@@ -37,9 +37,9 @@
 
 tm_system_t tm_current;
 
-tm_real_t tm_epoch = {19, 70, 1, 1, 0, 0, 0, 0};
-tm_real_t tm_internal_epoch = {19, 69, 3, 1, 0, 0, 0, 0};
-uint32_t tm_internal_epoch_offset = 26438400;
+tm_real_t                tm_epoch = {19, 70, 1, 1, 0, 0, 0, 0};
+tm_real_t       tm_internal_epoch = {19, 69, 3, 1, 0, 0, 0, 0};
+uint32_t tm_internal_epoch_offset =  26438400;
 uint8_t use_epoch = 1;
 
 uint8_t tm_installed_epoch_handlers = 0;
@@ -49,7 +49,9 @@ void tm_init(void){
     // Set this time using an RTC source.
     tm_current.seconds = 0;
     tm_current.frac = 0;
-    memset(&epoch_change_handlers, 0, TIME_MAX_EPOCH_CHANGE_HANDLERS * sizeof(void (*)(tm_sdelta_t *)));
+    memset(&epoch_change_handlers, 0, 
+           TIME_MAX_EPOCH_CHANGE_HANDLERS * sizeof(void (*)(tm_sdelta_t *)));
+    systick_init();
     return;
 }
 
@@ -164,7 +166,8 @@ void tm_rdelta_from_sdelta(tm_sdelta_t* sdelta, tm_rdelta_t* rdelta){
     return;
 }
 
-static const int16_t days_to_month[]={0, 306, 337, 0, 31, 61, 92, 122, 153, 184, 214, 245, 275};
+static const int16_t days_to_month[]=
+    {0, 306, 337, 0, 31, 61, 92, 122, 153, 184, 214, 245, 275};
 
 static uint16_t gyear(tm_real_t * rtime);
 
@@ -271,7 +274,8 @@ void tm_set_epoch(tm_real_t* rtime, uint8_t follow){
 
 void tm_register_epoch_change(void epoch_change_handler(tm_sdelta_t *)){
     if (tm_installed_epoch_handlers < TIME_MAX_EPOCH_CHANGE_HANDLERS){
-        epoch_change_handlers[tm_installed_epoch_handlers] = epoch_change_handler;
+        epoch_change_handlers[tm_installed_epoch_handlers] = 
+                                                epoch_change_handler;
         tm_installed_epoch_handlers ++;
     }
     return;
