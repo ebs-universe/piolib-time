@@ -50,7 +50,7 @@
 
 // This definition is informational only. 
 // Changing this number could have insidious consequences. 
-#define TIME_SYSTICK_PERIOD_uS          5000
+#define TIME_SYSTICK_PERIOD_uS          1000
 
 #define TIME_TICKS_PER_SECOND           (uint32_t)(1000000 / TIME_SYSTICK_PERIOD_uS)
 #define TIME_TICKS_PER_MINUTE           (TIME_TICKS_PER_SECOND * 60)
@@ -72,6 +72,8 @@
  */
 /**@{*/ 
 
+extern void systick_init(void);
+
 /**@}*/ 
 
 /**
@@ -82,7 +84,7 @@
 /**@{*/ 
 
 typedef struct TM_SYSTEM_t{
-    uint8_t frac;
+    uint16_t frac;
     uint32_t seconds;
 }tm_system_t;
 
@@ -95,7 +97,7 @@ typedef struct TM_SYSTEM_t{
  */
 typedef struct TM_SDELTA_t{
     uint32_t seconds;
-    uint8_t frac;
+    uint16_t frac;
     uint8_t sgn;
 }tm_sdelta_t;
 
@@ -121,7 +123,7 @@ typedef struct TM_REAL_t{
     uint8_t hours;
     uint8_t minutes;
     uint8_t seconds;
-    uint8_t frac; 
+    uint16_t frac; 
 }tm_real_t;
 
 
@@ -137,7 +139,7 @@ typedef struct TM_REAL_t{
  */
 typedef struct TM_RDELTA_t{
     uint8_t sgn;
-    uint8_t frac;
+    uint16_t frac;
     uint8_t seconds;
     uint8_t minutes;
     uint8_t hours;

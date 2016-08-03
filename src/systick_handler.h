@@ -34,11 +34,11 @@
 static inline void time_systick_handler(void);
 
 static inline void time_systick_handler(void){
-    if (time_current.frac == TIME_TICKS_PER_SECOND -1){
-        time_current.seconds ++;
-        time_current.frac = 0;
+    if (tm_current.frac == TIME_TICKS_PER_SECOND -1){
+        tm_current.seconds ++;
+        tm_current.frac = 0;
     }
     else{
-        time_current.frac ++;
+        tm_current.frac ++;
     }
 }
