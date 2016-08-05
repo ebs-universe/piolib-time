@@ -34,19 +34,19 @@
 
 #include <string.h>
 #include "time.h"
+#include "sync.h"
 
-tm_system_t tm_current;
-
-tm_real_t                tm_epoch = {19, 70, 1, 1, 0, 0, 0, 0};
-tm_real_t       tm_internal_epoch = {19, 69, 3, 1, 0, 0, 0, 0};
+tm_system_t tm_current = {0, 0};
+tm_real_t tm_epoch =          {19, 70, 1, 1, 0, 0, 0, 0};
+tm_real_t tm_internal_epoch = {19, 69, 3, 1, 0, 0, 0, 0};
 uint32_t tm_internal_epoch_offset =  26438400;
 uint8_t use_epoch = 1;
+int8_t tm_leapseconds = 0;
 
 uint8_t tm_installed_epoch_handlers = 0;
 void ( *epoch_change_handlers[TIME_MAX_EPOCH_CHANGE_HANDLERS] )(tm_sdelta_t *);
 
 void tm_init(void){
-    // Set this time using an RTC source.
     tm_current.seconds = 0;
     tm_current.frac = 0;
     memset(&epoch_change_handlers, 0, 
@@ -204,7 +204,7 @@ void tm_stime_from_rtime(tm_real_t* rtime, tm_system_t * stime){
     stime->seconds = ((          days * TIME_SECONDS_PER_DAY    )+
                       (  rtime->hours * TIME_SECONDS_PER_HOUR   )+
                       (rtime->minutes * TIME_SECONDS_PER_MINUTE )+ 
-                      (rtime->seconds                           ));
+                      (rtime->seconds) + (tm_leapseconds)       );
     stime->seconds -= tm_internal_epoch_offset;
     return;
 }
@@ -259,7 +259,7 @@ void tm_set_epoch(tm_real_t* rtime, uint8_t follow){
     else{
         clear_sdelta(&sdelta);
     }
-    memcpy((void*)&tm_epoch, (void*)rtime, sizeof(tm_real_t));
+    memcpy((void*)(&tm_epoch), (void*)rtime, sizeof(tm_real_t));
     tm_set_interal_epoch(rtime);
     clear_stime(&tm_current);
     tm_current.seconds = tm_internal_epoch_offset;

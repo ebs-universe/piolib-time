@@ -46,6 +46,10 @@
  */
 /**@{*/ 
 
+#define TIME_DEFAULT_EPOCH_CENTURY      19
+#define TIME_DEFAULT_EPOCH_YEAR         70 
+#define TIME_DEFAULT_EPOCH_MONTH        1
+#define TIME_DEFAULT_EPOCH_DATE         1
 #define TIME_MAX_EPOCH_CHANGE_HANDLERS  2
 
 // This definition is informational only. 
@@ -65,24 +69,23 @@
 /**@}*/ 
 
 /**
- * @name Time Low Level Interface Functions
- * 
- * These functions should be provided by the application/HAL and must be 
- * available at link time.
- */
-/**@{*/ 
-
-extern void systick_init(void);
-
-/**@}*/ 
-
-/**
  * @name Time Types
  * 
  * Various type definitions related to time storage and exchange.
  */
 /**@{*/ 
 
+/**
+ * @brief System Time Storage Type
+ * 
+ * This (struct) type stores a 'system' time. The 'frac' component is 
+ * based on the least count created by the system tick. 
+ * 
+ * The 'seconds' component is a count of the number of seconds elapsed 
+ * since the epoch, defined by tm_epoch, plus the number of leap seconds
+ * defined in tm_leapseconds.
+ * 
+ */
 typedef struct TM_SYSTEM_t{
     uint16_t frac;
     uint32_t seconds;
@@ -96,8 +99,8 @@ typedef struct TM_SYSTEM_t{
  * 
  */
 typedef struct TM_SDELTA_t{
-    uint32_t seconds;
     uint16_t frac;
+    uint32_t seconds;
     uint8_t sgn;
 }tm_sdelta_t;
 
@@ -111,8 +114,9 @@ typedef struct TM_SDELTA_t{
  * This form of time storage is always going to be expensive, and should
  * therefore be used sparingly. 
  * 
- * The content of this type will / should always be interpreted as a 
- * UTC time (GMT+0000).
+ * This type is not time-zone aware, and should always be interpreted as a 
+ * UTC time (GMT+0000). See the documentation of time.h for further detail
+ * about the interpretation of time by this library.
  * 
  */
 typedef struct TM_REAL_t{
@@ -133,8 +137,8 @@ typedef struct TM_REAL_t{
  * This (struct) type stores a 'real' time difference. The 'residual' 
  * component is based on the least count created by the system tick. 
  * 
- * This form of time storage is always going to be expensive, and should
- * therefore be used sparingly. 
+ * This form of time storage is always going to be expensive, and 
+ * should therefore be used sparingly. 
  * 
  */
 typedef struct TM_RDELTA_t{
@@ -149,16 +153,30 @@ typedef struct TM_RDELTA_t{
 /**@}*/ 
 
 /**
+ * @name Time Low Level Interface Functions
+ * 
+ * These functions should be provided by the application/HAL and must be 
+ * available at link time.
+ */
+/**@{*/ 
+
+extern void systick_init(void);
+
+/**@}*/ 
+
+/**
  * @name Time Containers
  * 
  * These containers are defined internally in the library.
  */
 /**@{*/ 
 
-extern tm_system_t   tm_current;
-extern tm_real_t     tm_user_epoch;
-extern tm_real_t     tm_epoch;
-extern uint8_t       use_epoch;
+extern tm_system_t tm_current;
+extern tm_real_t   tm_epoch;
+extern int8_t     tm_leapseconds;
+extern tm_real_t   tm_internal_epoch;
+extern uint32_t    tm_internal_epoch_offset;
+extern uint8_t     use_epoch;
 extern void (*epoch_change_handlers[TIME_MAX_EPOCH_CHANGE_HANDLERS])(tm_sdelta_t *);
 
 /**@}*/ 
@@ -217,6 +235,8 @@ void clear_rdelta(tm_rdelta_t* rdelta);
 /**
  * Get the current system time. 
  * 
+ * TODO This should be a critical section.
+ * 
  * @param *stime Pointer to the location where the current system timestamp 
  *               should be copied to.
  */
@@ -229,7 +249,7 @@ static inline void tm_current_time(tm_system_t * stime){
 
 /**
  * Get the difference between two system times as a system time delta.
- * 
+ * (t2 - t1)
  * Note that both times must be against the same epoch time.
  * 
  * @param *t1 Pointer to the first timestamp (*tm_system_t)
