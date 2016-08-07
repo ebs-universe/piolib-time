@@ -35,6 +35,7 @@
 #include "stddef.h"
 #include "time.h"
 
+
 typedef struct CRON_JOB_t{
     tm_system_t   texec;
     tm_sdelta_t * tafter_p;
@@ -47,8 +48,11 @@ extern cron_job_t * cron_nextjob_p;
 
 void clear_cron_job(cron_job_t* job_p);
 
-void create_cron_job(cron_job_t * job_p, void handler(void), 
-                     tm_system_t * texec_p, tm_sdelta_t * tafter_p);
+void create_cron_job_abs(cron_job_t * job_p, void handler(void), 
+                         tm_system_t * texec_p, tm_sdelta_t * tafter_p);
+
+void create_cron_job_rel(cron_job_t * job_p, void handler(void), 
+                         tm_sdelta_t * trelexec_p, tm_sdelta_t * tafter_p);
 
 void cron_insert_job(cron_job_t * job_p);
 
@@ -61,6 +65,6 @@ static inline void cron_replace_job(cron_job_t * job_p){
     cron_insert_job(job_p);
 }
 
-void cron_state_machine(void);
+void cron_poll(void);
 
 #endif
