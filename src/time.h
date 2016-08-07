@@ -247,6 +247,8 @@ static inline void tm_current_time(tm_system_t * stime){
     return;
 }
 
+int8_t tm_cmp_stime(tm_system_t * t1, tm_system_t * t2);
+
 /**
  * Get the difference between two system times as a system time delta.
  * (t2 - t1)

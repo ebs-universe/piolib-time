@@ -90,6 +90,24 @@ void clear_rdelta(tm_rdelta_t* rdelta){
     return;
 }
 
+int8_t tm_cmp_stime(tm_system_t * t1, tm_system_t * t2){
+    if (t1->seconds < t2->seconds){
+        return (-1);
+    }
+    else if (t1->seconds > t2->seconds){
+        return (1);
+    }
+    else if (t1->frac < t2->frac){
+        return (-1);
+    }
+    else if (t1->frac > t2->frac){
+        return (1);
+    }
+    else{
+        return 0;
+    }
+}
+
 void tm_get_sdelta(tm_system_t * t1, tm_system_t * t2, tm_sdelta_t * sdelta){
     uint8_t cfrac = 0;
     if (t2->frac > t1->frac){
