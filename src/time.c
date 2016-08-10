@@ -32,6 +32,7 @@
  * @see time.h
  */
 
+#include <ucdm/ucdm.h>
 #include <string.h>
 #include "time.h"
 #include "sync.h"
@@ -46,11 +47,22 @@ int8_t tm_leapseconds = 0;
 uint8_t tm_installed_epoch_handlers = 0;
 void ( *epoch_change_handlers[TIME_MAX_EPOCH_CHANGE_HANDLERS] )(tm_sdelta_t *);
 
-void tm_init(void){
+#define TM_UCDM_STIME_LEN     (sizeof(tm_system_t) / 2 + (sizeof(tm_system_t) % 2 != 0))
+#define TM_UCDM_RTIME_LEN     (sizeof(tm_real_t)   / 2 + (sizeof(tm_real_t) % 2 != 0))
+
+void tm_init(uint16_t ucdm_base_address){
     tm_current.seconds = 0;
     tm_current.frac = 0;
     memset(&epoch_change_handlers, 0, 
            TIME_MAX_EPOCH_CHANGE_HANDLERS * sizeof(void (*)(tm_sdelta_t *)));
+    for (uint8_t i=0; i < TM_UCDM_STIME_LEN; i ++){
+        ucdm_redirect_regr_ptr(ucdm_base_address + i, 
+                               ((uint16_t *)(void *)(&tm_current) + i));
+    }
+    for (uint8_t i=0; i < TM_UCDM_RTIME_LEN; i ++){
+        ucdm_redirect_regr_ptr(ucdm_base_address + TM_UCDM_STIME_LEN + i,
+                               ((uint16_t *)(void *)(&tm_epoch) + i));
+    }
     systick_init();
     return;
 }

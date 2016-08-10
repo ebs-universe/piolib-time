@@ -172,11 +172,11 @@ extern void systick_init(void);
 /**@{*/ 
 
 extern tm_system_t tm_current;
-extern tm_real_t   tm_epoch;
-extern int8_t     tm_leapseconds;
-extern tm_real_t   tm_internal_epoch;
-extern uint32_t    tm_internal_epoch_offset;
-extern uint8_t     use_epoch;
+extern   tm_real_t tm_epoch;
+extern      int8_t tm_leapseconds;
+extern   tm_real_t tm_internal_epoch;
+extern    uint32_t tm_internal_epoch_offset;
+extern     uint8_t use_epoch;
 extern void (*epoch_change_handlers[TIME_MAX_EPOCH_CHANGE_HANDLERS])(tm_sdelta_t *);
 
 /**@}*/ 
@@ -190,7 +190,7 @@ extern void (*epoch_change_handlers[TIME_MAX_EPOCH_CHANGE_HANDLERS])(tm_sdelta_t
 /**
  * Intitialize time library constructs
  */
-void tm_init(void);
+void tm_init(uint16_t ucdm_base_address);
 
 /**
  * Clear a time_system_t instance.

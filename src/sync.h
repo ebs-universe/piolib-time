@@ -102,6 +102,7 @@
 #define TM_SYNC_STATE_WAIT_DELAY_IN  3
 #define TM_SYNC_STATE_WAIT_DELAY_OUT 4
 
+#include <ds/avltree.h>
 #include "time.h"
 
 typedef struct TM_SYNC_SM_t{
@@ -112,11 +113,13 @@ typedef struct TM_SYNC_SM_t{
     tm_system_t t2p;
 }tm_sync_sm_t;
 
-void tm_sync_init(uint8_t handlers_base_address);
+void tm_sync_init(uint16_t handlers_base_address);
 void tm_sync_request_host(void);
-void tm_sync_handler(uint8_t addr);
+void tm_sync_handler(uint16_t addr);
 
 uint8_t tm_sync_current_to_rtc(void);
 uint8_t tm_sync_current_from_rtc(void);
+
+extern avlt_node_t  tm_avlt_sync_handler_node;
 
 #endif

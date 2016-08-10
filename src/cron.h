@@ -7,8 +7,8 @@
  *    Embedded bootstraps : time library
  * 
  *    This program is free software; you can redistribute it and/or modify
- *    it under the terms of the GNU Lesser General Public License as published by
- *    the Free Software Foundation; either version 3 of the License, or
+ *    it under the terms of the GNU Lesser General Public License as published 
+ *    by the Free Software Foundation; either version 3 of the License, or
  *    (at your option) any later version.
  * 
  *    This program is distributed in the hope that it will be useful,
@@ -25,6 +25,12 @@
 /**
  * @file cron.h
  * @brief Cron-like scheduling framework for embebedded systems.
+ * 
+ * TODO The function of the job queue seems to be, in essence, a min-heap 
+ * ordered on the complex key defined by `texec`. This should be verified. 
+ * If this is so, the conversion of the implementation from the current 
+ * doubly linked list to that of a heap may be considered. Whether or 
+ * not this will lead to a reduction in complexity is as yet unknown.
  * 
  * @see cron.c
  */

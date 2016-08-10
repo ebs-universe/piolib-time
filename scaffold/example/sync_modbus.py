@@ -70,7 +70,7 @@ if __name__ == '__main__':
               (seconds & 0x0000FFFF),
               (frac & 0xFFFF0000) >> 16,
               (frac & 0x0000FFFF)]
-        print seconds, milliseconds
+        print "SYNC_STRT ", seconds, milliseconds
         request = register_write_message.WriteMultipleRegistersRequest(
             address=time_address_base + 8, values=ts, unit=address
         )
@@ -87,7 +87,7 @@ if __name__ == '__main__':
               (seconds & 0x0000FFFF),
               (frac & 0xFFFF0000) >> 16,
               (frac & 0x0000FFFF)]
-        print seconds, milliseconds
+        print "SYNC STOP ", seconds, milliseconds
         request = register_write_message.WriteMultipleRegistersRequest(
             address=time_address_base + 8, values=ts, unit=address
         )
@@ -99,7 +99,7 @@ if __name__ == '__main__':
               (seconds & 0x0000FFFF),
               (frac & 0xFFFF0000) >> 16,
               (frac & 0x0000FFFF)]
-        print seconds, milliseconds
+        print "CHK STRT ", seconds, milliseconds
 
         request = register_read_message.ReadHoldingRegistersRequest(
             address=time_address_base, count=3, unit=address
@@ -107,7 +107,7 @@ if __name__ == '__main__':
         response = mb_client.execute(request)
         seconds = (response.registers[2] << 16) + response.registers[1]
         milliseconds = (response.registers[0])
-        print seconds, milliseconds
+        print "CHK RECV ", seconds, milliseconds
 
         seconds, milliseconds = get_time()
         frac = milliseconds
@@ -115,4 +115,4 @@ if __name__ == '__main__':
               (seconds & 0x0000FFFF),
               (frac & 0xFFFF0000) >> 16,
               (frac & 0x0000FFFF)]
-        print seconds, milliseconds
+        print "CHK STOP ", seconds, milliseconds

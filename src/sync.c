@@ -34,15 +34,18 @@
 #include "time.h"
 #include "sync.h"
 
+avlt_node_t  tm_avlt_sync_handler_node;
 tm_sync_sm_t tm_sync_sm;
 
-void tm_sync_init(uint8_t handlers_base_address){
+void tm_sync_init(uint16_t handlers_base_address){
     // Setup Host Interface Registers
     for(uint8_t i=0; i<4; i++){
         ucdm_enable_regw(handlers_base_address + i);        
     }
     // Setup Host Sync Handler(s)
-    ucdm_install_regw_handler(handlers_base_address + 3, &tm_sync_handler);
+    ucdm_install_regw_handler(handlers_base_address + 3, 
+                              &tm_avlt_sync_handler_node, 
+                              &tm_sync_handler);
     tm_sync_sm.state = TM_SYNC_STATE_IDLE;
 }
 
@@ -99,7 +102,7 @@ static inline void tm_sync_apply(void){
 }
 
 
-void tm_sync_handler(uint8_t addr){
+void tm_sync_handler(uint16_t addr){
     switch(tm_sync_sm.state){
         case TM_SYNC_STATE_PREINIT:
             break;
@@ -108,9 +111,9 @@ void tm_sync_handler(uint8_t addr){
         case TM_SYNC_STATE_IDLE:
             tm_sync_sm.state = TM_SYNC_STATE_WAIT_DELAY_OUT;
             // Got the sync timestamp from the host. 
-            tm_sync_sm.t1.seconds = ((uint32_t)(ucdm_register[addr-3]) << 16) |
-                                     (uint32_t)(ucdm_register[addr-2]);
-            tm_sync_sm.t1.frac = ucdm_register[addr];
+            tm_sync_sm.t1.seconds = ((uint32_t)(ucdm_register[addr-3].data) << 16) |
+                                     (uint32_t)(ucdm_register[addr-2].data);
+            tm_sync_sm.t1.frac = ucdm_register[addr].data;
             tm_current_time(&(tm_sync_sm.t1p));
             break;
         case TM_SYNC_STATE_WAIT_DELAY_OUT:
@@ -121,9 +124,9 @@ void tm_sync_handler(uint8_t addr){
             break;
         case TM_SYNC_STATE_WAIT_DELAY_IN:
             // Host returned its timestamp for delay calculation.
-            tm_sync_sm.t2p.seconds = ((uint32_t)(ucdm_register[addr-3]) << 16) | 
-                                      (uint32_t)(ucdm_register[addr-2]);
-            tm_sync_sm.t2p.frac = ucdm_register[addr];
+            tm_sync_sm.t2p.seconds = ((uint32_t)(ucdm_register[addr-3].data) << 16) | 
+                                      (uint32_t)(ucdm_register[addr-2].data);
+            tm_sync_sm.t2p.frac = ucdm_register[addr].data;
             tm_sync_sm.state = TM_SYNC_STATE_IDLE;
             // All information is now available. Calculate and apply.
             tm_sync_apply();
@@ -133,4 +136,3 @@ void tm_sync_handler(uint8_t addr){
     }
     return;
 }
-
