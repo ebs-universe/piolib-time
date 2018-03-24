@@ -37,16 +37,17 @@
 avlt_node_t  tm_avlt_sync_handler_node;
 tm_sync_sm_t tm_sync_sm;
 
-void tm_sync_init(uint16_t handlers_base_address){
+uint16_t tm_sync_init(uint16_t ucdm_next_address){
     // Setup Host Interface Registers
-    for(uint8_t i=0; i<4; i++){
-        ucdm_enable_regw(handlers_base_address + i);        
+    for(uint8_t i=0; i<4; i++, ucdm_next_address++){
+        ucdm_enable_regw(ucdm_next_address);        
     }
     // Setup Host Sync Handler(s)
-    ucdm_install_regw_handler(handlers_base_address + 3, 
+    ucdm_install_regw_handler(ucdm_next_address - 1, 
                               &tm_avlt_sync_handler_node, 
                               &tm_sync_handler);
     tm_sync_sm.state = TM_SYNC_STATE_IDLE;
+    return ucdm_next_address;
 }
 
 void tm_sync_request_host(void){

@@ -44,8 +44,8 @@
  * maintain it's own time, and does so with the implementation included
  * in this library (or one compatible with it). 
  * 
- * This implementation also that the following pieces of information are
- * known to both the host and the device : 
+ * This implementation also assume that the following pieces of information 
+ * are known to both the host and the device : 
  *   - epoch, as in `tm_epoch`
  *   - resolution of the frac, as in `TIME_SYSTICKS_PER_SECOND`
  * 
@@ -113,7 +113,7 @@ typedef struct TM_SYNC_SM_t{
     tm_system_t t2p;
 }tm_sync_sm_t;
 
-void tm_sync_init(uint16_t handlers_base_address);
+uint16_t tm_sync_init(uint16_t ucdm_next_address);
 void tm_sync_request_host(void);
 void tm_sync_handler(uint16_t addr);
 

@@ -33,7 +33,7 @@
 
 cron_job_t * cron_nextjob_p = NULL;
 
-void clear_cron_job(cron_job_t* job_p){
+void clear_cron_job(cron_job_t * job_p){
     cron_cancel_job(job_p);
     job_p->handler = NULL;
     job_p->nextjob = NULL;

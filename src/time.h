@@ -190,33 +190,33 @@ extern void (*epoch_change_handlers[TIME_MAX_EPOCH_CHANGE_HANDLERS])(tm_sdelta_t
 /**
  * Intitialize time library constructs
  */
-void tm_init(uint16_t ucdm_base_address);
+uint16_t tm_init(uint16_t ucdm_base_address);
 
 /**
  * Clear a time_system_t instance.
  * 
- * @param *stime Pointer to the time_system_t to clear.
+ * @param stime Pointer to the time_system_t to clear.
  */
 void clear_stime(tm_system_t* stime);
 
 /**
  * Clear a time_sdelta_t instance.
  * 
- * @param *sdelta Pointer to the time_sdelta_t to clear.
+ * @param sdelta Pointer to the time_sdelta_t to clear.
  */
 void clear_sdelta(tm_sdelta_t* sdelta);
 
 /**
  * Clear a time_real_t instance.
  * 
- * @param *rtime Pointer to the time_real_t to clear.
+ * @param rtime Pointer to the time_real_t to clear.
  */
 void clear_rtime(tm_real_t* rtime);
 
 /**
  * Clear a time_delta_t instance.
  * 
- * @param *rdelta Pointer to the time_delta_t to clear.
+ * @param rdelta Pointer to the time_delta_t to clear.
  */
 void clear_rdelta(tm_rdelta_t* rdelta);
 
@@ -237,7 +237,7 @@ void clear_rdelta(tm_rdelta_t* rdelta);
  * 
  * TODO This should be a critical section.
  * 
- * @param *stime Pointer to the location where the current system timestamp 
+ * @param stime Pointer to the location where the current system timestamp 
  *               should be copied to.
  */
 static inline void tm_current_time(tm_system_t * stime);
@@ -254,9 +254,9 @@ int8_t tm_cmp_stime(tm_system_t * t1, tm_system_t * t2);
  * (t2 - t1)
  * Note that both times must be against the same epoch time.
  * 
- * @param *t1 Pointer to the first timestamp (*tm_system_t)
- * @param *t2 Pointer to the second timestamp (*tm_system_t)
- * @param *sdelta Poiter to the location where the delta should be stored
+ * @param t1 Pointer to the first timestamp (*tm_system_t)
+ * @param t2 Pointer to the second timestamp (*tm_system_t)
+ * @param sdelta Poiter to the location where the delta should be stored
  */
 void tm_get_sdelta(tm_system_t * t1, tm_system_t * t2, tm_sdelta_t * sdelta);
 
@@ -264,8 +264,8 @@ void tm_get_sdelta(tm_system_t * t1, tm_system_t * t2, tm_sdelta_t * sdelta);
 /**
  * Apply a time difference to a time in system time. 
  * 
- * @param *t Pointer to (a copy of) the original timestamp. This will be overwritten.
- * @param *sdelta Pointer to the time difference to apply 
+ * @param t Pointer to (a copy of) the original timestamp. This will be overwritten.
+ * @param sdelta Pointer to the time difference to apply 
  */
 void tm_apply_sdelta(tm_system_t * t, tm_sdelta_t * sdelta);
 
@@ -286,16 +286,16 @@ void tm_apply_sdelta(tm_system_t * t, tm_sdelta_t * sdelta);
 /**
  * Convert a time_delta_t instance into systick units.
  * 
- * @param *rdelta Pointer to the time difference in real time units.
- * @param *sdelta Pointer to the tm_sdelta_t in which to store the result.
+ * @param rdelta Pointer to the time difference in real time units.
+ * @param sdelta Pointer to the tm_sdelta_t in which to store the result.
  */
 void tm_sdelta_from_rdelta(tm_rdelta_t* rdelta, tm_sdelta_t* sdelta);
 
 /**
  * Convert a time difference in systick units into a real time difference.
  * 
- * @param *sdelta Pointer to the time difference in system time units.
- * @param *rdelta Pointer to the tm_rdelta_t in which to store the result.
+ * @param sdelta Pointer to the time difference in system time units.
+ * @param rdelta Pointer to the tm_rdelta_t in which to store the result.
  */
 void tm_rdelta_from_sdelta(tm_sdelta_t* sdelta, tm_rdelta_t * rdelta);
 
@@ -303,8 +303,8 @@ void tm_rdelta_from_sdelta(tm_sdelta_t* sdelta, tm_rdelta_t * rdelta);
 /**
  * Apply a real time difference to a time in systick units.
  * 
- * @param *t Pointer to (a copy of) the original timestamp. This will be overwritten.
- * @param *rdelta Pointer to the tm_rdelta_t in which the desired difference is stored.
+ * @param t Pointer to (a copy of) the original timestamp. This will be overwritten.
+ * @param rdelta Pointer to the tm_rdelta_t in which the desired difference is stored.
  */
 static inline void tm_apply_rdelta(tm_system_t * t, tm_rdelta_t * rdelta);
 
@@ -322,8 +322,8 @@ static inline void tm_apply_rdelta(tm_system_t * t, tm_rdelta_t * rdelta){
  * 
  * @todo Align to timegm. 
  * 
- * @param *rtime The real time (as a pointer to a tm_real_t instance)
- * @param *stime Pointer to the tm_system_t in which to store the result.
+ * @param rtime The real time (as a pointer to a tm_real_t instance)
+ * @param stime Pointer to the tm_system_t in which to store the result.
  */
 void tm_stime_from_rtime(tm_real_t* rtime, tm_system_t* stime);
 
@@ -335,8 +335,8 @@ void tm_stime_from_rtime(tm_real_t* rtime, tm_system_t* stime);
  * 
  * @todo Align to gmtime
  * 
- * @param *stime The system time (as a pointer to a time_system_t instance)
- * @param *rtime Pointer to the tm_real_t in which to store the result.
+ * @param stime The system time (as a pointer to a time_system_t instance)
+ * @param rtime Pointer to the tm_real_t in which to store the result.
  *              represented by stime.
  */
 void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime);
@@ -378,7 +378,7 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime);
  * Note that for 'follow' to work, both the new epoch and the old one 
  * should be representable against the old epoch.
  * 
- * @param *rtime Pointer to the time_real_t in which the desired epoch
+ * @param rtime Pointer to the time_real_t in which the desired epoch
  *               is stored
  * @param follow Whether the system should try to adjust stored 
  *               timestamps to the new epoch.

@@ -50,21 +50,21 @@ void ( *epoch_change_handlers[TIME_MAX_EPOCH_CHANGE_HANDLERS] )(tm_sdelta_t *);
 #define TM_UCDM_STIME_LEN     (sizeof(tm_system_t) / 2 + (sizeof(tm_system_t) % 2 != 0))
 #define TM_UCDM_RTIME_LEN     (sizeof(tm_real_t)   / 2 + (sizeof(tm_real_t) % 2 != 0))
 
-void tm_init(uint16_t ucdm_base_address){
+uint16_t tm_init(uint16_t ucdm_next_address){
     tm_current.seconds = 0;
     tm_current.frac = 0;
     memset(&epoch_change_handlers, 0, 
            TIME_MAX_EPOCH_CHANGE_HANDLERS * sizeof(void (*)(tm_sdelta_t *)));
-    for (uint8_t i=0; i < TM_UCDM_STIME_LEN; i ++){
-        ucdm_redirect_regr_ptr(ucdm_base_address + i, 
+    for (uint8_t i=0; i < TM_UCDM_STIME_LEN; i ++, ucdm_next_address++){
+        ucdm_redirect_regr_ptr(ucdm_next_address, 
                                ((uint16_t *)(void *)(&tm_current) + i));
     }
-    for (uint8_t i=0; i < TM_UCDM_RTIME_LEN; i ++){
-        ucdm_redirect_regr_ptr(ucdm_base_address + TM_UCDM_STIME_LEN + i,
+    for (uint8_t i=0; i < TM_UCDM_RTIME_LEN; i ++, ucdm_next_address++){
+        ucdm_redirect_regr_ptr(ucdm_next_address,
                                ((uint16_t *)(void *)(&tm_epoch) + i));
     }
     systick_init();
-    return;
+    return ucdm_next_address;;
 }
 
 void clear_stime(tm_system_t* stime){
