@@ -1,6 +1,6 @@
 /*
     Copyright (c) 
-      (c) 2016      Chintalagiri Shashank, Firefly Aerospace Pvt.Ltd.
+      (c) 2016-2018 Chintalagiri Shashank, Firefly Aerospace Pvt.Ltd.
       (c) 2010-2011 Chintalagiri Shashank, Jugnu, IIT Kanpur
 
     This file is part of
@@ -219,28 +219,28 @@ void tm_init(void);
 void tm_install_descriptor(void);
 
 /**
- * Clear a time_system_t instance.
+ * @brief Clear a time_system_t instance.
  * 
  * @param stime Pointer to the time_system_t to clear.
  */
 void tm_clear_stime(tm_system_t* stime);
 
 /**
- * Clear a time_sdelta_t instance.
+ * @brief Clear a time_sdelta_t instance.
  * 
  * @param sdelta Pointer to the time_sdelta_t to clear.
  */
 void tm_clear_sdelta(tm_sdelta_t* sdelta);
 
 /**
- * Clear a time_real_t instance.
+ * @brief Clear a time_real_t instance.
  * 
  * @param rtime Pointer to the time_real_t to clear.
  */
 void tm_clear_rtime(tm_real_t* rtime);
 
 /**
- * Clear a time_delta_t instance.
+ * @brief Clear a time_delta_t instance.
  * 
  * @param rdelta Pointer to the time_delta_t to clear.
  */
@@ -259,9 +259,7 @@ void tm_clear_rdelta(tm_rdelta_t* rdelta);
 /**@{*/ 
 
 /**
- * Get the current system time. 
- * 
- * TODO This should be a critical section.
+ * @brief Get the current system time. 
  * 
  * @param stime Pointer to the location where the current system timestamp 
  *               should be copied to.
@@ -276,8 +274,9 @@ static inline void tm_current_time(tm_system_t * stime){
 int8_t tm_cmp_stime(tm_system_t * t1, tm_system_t * t2);
 
 /**
- * Get the difference between two system times as a system time delta.
- * (t2 - t1)
+ * @brief Get the difference between two system times as a system 
+ *        time delta (t2 - t1)
+ * 
  * Note that both times must be against the same epoch time.
  * 
  * @param t1 Pointer to the first timestamp (*tm_system_t)
@@ -288,7 +287,7 @@ void tm_get_sdelta(tm_system_t * t1, tm_system_t * t2, tm_sdelta_t * sdelta);
 
 
 /**
- * Apply a time difference to a time in system time. 
+ * @brief Apply a time difference to a time in system time. 
  * 
  * @param t Pointer to (a copy of) the original timestamp. This will be overwritten.
  * @param sdelta Pointer to the time difference to apply 
@@ -310,7 +309,7 @@ void tm_apply_sdelta(tm_system_t * t, tm_sdelta_t * sdelta);
 /**@{*/ 
 
 /**
- * Convert a time_delta_t instance into systick units.
+ * @brief Convert a time_delta_t instance into systick units.
  * 
  * @param rdelta Pointer to the time difference in real time units.
  * @param sdelta Pointer to the tm_sdelta_t in which to store the result.
@@ -318,7 +317,7 @@ void tm_apply_sdelta(tm_system_t * t, tm_sdelta_t * sdelta);
 void tm_sdelta_from_rdelta(tm_rdelta_t* rdelta, tm_sdelta_t* sdelta);
 
 /**
- * Convert a time difference in systick units into a real time difference.
+ * @brief Convert a time difference in systick units into a real time difference.
  * 
  * @param sdelta Pointer to the time difference in system time units.
  * @param rdelta Pointer to the tm_rdelta_t in which to store the result.
@@ -327,7 +326,7 @@ void tm_rdelta_from_sdelta(tm_sdelta_t* sdelta, tm_rdelta_t * rdelta);
 
 
 /**
- * Apply a real time difference to a time in systick units.
+ * @brief Apply a real time difference to a time in systick units.
  * 
  * @param t Pointer to (a copy of) the original timestamp. This will be overwritten.
  * @param rdelta Pointer to the tm_rdelta_t in which the desired difference is stored.
@@ -341,10 +340,10 @@ static inline void tm_apply_rdelta(tm_system_t * t, tm_rdelta_t * rdelta){
 }
 
 /**
- * Get a system timestamp from a real time, against the current epoch.
- * If the current epoch is not set, returns 0.
+ * @brief Get a system timestamp from a real time, against the current epoch.
  * 
- * Currently only supports epochs with frac = 0.
+ * If the current epoch is not set, returns 0. Currently only supports 
+ * epochs with frac = 0.
  * 
  * @todo Align to timegm. 
  * 
@@ -354,10 +353,11 @@ static inline void tm_apply_rdelta(tm_system_t * t, tm_rdelta_t * rdelta){
 void tm_stime_from_rtime(tm_real_t* rtime, tm_system_t* stime);
 
 /**
- * Get the real time from a system timestamp against the current epoch.
+ * @brief Get the real time from a system timestamp against the current epoch.
+ * 
  * If the current epoch is not set, does nothing.
  * 
- * NOT IMPLEMENTED YET!
+ * @note NOT IMPLEMENTED YET!
  * 
  * @todo Align to gmtime
  * 
@@ -399,7 +399,7 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime);
 /**@{*/ 
 
 /**
- * Set the epoch time from an external real time source. 
+ * @brief Set the epoch time from an external real time source. 
  * 
  * Note that for 'follow' to work, both the new epoch and the old one 
  * should be representable against the old epoch.
@@ -412,14 +412,14 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime);
 void tm_set_epoch(tm_real_t* rtime, uint8_t follow);
 
 /**
- * Register a callback for changes to the epoch. Use this if you are 
- * storing timestamps for any reason. If possible, invalidate your
- * stored timestamps. If you need to retain that information, apply the
- * provided delta. 
+ * @brief Register a callback for changes to the epoch. 
  * 
- * If the change is not intended to be followed, the delta reported 
- * will be zero. In this case, the function should discard all timestamp 
- * information.
+ * Use this if you are storing timestamps for any reason. If possible, 
+ * invalidate your stored timestamps. If you need to retain that information, 
+ * apply the provided delta. 
+ * 
+ * If the change is not intended to be followed, the delta reported will be 
+ * zero. In this case, the function should discard all timestamp information.
  * 
  * @note This function should also be used to follow time sync where 
  *       applicable. 

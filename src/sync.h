@@ -84,11 +84,11 @@
  * 
  * This is the most complicated use of this implementation, with serious 
  * implications to system performance. When time is synchonized, this 
- * implementation will (should. not implemented yet) pass along the offset
- * to all subsystems which have stored timestamps, and all of them must 
- * apply these offsets for all relative timestamps they have which require
- * this precision. This kind of synchonization is likely to have dangerous
- * consequences to scheduled events and temporally marked data streams. 
+ * implementation will pass along the offset to all subsystems which have 
+ * stored timestamps, and all of them must apply these offsets for all 
+ * timestamps they have which require this precision. This kind of 
+ * synchonization is likely to have dangerous consequences to scheduled 
+ * events and temporally marked data streams. 
  * 
  * @see sync.c
  */
