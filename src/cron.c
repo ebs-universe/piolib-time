@@ -33,8 +33,16 @@
 
 cron_job_t * cron_nextjob_p = NULL;
 
-void clear_cron_job(cron_job_t * job_p){
-    cron_cancel_job(job_p);
+tm_epochchange_handler_t cron_change_handler = {NULL, 3, &tm_cron_epoch_change_handler};
+
+
+void tm_cron_init(void){
+    tm_register_epoch_change_handler(&cron_change_handler);
+}
+
+
+void tm_cron_clear_job(cron_job_t * job_p){
+    tm_cron_cancel_job(job_p);
     job_p->handler = NULL;
     job_p->nextjob = NULL;
     job_p->prevjob = NULL;
@@ -44,29 +52,29 @@ void clear_cron_job(cron_job_t * job_p){
 }
 
 
-void create_cron_job_abs(cron_job_t * job_p, void handler(void), 
+void tm_cron_create_job_abs(cron_job_t * job_p, void handler(void), 
                          tm_system_t * texec_p, tm_sdelta_t * tafter_p){
     job_p->handler = handler;
     job_p->tafter_p = tafter_p;
     job_p->texec.seconds = texec_p->seconds;
     job_p->texec.frac = texec_p->frac;
-    cron_insert_job(job_p);
+    tm_cron_insert_job(job_p);
     return;
 }
 
 
-void create_cron_job_rel(cron_job_t * job_p, void handler(void), 
+void tm_cron_create_job_rel(cron_job_t * job_p, void handler(void), 
                          tm_sdelta_t * trelexec_p, tm_sdelta_t * tafter_p){
     job_p->handler = handler;
     job_p->tafter_p = tafter_p;
     tm_current_time(&(job_p->texec));
     tm_apply_sdelta(&(job_p->texec), trelexec_p);
-    cron_insert_job(job_p);
+    tm_cron_insert_job(job_p);
     return;
 }
 
 
-void cron_insert_job(cron_job_t * job_p){
+void tm_cron_insert_job(cron_job_t * job_p){
     cron_job_t * walker = cron_nextjob_p;
     if (!walker){
         // There are no jobs to start with.
@@ -99,7 +107,7 @@ void cron_insert_job(cron_job_t * job_p){
 }
 
 
-void cron_cancel_job(cron_job_t * job_p){
+void tm_cron_cancel_job(cron_job_t * job_p){
     if (job_p->nextjob){
         job_p->nextjob->prevjob = job_p->prevjob;
     }
@@ -113,7 +121,7 @@ void cron_cancel_job(cron_job_t * job_p){
 }
 
 
-void cron_poll(void){
+void tm_cron_poll(void){
     if (!cron_nextjob_p){
         return;
     }
@@ -121,11 +129,19 @@ void cron_poll(void){
         cron_nextjob_p->handler();
         if (cron_nextjob_p->tafter_p){
             tm_apply_sdelta(&(cron_nextjob_p->texec), cron_nextjob_p->tafter_p);
-            cron_replace_job(cron_nextjob_p);
+            tm_cron_replace_job(cron_nextjob_p);
         }
         else{
             cron_nextjob_p = cron_nextjob_p->nextjob;
             cron_nextjob_p->prevjob = NULL;
         }
+    }
+}
+
+void tm_cron_epoch_change_handler(tm_sdelta_t * offset){
+    cron_job_t * walker = cron_nextjob_p;
+    while (walker){
+        tm_apply_sdelta(&(walker->texec), offset);
+        walker = walker->nextjob;
     }
 }

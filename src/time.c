@@ -32,10 +32,13 @@
  * @see time.h
  */
 
+#include <ds/sllist.h>
 #include <ucdm/ucdm.h>
+#include <ucdm/descriptor.h>
 #include <string.h>
 #include "time.h"
 #include "sync.h"
+
 
 tm_system_t tm_current = {0, 0};
 tm_real_t tm_epoch =          {19, 70, 1, 1, 0, 0, 0, 0};
@@ -44,43 +47,43 @@ uint32_t tm_internal_epoch_offset =  26438400;
 uint8_t use_epoch = 1;
 int8_t tm_leapseconds = 0;
 
-uint8_t tm_installed_epoch_handlers = 0;
-void ( *epoch_change_handlers[TIME_MAX_EPOCH_CHANGE_HANDLERS] )(tm_sdelta_t *);
+tm_epochchange_handler_t * epoch_handlers_root = NULL;
 
-#define TM_UCDM_STIME_LEN     (sizeof(tm_system_t) / 2 + (sizeof(tm_system_t) % 2 != 0))
-#define TM_UCDM_RTIME_LEN     (sizeof(tm_real_t)   / 2 + (sizeof(tm_real_t) % 2 != 0))
+descriptor_custom_t tm_epoch_descriptor = {NULL, DESCRIPTOR_TAG_TIME_EPOCH, 
+    sizeof(tm_real_t), DESCRIPTOR_ACCTYPE_PTR, {&tm_epoch}};
 
-uint16_t tm_init(uint16_t ucdm_next_address){
+/** @brief Time Library Version Descriptor */
+static descriptor_custom_t time_descriptor = {NULL, DESCRIPTOR_TAG_LIBVERSION,
+    sizeof(TIME_VERSION), DESCRIPTOR_ACCTYPE_PTR, {TIME_VERSION}};
+
+    
+void tm_install_descriptor(void)
+{
+    descriptor_install(&time_descriptor);
+}    
+
+void tm_init(void){
     tm_current.seconds = 0;
     tm_current.frac = 0;
-    memset(&epoch_change_handlers, 0, 
-           TIME_MAX_EPOCH_CHANGE_HANDLERS * sizeof(void (*)(tm_sdelta_t *)));
-    for (uint8_t i=0; i < TM_UCDM_STIME_LEN; i ++, ucdm_next_address++){
-        ucdm_redirect_regr_ptr(ucdm_next_address, 
-                               ((uint16_t *)(void *)(&tm_current) + i));
-    }
-    for (uint8_t i=0; i < TM_UCDM_RTIME_LEN; i ++, ucdm_next_address++){
-        ucdm_redirect_regr_ptr(ucdm_next_address,
-                               ((uint16_t *)(void *)(&tm_epoch) + i));
-    }
+    descriptor_install(&tm_epoch_descriptor);
     systick_init();
-    return ucdm_next_address;;
+    return;
 }
 
-void clear_stime(tm_system_t* stime){
+void tm_clear_stime(tm_system_t* stime){
     stime->seconds = 0;
     stime->frac = 0;
     return;
 }
 
-void clear_sdelta(tm_sdelta_t* sdelta){
+void tm_clear_sdelta(tm_sdelta_t* sdelta){
     sdelta->seconds = 0;
     sdelta->frac = 0;
     sdelta->sgn = 0;
     return;
 }
 
-void clear_rtime(tm_real_t* rtime){
+void tm_clear_rtime(tm_real_t* rtime){
     rtime->frac = 0;
     rtime->seconds = 0;
     rtime->minutes = 0;
@@ -92,7 +95,7 @@ void clear_rtime(tm_real_t* rtime){
     return;
 }
 
-void clear_rdelta(tm_rdelta_t* rdelta){
+void tm_clear_rdelta(tm_rdelta_t* rdelta){
     rdelta->days = 0;
     rdelta->hours = 0;
     rdelta->minutes = 0;
@@ -178,7 +181,7 @@ void tm_sdelta_from_rdelta(tm_rdelta_t* rdelta, tm_sdelta_t* sdelta){
 }
 
 void tm_rdelta_from_sdelta(tm_sdelta_t* sdelta, tm_rdelta_t* rdelta){
-    clear_rdelta(rdelta);
+    tm_clear_rdelta(rdelta);
     
     rdelta->sgn = sdelta->sgn;
     
@@ -287,26 +290,22 @@ void tm_set_epoch(tm_real_t* rtime, uint8_t follow){
         tm_get_sdelta(&original_epoch, &new_epoch, &sdelta);
     }
     else{
-        clear_sdelta(&sdelta);
+        tm_clear_sdelta(&sdelta);
     }
     memcpy((void*)(&tm_epoch), (void*)rtime, sizeof(tm_real_t));
     tm_set_interal_epoch(rtime);
-    clear_stime(&tm_current);
+    tm_clear_stime(&tm_current);
     tm_current.seconds = tm_internal_epoch_offset;
     use_epoch = 1;
-    for (uint8_t i=0; i < tm_installed_epoch_handlers; i++){
-        if (epoch_change_handlers[i]){
-            (*epoch_change_handlers[i])(&sdelta);
-        }
+    
+    tm_epochchange_handler_t * echandler = epoch_handlers_root;
+    while(echandler){
+        echandler -> func(&sdelta);
+        echandler = echandler->next;
     }
     return;
 }
 
-void tm_register_epoch_change(void epoch_change_handler(tm_sdelta_t *)){
-    if (tm_installed_epoch_handlers < TIME_MAX_EPOCH_CHANGE_HANDLERS){
-        epoch_change_handlers[tm_installed_epoch_handlers] = 
-                                                epoch_change_handler;
-        tm_installed_epoch_handlers ++;
-    }
-    return;
+void tm_register_epoch_change_handler(tm_epochchange_handler_t * handler){
+    sllist_install((void *)&epoch_handlers_root, (void *)handler);
 }

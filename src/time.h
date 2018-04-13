@@ -32,8 +32,9 @@
 #ifndef TIME_H
 #define TIME_H
 
-#include<stdint.h>
-#include<string.h>
+#include <stdint.h>
+#include <string.h>
+#include "config.h"
 
 /**
  * @name Time Configuration Definitions
@@ -150,6 +151,20 @@ typedef struct TM_RDELTA_t{
     uint16_t days;
 }tm_rdelta_t;
 
+
+/**
+ * @brief Epoch Change Handler Type
+ * 
+ * This (struct) type stores an epoch change handler, and must be instantiated
+ * and registerd by consumers requiring epoch change information. 
+ * 
+ */
+typedef struct TM_EPOCH_CHANGEHANDLER_t{
+    struct TM_EPOCH_CHANGEHANDLER_t * next;
+    uint8_t priority;
+    void (* func)(tm_sdelta_t *);
+}tm_epochchange_handler_t;
+
 /**@}*/ 
 
 /**
@@ -177,7 +192,7 @@ extern      int8_t tm_leapseconds;
 extern   tm_real_t tm_internal_epoch;
 extern    uint32_t tm_internal_epoch_offset;
 extern     uint8_t use_epoch;
-extern void (*epoch_change_handlers[TIME_MAX_EPOCH_CHANGE_HANDLERS])(tm_sdelta_t *);
+extern tm_epochchange_handler_t * epoch_handlers_root;
 
 /**@}*/ 
 
@@ -190,35 +205,46 @@ extern void (*epoch_change_handlers[TIME_MAX_EPOCH_CHANGE_HANDLERS])(tm_sdelta_t
 /**
  * Intitialize time library constructs
  */
-uint16_t tm_init(uint16_t ucdm_base_address);
+void tm_init(void);
+
+/**
+ * @brief Install the time library descriptor to the application.
+ * 
+ * The time application descriptor contains the library version number and is
+ * installed to the application descriptors with the tag specified in UCDM's 
+ * descriptor header as DESCRIPTOR_TAG_LIBVERSION. 
+ * 
+ * This does not effect the functionality of the time library in any way.
+ */
+void tm_install_descriptor(void);
 
 /**
  * Clear a time_system_t instance.
  * 
  * @param stime Pointer to the time_system_t to clear.
  */
-void clear_stime(tm_system_t* stime);
+void tm_clear_stime(tm_system_t* stime);
 
 /**
  * Clear a time_sdelta_t instance.
  * 
  * @param sdelta Pointer to the time_sdelta_t to clear.
  */
-void clear_sdelta(tm_sdelta_t* sdelta);
+void tm_clear_sdelta(tm_sdelta_t* sdelta);
 
 /**
  * Clear a time_real_t instance.
  * 
  * @param rtime Pointer to the time_real_t to clear.
  */
-void clear_rtime(tm_real_t* rtime);
+void tm_clear_rtime(tm_real_t* rtime);
 
 /**
  * Clear a time_delta_t instance.
  * 
  * @param rdelta Pointer to the time_delta_t to clear.
  */
-void clear_rdelta(tm_rdelta_t* rdelta);
+void tm_clear_rdelta(tm_rdelta_t* rdelta);
 
 /**@}*/ 
 
@@ -389,16 +415,19 @@ void tm_set_epoch(tm_real_t* rtime, uint8_t follow);
  * Register a callback for changes to the epoch. Use this if you are 
  * storing timestamps for any reason. If possible, invalidate your
  * stored timestamps. If you need to retain that information, apply the
- * returned delta. 
+ * provided delta. 
  * 
  * If the change is not intended to be followed, the delta reported 
  * will be zero. In this case, the function should discard all timestamp 
  * information.
  * 
- * @param epoch_change_handler Pointer to the epoch change handler, must 
- *          accept a pointer to a tm_sdelta_t.
+ * @note This function should also be used to follow time sync where 
+ *       applicable. 
+ * 
+ * @param handler Pointer to the epoch change handler.
+ * 
  */
-void tm_register_epoch_change(void epoch_change_handler(tm_sdelta_t *));
+void tm_register_epoch_change_handler(tm_epochchange_handler_t * handler);
 
 /**@}*/ 
 #endif

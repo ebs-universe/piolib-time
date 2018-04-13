@@ -37,6 +37,7 @@
 avlt_node_t  tm_avlt_sync_handler_node;
 tm_sync_sm_t tm_sync_sm;
 
+
 uint16_t tm_sync_init(uint16_t ucdm_next_address){
     // Setup Host Interface Registers
     for(uint8_t i=0; i<4; i++, ucdm_next_address++){
@@ -50,12 +51,15 @@ uint16_t tm_sync_init(uint16_t ucdm_next_address){
     return ucdm_next_address;
 }
 
+
 void tm_sync_request_host(void){
     ucdm_exception_status |= UCDM_EXST_TIMESYNC_REQ;
     tm_sync_sm.state = TM_SYNC_STATE_WAIT_HOST;
 }
 
+
 static inline void tm_sync_apply(void);
+
 static inline void tm_sync_apply(void){
     tm_sdelta_t offset, tsd1, tsd2;
     uint8_t cfrac = 0;
@@ -100,6 +104,11 @@ static inline void tm_sync_apply(void){
         offset.sgn = 1;
     }
     tm_apply_sdelta(&tm_current, &offset);
+    tm_epochchange_handler_t * echandler = epoch_handlers_root;
+    while(echandler){
+        echandler -> func(&offset);
+        echandler = echandler->next;
+    }
 }
 
 
