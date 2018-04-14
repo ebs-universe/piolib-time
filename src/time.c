@@ -255,9 +255,9 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime){
     }
 }
 
-static void tm_set_interal_epoch(tm_real_t* rtime);
+static void tm_set_internal_epoch(tm_real_t* rtime);
 
-static void tm_set_interal_epoch(tm_real_t* rtime){
+static void tm_set_internal_epoch(tm_real_t* rtime){
     tm_internal_epoch.frac = 0;
     tm_internal_epoch.seconds = 0;
     tm_internal_epoch.minutes = 0;
@@ -300,7 +300,10 @@ void tm_set_epoch(tm_real_t* rtime, uint8_t follow){
         tm_clear_sdelta(&sdelta);
     }
     memcpy((void*)(&tm_epoch), (void*)rtime, sizeof(tm_real_t));
-    tm_set_interal_epoch(rtime);
+    tm_set_internal_epoch(rtime);
+    // TODO This seems quite incomplete! It may have been left uncompleted at 
+    // the last major rewrite. The current time seems to be lost entirely, and 
+    // set instead to the epoch point itself. 
     tm_clear_stime(&tm_current);
     tm_current.seconds = tm_internal_epoch_offset;
     use_epoch = 1;

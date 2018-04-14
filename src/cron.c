@@ -76,34 +76,33 @@ void tm_cron_create_job_rel(cron_job_t * job_p, void handler(void),
 
 void tm_cron_insert_job(cron_job_t * job_p){
     cron_job_t * walker = cron_nextjob_p;
-    if (!walker){
-        // There are no jobs to start with.
+    if(walker == NULL){
         cron_nextjob_p = job_p;
+        job_p->prevjob = NULL;
+        job_p->nextjob = NULL;
         return;
     }
     while(walker){
-        if (!(walker->nextjob)){
-            // This is the last job.
-            walker->nextjob = job_p;
-            return;
-        }
-        else if (tm_cmp_stime(&(job_p->texec), &(walker->texec)) > 0){
-            // job_p needs to be inserted before walker. 
+        if (tm_cmp_stime(&(walker->texec), &(job_p->texec)) == 1){
             job_p->nextjob = walker;
             job_p->prevjob = walker->prevjob;
-            walker->prevjob = job_p;
-            if (job_p->prevjob){
-                // walker is not the first job
-                job_p->prevjob->nextjob = job_p;
-                return;
+            if(walker->prevjob){
+                walker->prevjob->nextjob = job_p;
             }
             else{
-                // walker is the first job
                 cron_nextjob_p = job_p;
-                return;
             }
+            walker->prevjob = job_p;
+            return;
         }
-    }
+        if (!(walker->nextjob)){
+            walker->nextjob = job_p;
+            job_p->prevjob = walker;
+            job_p->nextjob = NULL;
+            return;
+        }
+        walker = walker->nextjob;
+    };
 }
 
 
@@ -125,7 +124,7 @@ void tm_cron_poll(void){
     if (!cron_nextjob_p){
         return;
     }
-    if (tm_cmp_stime(&(cron_nextjob_p->texec), &tm_current) >= 0){
+    if (tm_cmp_stime(&(cron_nextjob_p->texec), &tm_current) <= 0){
         cron_nextjob_p->handler();
         if (cron_nextjob_p->tafter_p){
             tm_apply_sdelta(&(cron_nextjob_p->texec), cron_nextjob_p->tafter_p);
