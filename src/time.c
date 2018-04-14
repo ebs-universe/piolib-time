@@ -62,12 +62,19 @@ void tm_install_descriptor(void)
     descriptor_install(&time_descriptor);
 }    
 
-void tm_init(void){
+#define TM_UCDM_STIME_LEN     (sizeof(tm_system_t) / 2 + (sizeof(tm_system_t) % 2 != 0))
+#define TM_UCDM_RTIME_LEN     (sizeof(tm_real_t)   / 2 + (sizeof(tm_real_t) % 2 != 0))
+
+uint16_t tm_init(uint16_t ucdm_address){
     tm_current.seconds = 0;
     tm_current.frac = 0;
+    for (uint8_t i=0; i < TM_UCDM_STIME_LEN; i ++, ucdm_address++){
+        ucdm_redirect_regr_ptr(ucdm_address, 
+                               ((uint16_t *)(void *)(&tm_current) + i));
+    }
     descriptor_install(&tm_epoch_descriptor);
     systick_init();
-    return;
+    return ucdm_address;
 }
 
 void tm_clear_stime(tm_system_t* stime){

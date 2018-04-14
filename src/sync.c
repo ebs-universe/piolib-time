@@ -38,17 +38,17 @@ avlt_node_t  tm_avlt_sync_handler_node;
 tm_sync_sm_t tm_sync_sm;
 
 
-uint16_t tm_sync_init(uint16_t ucdm_next_address){
+uint16_t tm_sync_init(uint16_t ucdm_address){
     // Setup Host Interface Registers
-    for(uint8_t i=0; i<4; i++, ucdm_next_address++){
-        ucdm_enable_regw(ucdm_next_address);        
+    for(uint8_t i=0; i<3; i++, ucdm_address++){
+        ucdm_enable_regw(ucdm_address);        
     }
     // Setup Host Sync Handler(s)
-    ucdm_install_regw_handler(ucdm_next_address - 1, 
+    ucdm_install_regw_handler(ucdm_address - 1, 
                               &tm_avlt_sync_handler_node, 
                               &tm_sync_handler);
     tm_sync_sm.state = TM_SYNC_STATE_IDLE;
-    return ucdm_next_address;
+    return ucdm_address;
 }
 
 
@@ -121,8 +121,8 @@ void tm_sync_handler(uint16_t addr){
         case TM_SYNC_STATE_IDLE:
             tm_sync_sm.state = TM_SYNC_STATE_WAIT_DELAY_OUT;
             // Got the sync timestamp from the host. 
-            tm_sync_sm.t1.seconds = ((uint32_t)(ucdm_register[addr-3].data) << 16) |
-                                     (uint32_t)(ucdm_register[addr-2].data);
+            tm_sync_sm.t1.seconds = ((uint32_t)(ucdm_register[addr-2].data) << 16) |
+                                     (uint32_t)(ucdm_register[addr-1].data);
             tm_sync_sm.t1.frac = ucdm_register[addr].data;
             tm_current_time(&(tm_sync_sm.t1p));
             break;
@@ -134,8 +134,8 @@ void tm_sync_handler(uint16_t addr){
             break;
         case TM_SYNC_STATE_WAIT_DELAY_IN:
             // Host returned its timestamp for delay calculation.
-            tm_sync_sm.t2p.seconds = ((uint32_t)(ucdm_register[addr-3].data) << 16) | 
-                                      (uint32_t)(ucdm_register[addr-2].data);
+            tm_sync_sm.t2p.seconds = ((uint32_t)(ucdm_register[addr-2].data) << 16) | 
+                                      (uint32_t)(ucdm_register[addr-1].data);
             tm_sync_sm.t2p.frac = ucdm_register[addr].data;
             tm_sync_sm.state = TM_SYNC_STATE_IDLE;
             // All information is now available. Calculate and apply.

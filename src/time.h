@@ -205,7 +205,7 @@ extern tm_epochchange_handler_t * epoch_handlers_root;
 /**
  * Intitialize time library constructs
  */
-void tm_init(void);
+uint16_t tm_init(uint16_t ucdm_address);
 
 /**
  * @brief Install the time library descriptor to the application.

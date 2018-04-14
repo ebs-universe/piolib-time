@@ -60,35 +60,35 @@
  *
  * 1. Time Initialization
  * 
- * This is the simplest means of utilizing this implementation. This kind 
- * of application requires the assumption that the system is perfectly
- * capable of maintaining it's own clocks, once intialized to the correct
- * time. This assumption is usually invalidated over long periods due to 
- * clock drift, and over even longer periods (years) due to leap seconds.
+ *   This is the simplest means of utilizing this implementation. This kind 
+ *   of application requires the assumption that the system is perfectly
+ *   capable of maintaining it's own clocks, once intialized to the correct
+ *   time. This assumption is usually invalidated over long periods due to 
+ *   clock drift, and over even longer periods (years) due to leap seconds.
  * 
  * 2. Ephemeral Time Synchronization
  * 
- * This is likely the optimal use of this implementation. In this kind of 
- * application, time is synchonized at specific 'safe' points of the 
- * application. In order to use this implementation, the host must know
- * when the device is safely able to synchonize. This synchronization 
- * will hold until the next sychronization happens, after which the system
- * is more or less reset to a known state as far as temporal state is 
- * concerned. At the next synchronization, any stored timstamps within 
- * the application should effectively be invalidated, or be shifted by 
- * a degree equal to that of the offset synchonized. Applications of this 
- * category must be able to discard stored timestamps (or derivatives thereof) 
- * at the point of synchronization.
+ *   This is likely the optimal use of this implementation. In this kind of 
+ *   application, time is synchonized at specific 'safe' points of the 
+ *   application. In order to use this implementation, the host must know
+ *   when the device is safely able to synchonize. This synchronization 
+ *   will hold until the next sychronization happens, after which the system
+ *   is more or less reset to a known state as far as temporal state is 
+ *   concerned. At the next synchronization, any stored timstamps within 
+ *   the application should effectively be invalidated, or be shifted by 
+ *   a degree equal to that of the offset synchonized. Applications of this 
+ *   category must be able to discard stored timestamps (or derivatives thereof) 
+ *   at the point of synchronization.
  * 
  * 3. Continuous Time Synchonization
  * 
- * This is the most complicated use of this implementation, with serious 
- * implications to system performance. When time is synchonized, this 
- * implementation will pass along the offset to all subsystems which have 
- * stored timestamps, and all of them must apply these offsets for all 
- * timestamps they have which require this precision. This kind of 
- * synchonization is likely to have dangerous consequences to scheduled 
- * events and temporally marked data streams. 
+ *   This is the most complicated use of this implementation, with serious 
+ *   implications to system performance. When time is synchonized, this 
+ *   implementation will pass along the offset to all subsystems which have 
+ *   stored timestamps, and all of them must apply these offsets for all 
+ *   timestamps they have which require this precision. This kind of 
+ *   synchonization is likely to have dangerous consequences to scheduled 
+ *   events and temporally marked data streams. 
  * 
  * @see sync.c
  */
