@@ -3,22 +3,19 @@
 import time
 from datetime import datetime
 from datetime import timedelta
-from ebs.modbus.client import ModbusServerException
-from ebs.modbus.device import ModbusDevice
 
 
 def _parse_epoch(value):
-    bytes = bytearray(value)
-    rval = datetime(
-        bytes[0] * 100 + bytes[1],          # year
-        bytes[2],                           # month
-        bytes[3],                           # day
-        bytes[4],                           # hour
-        bytes[5],                           # minutes
-        bytes[6],                           # second
-        (bytes[7] << 16 | bytes[8]) * 1000  # microseconds
+    vbytes = bytearray(value)
+    return datetime(
+        vbytes[0] * 100 + vbytes[1],          # year
+        vbytes[2],                            # month
+        vbytes[3],                            # day
+        vbytes[4],                            # hour
+        vbytes[5],                            # minutes
+        vbytes[6],                            # second
+        (vbytes[7] << 16 | vbytes[8]) * 1000  # microseconds
     )
-    return rval
 
 
 class ModbusTimeMixin(object):
@@ -41,22 +38,35 @@ class ModbusTimeMixin(object):
     def current_time(self):
         return self.parse_timestamp(self.current_timestamp)
 
-    def parse_timestamp(self, timestamp):
-        delta = timedelta(seconds=timestamp)
-        return self.epoch + delta
-
     @property
     def current_timestamp(self):
-        words = self._get_current_time()
-        return (words[2] << 16) + words[1] + words[0]/1000.0
-
-    def _get_current_time(self):
-        response = self.read_holding_registers(self._time_base_address, count=3)
-        return response.registers
+        return self.unpack_timestamp(self._get_current_time())
 
     @property
     def time_offset(self):
         return self.current_timestamp - time.time()
+
+    def parse_timestamp(self, timestamp, epoch=None):
+        if epoch is None:
+            epoch = self.epoch
+        delta = timedelta(seconds=timestamp)
+        return epoch + delta
+
+    @staticmethod
+    def pack_timestamp(timestamp):
+        seconds = int(timestamp)
+        milliseconds = int((timestamp - seconds) * 1000)
+        return [(milliseconds & 0x0000FFFF),
+                (seconds & 0xFFFF0000) >> 16,
+                (seconds & 0x0000FFFF)]
+
+    @staticmethod
+    def unpack_timestamp(words):
+        return (words[2] << 16) + words[1] + words[0] / 1000.0
+
+    def _get_current_time(self):
+        resp = self.read_holding_registers(self._time_base_address, count=3)
+        return resp.registers
 
     def __getattr__(self, item):
         return super(ModbusTimeMixin, self).__getattr__(item)

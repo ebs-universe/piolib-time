@@ -120,9 +120,9 @@ void tm_sync_handler(uint16_t addr){
         case TM_SYNC_STATE_IDLE:
             tm_sync_sm.state = TM_SYNC_STATE_WAIT_DELAY_OUT;
             // Got the sync timestamp from the host. 
-            tm_sync_sm.t1.seconds = ((uint32_t)(ucdm_register[addr-2].data) << 16) |
-                                     (uint32_t)(ucdm_register[addr-1].data);
-            tm_sync_sm.t1.frac = ucdm_register[addr].data;
+            tm_sync_sm.t1.seconds = ((uint32_t)(ucdm_register[addr-1].data) << 16) |
+                                     (uint32_t)(ucdm_register[addr].data);
+            tm_sync_sm.t1.frac = ucdm_register[addr-2].data;
             tm_current_time(&(tm_sync_sm.t1p));
             break;
         case TM_SYNC_STATE_WAIT_DELAY_OUT:
@@ -133,9 +133,9 @@ void tm_sync_handler(uint16_t addr){
             break;
         case TM_SYNC_STATE_WAIT_DELAY_IN:
             // Host returned its timestamp for delay calculation.
-            tm_sync_sm.t2p.seconds = ((uint32_t)(ucdm_register[addr-2].data) << 16) | 
-                                      (uint32_t)(ucdm_register[addr-1].data);
-            tm_sync_sm.t2p.frac = ucdm_register[addr].data;
+            tm_sync_sm.t2p.seconds = ((uint32_t)(ucdm_register[addr-1].data) << 16) | 
+                                      (uint32_t)(ucdm_register[addr].data);
+            tm_sync_sm.t2p.frac = ucdm_register[addr-2].data;
             tm_sync_sm.state = TM_SYNC_STATE_IDLE;
             // All information is now available. Calculate and apply.
             tm_sync_apply();
