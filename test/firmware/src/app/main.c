@@ -7,6 +7,7 @@
 
 #include "sys/modbus/modbus.h"
 #include "test_time.h"
+#include <platform/cpu.h>
 #include <time/cron.h>
 
 volatile uint8_t rval=0;

@@ -35,6 +35,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "config.h"
+#include <platform/cpu.h>
 
 /**
  * @name Time Configuration Definitions
@@ -52,6 +53,7 @@
 #define TIME_DEFAULT_EPOCH_MONTH        1
 #define TIME_DEFAULT_EPOCH_DATE         1
 #define TIME_MAX_EPOCH_CHANGE_HANDLERS  2
+#define DESCRIPTOR_TAG_TIME_EPOCH       0x02
 
 // This definition is informational only. 
 // Changing this number could have insidious consequences. 
@@ -267,7 +269,9 @@ void tm_clear_rdelta(tm_rdelta_t* rdelta);
 static inline void tm_current_time(tm_system_t * stime);
 
 static inline void tm_current_time(tm_system_t * stime){
+    critical_enter();
     memcpy((void *)stime, (void *)(&tm_current), sizeof(tm_system_t));
+    critical_exit();
     return;
 }
 
