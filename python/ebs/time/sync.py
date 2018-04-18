@@ -10,14 +10,26 @@ class ModbusTimeSyncMixin(ModbusTimeMixin):
         self._descriptors = {}
         super(ModbusTimeSyncMixin, self).__init__(*args, **kwargs)
 
+    def connect(self):
+        super(ModbusTimeSyncMixin, self).connect()
+        self.sync_time()
+
     def _build_host_timestamp(self):
         return self.pack_timestamp(time.time())
 
-    def sync_time(self, force=False):
+    def sync_time(self, force=False, threshold=None, maxattempts=3):
         if not force and \
                 not self.exception_status & self._time_sync_request_bit:
             return
+        attempts = 0
+        while attempts < maxattempts:
+            attempts = attempts + 1
+            self._sync_time()
+            if not threshold or abs(self.time_offset) < threshold:
+                break
+        return attempts
 
+    def _sync_time(self):
         _write_address = self._time_base_address + 3
         _trigger_address = self._time_base_address + 5
 

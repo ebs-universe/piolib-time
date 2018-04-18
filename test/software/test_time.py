@@ -31,10 +31,13 @@ if __name__ == '__main__':
 
     print(device.lib_versions)
     print()
-
     device.print_timeinfo()
 
-    print('\nTrying to synchronize time ... \n')
+    print('\nSynchronizing time if needed (should not be) ... \n')
     device.sync_time(force=False)
+    device.print_timeinfo()
 
+    print('\nForcing time synchronization to a high threshold ... \n')
+    attempts = device.sync_time(force=True, threshold=0.001)
+    print('    Made {0} attempts.\n'.format(attempts))
     device.print_timeinfo()
