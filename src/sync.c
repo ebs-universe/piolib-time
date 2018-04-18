@@ -117,7 +117,6 @@ void tm_sync_handler(uint16_t addr){
         case TM_SYNC_STATE_PREINIT:
             break;
         case TM_SYNC_STATE_WAIT_HOST:
-            ucdm_exception_status &= ~UCDM_EXST_TIMESYNC_REQ;
         case TM_SYNC_STATE_IDLE:
             tm_sync_sm.state = TM_SYNC_STATE_WAIT_DELAY_OUT;
             // Got the sync timestamp from the host. 
@@ -140,6 +139,7 @@ void tm_sync_handler(uint16_t addr){
             tm_sync_sm.state = TM_SYNC_STATE_IDLE;
             // All information is now available. Calculate and apply.
             tm_sync_apply();
+            ucdm_exception_status &= ~UCDM_EXST_TIMESYNC_REQ;
             break;
         default:
             break;
