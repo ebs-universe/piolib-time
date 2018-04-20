@@ -6,6 +6,7 @@
 #include "sys/sys.h"
 
 #include "sys/modbus/modbus.h"
+#include "sys/watchdog.h"
 #include "test_time.h"
 #include <platform/cpu.h>
 #include <time/cron.h>
@@ -56,6 +57,7 @@ int main(void)
     
     ucdm_init();
     app_tm_init(DMAP_TIME_BASE_ADDRESS);
+    watchdog_service_init();
     
     #if APP_ENABLE_MODBUS == 1
         modbus_init(DMAP_MODBUS_BASE_ADDRESS, MODBUS_DEFAULT_DEVICE_ADDRESS);
