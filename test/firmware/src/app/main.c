@@ -39,11 +39,6 @@ int main(void)
     // Pre-init, and assoicated Housekeeping
     _initialize_interrupts();
     
-    led_init(BOARD_GREEN_LED_SELECTOR);
-    led_init(BOARD_RED_LED_SELECTOR);
-    led_off(BOARD_GREEN_LED_SELECTOR);
-    led_off(BOARD_RED_LED_SELECTOR);
-    
     // uC Core Initialization
     watchdog_hold();
     power_set_full();
