@@ -29,7 +29,7 @@
 #define TIME_IF_H
 
 #include "app/application.h"
-#include "bsp/hal/uc.h"
+#include "bsp/hal/uc/timer.h"
 #include <time/time.h>
 #include <time/sync.h>
 #include <time/cron.h>
