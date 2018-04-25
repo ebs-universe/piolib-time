@@ -26,7 +26,6 @@ class ModbusTimeMixin(object):
     _time_ticks_per_us = 1000
 
     def __init__(self, *args, **kwargs):
-        self._descriptors = {}
         super(ModbusTimeMixin, self).__init__(*args, **kwargs)
         if not hasattr(self, '_registry'):
             self._registry = {}
