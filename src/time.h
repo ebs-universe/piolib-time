@@ -52,7 +52,6 @@
 #define TIME_DEFAULT_EPOCH_YEAR         70 
 #define TIME_DEFAULT_EPOCH_MONTH        1
 #define TIME_DEFAULT_EPOCH_DATE         1
-#define TIME_MAX_EPOCH_CHANGE_HANDLERS  2
 #define DESCRIPTOR_TAG_TIME_EPOCH       0x02
 
 // This definition is informational only. 

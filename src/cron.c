@@ -49,6 +49,7 @@ void tm_cron_clear_job(cron_job_t * job_p){
     job_p->tafter_p = NULL;
     job_p->texec.seconds = 0;
     job_p->texec.frac = 0;
+    job_p->active = 0;
 }
 
 
@@ -76,6 +77,7 @@ void tm_cron_create_job_rel(cron_job_t * job_p, void handler(void),
 
 void tm_cron_insert_job(cron_job_t * job_p){
     cron_job_t * walker = cron_nextjob_p;
+    job_p->active = 1;
     if(walker == NULL){
         cron_nextjob_p = job_p;
         job_p->prevjob = NULL;
@@ -117,6 +119,7 @@ void tm_cron_cancel_job(cron_job_t * job_p){
         cron_nextjob_p = job_p->nextjob;
         cron_nextjob_p->prevjob = NULL;
     }
+    job_p->active = 0;
 }
 
 
@@ -131,6 +134,7 @@ void tm_cron_poll(void){
             tm_cron_replace_job(cron_nextjob_p);
         }
         else{
+            cron_nextjob_p->active = 0;
             cron_nextjob_p = cron_nextjob_p->nextjob;
             cron_nextjob_p->prevjob = NULL;
         }

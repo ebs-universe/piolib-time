@@ -44,6 +44,7 @@
 
 typedef struct CRON_JOB_t{
     tm_system_t   texec;
+    uint8_t       active;
     tm_sdelta_t * tafter_p;
     struct CRON_JOB_t * nextjob;
     struct CRON_JOB_t * prevjob;
@@ -57,10 +58,10 @@ void tm_cron_init(void);
 void tm_cron_clear_job(cron_job_t* job_p);
 
 void tm_cron_create_job_abs(cron_job_t * job_p, void handler(void), 
-                         tm_system_t * texec_p, tm_sdelta_t * tafter_p);
+                            tm_system_t * texec_p, tm_sdelta_t * tafter_p);
 
 void tm_cron_create_job_rel(cron_job_t * job_p, void handler(void), 
-                         tm_sdelta_t * trelexec_p, tm_sdelta_t * tafter_p);
+                            tm_sdelta_t * trelexec_p, tm_sdelta_t * tafter_p);
 
 void tm_cron_insert_job(cron_job_t * job_p);
 
@@ -69,7 +70,9 @@ void tm_cron_cancel_job(cron_job_t * job_p);
 static inline void tm_cron_replace_job(cron_job_t * job_p);
 
 static inline void tm_cron_replace_job(cron_job_t * job_p){
-    tm_cron_cancel_job(job_p);
+    if (job_p->active){
+        tm_cron_cancel_job(job_p);
+    }
     tm_cron_insert_job(job_p);
 }
 
