@@ -1,0 +1,10 @@
+<map id="time/time.h" name="time/time.h">
+<area shape="rect" id="node1" title="Time related functions for embebedded systems." alt="" coords="176,5,275,32"/>
+<area shape="rect" id="node2" href="$cron_8h.html" title="Cron&#45;like scheduling framework for embebedded systems." alt="" coords="5,80,101,107"/>
+<area shape="rect" id="node4" href="$sync_8c.html" title="Time synchonization function implementations." alt="" coords="127,155,225,181"/>
+<area shape="rect" id="node5" href="$sync_8h.html" title="Time synchonization functions for embebedded systems." alt="" coords="176,80,275,107"/>
+<area shape="rect" id="node6" href="$time_8c.html" title="Time related function implementations." alt="" coords="254,155,351,181"/>
+<area shape="rect" id="node7" href="$systick__handler_8h.html" title="Interrupt handler for the system tick for static inclusion in the application." alt="" coords="350,80,519,107"/>
+<area shape="rect" id="node3" href="$cron_8c.html" title="Cron&#45;like scheduling framework implementations." alt="" coords="6,155,101,181"/>
+<area shape="rect" id="node8" href="$systick_8c_source.html" title=" " alt="" coords="378,155,491,181"/>
+</map>

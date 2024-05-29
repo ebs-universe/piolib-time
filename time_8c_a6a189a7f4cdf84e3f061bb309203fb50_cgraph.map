@@ -1,0 +1,4 @@
+<map id="tm_set_epoch" name="tm_set_epoch">
+<area shape="rect" id="node1" title="Set the epoch time from an external real time source." alt="" coords="5,5,119,32"/>
+<area shape="rect" id="node2" href="$time_8c.html#adcd940fe0a1b12b1a0c47e857bc91b6e" title="Get a system timestamp from a real time, against the current epoch." alt="" coords="167,5,331,32"/>
+</map>

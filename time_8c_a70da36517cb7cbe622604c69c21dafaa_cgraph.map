@@ -1,0 +1,4 @@
+<map id="tm_rdelta_from_sdelta" name="tm_rdelta_from_sdelta">
+<area shape="rect" id="node1" title="Convert a time difference in systick units into a real time difference." alt="" coords="5,5,176,32"/>
+<area shape="rect" id="node2" href="$time_8c.html#a56895961aa355ff23c287403e49833ac" title="Clear a time_delta_t instance." alt="" coords="224,5,348,32"/>
+</map>

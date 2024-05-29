@@ -1,0 +1,9 @@
+<map id="time/systick_handler.h" name="time/systick_handler.h">
+<area shape="rect" id="node1" title="Interrupt handler for the system tick for static inclusion in the application." alt="" coords="99,5,268,32"/>
+<area shape="rect" id="node2" href="$time_8h.html" title="Time related functions for embebedded systems." alt="" coords="151,80,215,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,155,76,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="100,155,171,181"/>
+<area shape="rect" id="node5" href="$config_8h_source.html" title=" " alt="" coords="195,155,268,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="293,155,410,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="178,229,285,256"/>
+</map>
