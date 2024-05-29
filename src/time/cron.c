@@ -127,7 +127,10 @@ void tm_cron_poll(void){
     if (!cron_nextjob_p){
         return;
     }
-    if (tm_cmp_stime(&(cron_nextjob_p->texec), &tm_current) <= 0){
+    tm_system_t current;
+    tm_current_time(&current);
+    
+    if (tm_cmp_stime(&(cron_nextjob_p->texec), &current) <= 0){
         cron_nextjob_p->handler();
         if (cron_nextjob_p->tafter_p){
             tm_apply_sdelta(&(cron_nextjob_p->texec), cron_nextjob_p->tafter_p);

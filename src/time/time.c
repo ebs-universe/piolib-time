@@ -37,10 +37,11 @@
 #include <ucdm/descriptor.h>
 #include <string.h>
 #include "time.h"
+#include "systick.h"
 #include "sync.h"
 
 
-tm_system_t tm_current = {0, 0};
+volatile tm_system_t tm_current = {0, 0};
 tm_real_t tm_epoch =          {19, 70, 1, 1, 0, 0, 0, 0};
 tm_real_t tm_internal_epoch = {19, 69, 3, 1, 0, 0, 0, 0};
 uint32_t tm_internal_epoch_offset =  26438400;
@@ -73,7 +74,7 @@ uint16_t tm_init(uint16_t ucdm_address){
                                ((uint16_t *)(void *)(&tm_current) + i));
     }
     descriptor_install(&tm_epoch_descriptor);
-    systick_init();
+    tm_systick_init();
     return ucdm_address;
 }
 

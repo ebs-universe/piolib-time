@@ -24,7 +24,7 @@
 /**
  * @file systick_handler.h
  * @brief Interrupt handler for the system tick for static inclusion 
- *        in the application. 
+ *        in the application.
  * 
  */
 

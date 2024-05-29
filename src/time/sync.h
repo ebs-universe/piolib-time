@@ -44,7 +44,7 @@
  * maintain it's own time, and does so with the implementation included
  * in this library (or one compatible with it). 
  * 
- * This implementation also assume that the following pieces of information 
+ * This implementation also assumes that the following pieces of information 
  * are known to both the host and the device : 
  *   - epoch, as in `tm_epoch`
  *   - resolution of the frac, as in `TIME_SYSTICKS_PER_SECOND`
@@ -75,10 +75,8 @@
  *   will hold until the next sychronization happens, after which the system
  *   is more or less reset to a known state as far as temporal state is 
  *   concerned. At the next synchronization, any stored timstamps within 
- *   the application should effectively be invalidated, or be shifted by 
- *   a degree equal to that of the offset synchonized. Applications of this 
- *   category must be able to discard stored timestamps (or derivatives thereof) 
- *   at the point of synchronization.
+ *   the application should effectively be invalidated, or be offset by 
+ *   a degree equal to that of the offset synchonized. 
  * 
  * 3. Continuous Time Synchonization
  * 

@@ -63,6 +63,8 @@ static inline void tm_sync_apply(void);
 static inline void tm_sync_apply(void){
     tm_sdelta_t offset, tsd1, tsd2;
     uint8_t cfrac = 0;
+    // tm_system_t current;
+
     tm_get_sdelta(&(tm_sync_sm.t1), &(tm_sync_sm.t1p), &(tsd1));
     tm_get_sdelta(&(tm_sync_sm.t2p), &(tm_sync_sm.t2), &(tsd2));
     if (tsd1.sgn == tsd2.sgn){
@@ -103,6 +105,7 @@ static inline void tm_sync_apply(void){
     else{
         offset.sgn = 1;
     }
+    // tm_current_time(&tm_current);
     tm_apply_sdelta(&tm_current, &offset);
     tm_epochchange_handler_t * echandler = epoch_handlers_root;
     while(echandler){

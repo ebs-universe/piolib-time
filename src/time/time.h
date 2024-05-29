@@ -38,24 +38,17 @@
 #include <platform/cpu.h>
 
 /**
- * @name Time Configuration Definitions
+ * @name Time Tick Calculations
  * 
- * It would be nice to be able to provide these definitions from the 
- * applications, but that would require recompilation of the library. 
+ * These definitions configure the systick and prepare all the calculated names 
+ * derived from it. 
  * 
- * For the moment, these are defitions which the application must be 
- * built to respect / accomodate. 
+ * This definition is informational only. Changing this number could have insidious 
+ * consequences. 
+ * 
  */
 /**@{*/ 
 
-#define TIME_DEFAULT_EPOCH_CENTURY      19
-#define TIME_DEFAULT_EPOCH_YEAR         70 
-#define TIME_DEFAULT_EPOCH_MONTH        1
-#define TIME_DEFAULT_EPOCH_DATE         1
-#define DESCRIPTOR_TAG_TIME_EPOCH       0x02
-
-// This definition is informational only. 
-// Changing this number could have insidious consequences. 
 #define TIME_SYSTICK_PERIOD_uS          1000
 
 #define TIME_TICKS_PER_SECOND           (uint32_t)(1000000 / TIME_SYSTICK_PERIOD_uS)
@@ -67,8 +60,7 @@
 #define TIME_SECONDS_PER_HOUR           (TIME_SECONDS_PER_MINUTE * 60)
 #define TIME_SECONDS_PER_DAY            (TIME_SECONDS_PER_HOUR * 24)
 
-
-/**@}*/ 
+/**@}*/
 
 /**
  * @name Time Types
@@ -116,7 +108,7 @@ typedef struct TM_SDELTA_t{
  * This form of time storage is always going to be expensive, and should
  * therefore be used sparingly. 
  * 
- * This type is not time-zone aware, and should always be interpreted as a 
+ * This type is not time-zone aware, and should always be interpreted as
  * UTC time (GMT+0000). See the documentation of time.h for further detail
  * about the interpretation of time by this library.
  * 
@@ -157,7 +149,7 @@ typedef struct TM_RDELTA_t{
  * @brief Epoch Change Handler Type
  * 
  * This (struct) type stores an epoch change handler, and must be instantiated
- * and registerd by consumers requiring epoch change information. 
+ * and registerd by consumers requiring epoch change notifications. 
  * 
  */
 typedef struct TM_EPOCH_CHANGEHANDLER_t{
@@ -169,25 +161,13 @@ typedef struct TM_EPOCH_CHANGEHANDLER_t{
 /**@}*/ 
 
 /**
- * @name Time Low Level Interface Functions
- * 
- * These functions should be provided by the application/HAL and must be 
- * available at link time.
- */
-/**@{*/ 
-
-extern void systick_init(void);
-
-/**@}*/ 
-
-/**
  * @name Time Containers
  * 
  * These containers are defined internally in the library.
  */
 /**@{*/ 
 
-extern tm_system_t tm_current;
+extern volatile tm_system_t tm_current;
 extern   tm_real_t tm_epoch;
 extern      int8_t tm_leapseconds;
 extern   tm_real_t tm_internal_epoch;
