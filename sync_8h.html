@@ -189,7 +189,7 @@ avlt_node_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_avlt_sync_h
 <p class="startli">This is the simplest means of utilizing this implementation. This kind of application requires the assumption that the system is perfectly capable of maintaining it's own clocks, once intialized to the correct time. This assumption is usually invalidated over long periods due to clock drift, and over even longer periods (years) due to leap seconds.</p>
 </li>
 <li><p class="startli">Ephemeral Time Synchronization</p>
-<p class="startli">This is likely the optimal use of this implementation. In this kind of application, time is synchonized at specific 'safe' points of the application. In order to use this implementation, the host must know when the device is safely able to synchonize. This synchronization will hold until the next sychronization happens, after which the system is more or less reset to a known state as far as temporal state is concerned. At the next synchronization, any stored timstamps within the application should effectively be invalidated, or be offset by a degree equal to that of the offset synchonized.</p>
+<p class="startli">This is likely the optimal use of this implementation. In this kind of application, time is synchonized at specific 'safe' points of the application. In order to use this implementation, the host must know when the device is safely able to synchonize. This synchronization will hold until the next sychronization happens, after which the system is more or less reset to a known temporal state. At the next synchronization, any stored timstamps within the application should effectively be invalidated, or be offset by a degree equal to that of the offset synchonized.</p>
 </li>
 <li><p class="startli">Continuous Time Synchonization</p>
 <p class="startli">This is the most complicated use of this implementation, with serious implications to system performance. When time is synchonized, this implementation will pass along the offset to all subsystems which have stored timestamps, and all of them must apply these offsets for all timestamps they have which require this precision. This kind of synchonization is likely to have dangerous consequences to scheduled events and temporally marked data streams.</p>
@@ -204,7 +204,7 @@ avlt_node_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_avlt_sync_h
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="sync_8h.html">sync.h</a></li>
-    <li class="footer">Generated on Wed May 29 2024 15:19:38 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Sep 5 2024 09:26:04 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
