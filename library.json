@@ -16,7 +16,7 @@
     "license": "LGPL-3.0-or-later",
     "homepage": "https://ebs-universe.github.io/piolib-time",
     "frameworks": "*",
-    "platforms": ["atmelavr"],
+    "platforms": "*",
     "dependencies": [
         { 
             "owner": "chintal",

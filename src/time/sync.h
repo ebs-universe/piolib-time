@@ -73,10 +73,10 @@
  *   application. In order to use this implementation, the host must know
  *   when the device is safely able to synchonize. This synchronization 
  *   will hold until the next sychronization happens, after which the system
- *   is more or less reset to a known state as far as temporal state is 
- *   concerned. At the next synchronization, any stored timstamps within 
- *   the application should effectively be invalidated, or be offset by 
- *   a degree equal to that of the offset synchonized. 
+ *   is more or less reset to a known temporal state. At the next 
+ *   synchronization, any stored timstamps within the application should 
+ *   effectively be invalidated, or be offset by a degree equal to that of 
+ *   the offset synchonized. 
  * 
  * 3. Continuous Time Synchonization
  * 
