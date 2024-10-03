@@ -131,7 +131,9 @@ void tm_cron_poll(void){
     tm_current_time(&current);
     
     if (tm_cmp_stime(&(cron_nextjob_p->texec), &current) <= 0){
-        cron_nextjob_p->handler();
+        if (cron_nextjob_p->handler) {
+            cron_nextjob_p->handler();
+        }
         if (cron_nextjob_p->tafter_p){
             tm_apply_sdelta(&(cron_nextjob_p->texec), cron_nextjob_p->tafter_p);
             tm_cron_replace_job(cron_nextjob_p);
