@@ -28,7 +28,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ebs-time
-   &#160;<span id="projectnumber">0.1.1</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Time keeping and manipulation functions for embedded systems</div>
   </td>
@@ -113,46 +113,51 @@ $(document).ready(function(){initNavTree('sync_8h_source.html',''); initResizabl
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#ifndef TIME_SYNC_H</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#define TIME_SYNC_H</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#define TM_SYNC_STATE_PREINIT        0</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#define TM_SYNC_STATE_IDLE           1   </span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#define TM_SYNC_STATE_WAIT_HOST      2</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#define TM_SYNC_STATE_WAIT_DELAY_IN  3</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#define TM_SYNC_STATE_WAIT_DELAY_OUT 4</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#include &lt;ds/avltree.h&gt;</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="time_8h.html">time.h</a>&quot;</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#ifndef TIME_SYNC_H</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#define TIME_SYNC_H</span></div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="struct_t_m___s_y_n_c___s_m__t.html">  106</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_t_m___s_y_n_c___s_m__t.html">TM_SYNC_SM_t</a>{</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    uint8_t state;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> t1;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> t1p;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> t2;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> t2p;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}<a class="code" href="struct_t_m___s_y_n_c___s_m__t.html">tm_sync_sm_t</a>;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;uint16_t tm_sync_init(uint16_t ucdm_next_address);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keywordtype">void</span> tm_sync_request_host(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keywordtype">void</span> tm_sync_handler(uint16_t addr);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;uint8_t tm_sync_current_to_rtc(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;uint8_t tm_sync_current_from_rtc(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">extern</span> avlt_node_t  tm_avlt_sync_handler_node;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="astruct_t_m___s_y_n_c___s_m__t_html"><div class="ttname"><a href="struct_t_m___s_y_n_c___s_m__t.html">TM_SYNC_SM_t</a></div><div class="ttdef"><b>Definition:</b> <a href="sync_8h_source.html#l00106">sync.h:106</a></div></div>
-<div class="ttc" id="astruct_t_m___s_y_s_t_e_m__t_html"><div class="ttname"><a href="struct_t_m___s_y_s_t_e_m__t.html">TM_SYSTEM_t</a></div><div class="ttdoc">System Time Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00083">time.h:83</a></div></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#define TM_SYNC_STATE_PREINIT        0</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#define TM_SYNC_STATE_IDLE           1   </span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#define TM_SYNC_STATE_WAIT_HOST      2</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#define TM_SYNC_STATE_WAIT_FOLLOW_UP 3</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#define TM_SYNC_STATE_WAIT_DELAY_IN  4</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#define TM_SYNC_STATE_WAIT_DELAY_OUT 5</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#include &lt;ds/avltree.h&gt;</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="time_8h.html">time.h</a>&quot;</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="struct_t_m___s_y_n_c___s_m__t.html">  116</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_t_m___s_y_n_c___s_m__t.html">TM_SYNC_SM_t</a>{</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    uint8_t state;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> t1;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> t1p;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> t2;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> t2p;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;} <a class="code" href="struct_t_m___s_y_n_c___s_m__t.html">tm_sync_sm_t</a>;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#if TIME_ENABLE_SYNC</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;uint16_t tm_sync_init(uint16_t ucdm_next_address);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keywordtype">void</span> tm_sync_request_host(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keywordtype">void</span> tm_sync_handler(uint16_t addr);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keyword">extern</span> avlt_node_t  tm_avlt_sync_handler_node;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">#if TIME_ENABLE_SYNC_RTC</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;uint8_t tm_sync_current_to_rtc(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;uint8_t tm_sync_current_from_rtc(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="ttc" id="astruct_t_m___s_y_n_c___s_m__t_html"><div class="ttname"><a href="struct_t_m___s_y_n_c___s_m__t.html">TM_SYNC_SM_t</a></div><div class="ttdef"><b>Definition:</b> <a href="sync_8h_source.html#l00116">sync.h:116</a></div></div>
 <div class="ttc" id="atime_8h_html"><div class="ttname"><a href="time_8h.html">time.h</a></div><div class="ttdoc">Time related functions for embebedded systems.</div></div>
+<div class="ttc" id="atime_8h_html_a6431d9bc028f3b054654b0b326ca6e97"><div class="ttname"><a href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a></div><div class="ttdeci">int64_t tm_system_t</div><div class="ttdoc">System Time Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00118">time.h:118</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="sync_8h.html">sync.h</a></li>
-    <li class="footer">Generated on Thu Sep 5 2024 11:03:15 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Oct 3 2024 13:50:27 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

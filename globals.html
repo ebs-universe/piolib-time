@@ -28,7 +28,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ebs-time
-   &#160;<span id="projectnumber">0.1.1</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Time keeping and manipulation functions for embedded systems</div>
   </td>
@@ -85,16 +85,10 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 </div>
 
 <div class="contents">
-<div class="textblock">Here is a list of all documented functions, variables, defines, enums, and typedefs with links to the documentation:</div>
-
-<h3><a id="index_t"></a>- t -</h3><ul>
-<li>tm_apply_sdelta()
-: <a class="el" href="time_8h.html#a95f5459a905bec06152d9194ef56f557">time.h</a>
-, <a class="el" href="time_8c.html#a95f5459a905bec06152d9194ef56f557">time.c</a>
-</li>
+<div class="textblock">Here is a list of all documented functions, variables, defines, enums, and typedefs with links to the documentation:</div><ul>
 <li>tm_clear_rdelta()
-: <a class="el" href="time_8c.html#a56895961aa355ff23c287403e49833ac">time.c</a>
-, <a class="el" href="time_8h.html#a56895961aa355ff23c287403e49833ac">time.h</a>
+: <a class="el" href="time_8h.html#a56895961aa355ff23c287403e49833ac">time.h</a>
+, <a class="el" href="time_8c.html#a56895961aa355ff23c287403e49833ac">time.c</a>
 </li>
 <li>tm_clear_rtime()
 : <a class="el" href="time_8c.html#aa6bbe6f553bb851f42fb51b008ff4517">time.c</a>
@@ -108,24 +102,23 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 : <a class="el" href="time_8c.html#a80e742cf4d5a15aa405e271532631cb7">time.c</a>
 , <a class="el" href="time_8h.html#a80e742cf4d5a15aa405e271532631cb7">time.h</a>
 </li>
+<li>tm_epoch_descriptor
+: <a class="el" href="time_8c.html#a1687bb92a3bbf9bcd535ce26d50df319">time.c</a>
+</li>
 <li>tm_epochchange_handler_t
 : <a class="el" href="time_8h.html#adc3a4779fa0302239208634953cfc2a1">time.h</a>
-</li>
-<li>tm_get_sdelta()
-: <a class="el" href="time_8c.html#ab641ed88ef42759a236f3dccbe3192d9">time.c</a>
-, <a class="el" href="time_8h.html#ab641ed88ef42759a236f3dccbe3192d9">time.h</a>
 </li>
 <li>tm_init()
 : <a class="el" href="time_8c.html#a130024d5ed12980fbd5e325f2d82301e">time.c</a>
 , <a class="el" href="time_8h.html#a130024d5ed12980fbd5e325f2d82301e">time.h</a>
 </li>
 <li>tm_install_descriptor()
-: <a class="el" href="time_8h.html#ae649a29fbd008c16730d843b6da0a7fc">time.h</a>
-, <a class="el" href="time_8c.html#ae649a29fbd008c16730d843b6da0a7fc">time.c</a>
+: <a class="el" href="time_8c.html#ae649a29fbd008c16730d843b6da0a7fc">time.c</a>
+, <a class="el" href="time_8h.html#ae649a29fbd008c16730d843b6da0a7fc">time.h</a>
 </li>
 <li>tm_rdelta_from_sdelta()
-: <a class="el" href="time_8c.html#a70da36517cb7cbe622604c69c21dafaa">time.c</a>
-, <a class="el" href="time_8h.html#a70da36517cb7cbe622604c69c21dafaa">time.h</a>
+: <a class="el" href="time_8h.html#a70da36517cb7cbe622604c69c21dafaa">time.h</a>
+, <a class="el" href="time_8c.html#a70da36517cb7cbe622604c69c21dafaa">time.c</a>
 </li>
 <li>tm_rdelta_t
 : <a class="el" href="time_8h.html#add7b65e9a7e04684743d2f45f719e7ba">time.h</a>
@@ -138,15 +131,15 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 , <a class="el" href="time_8h.html#a542af40054156e483d8394af15fc0ac4">time.h</a>
 </li>
 <li>tm_rtime_from_stime()
-: <a class="el" href="time_8h.html#a52c2bf43c04d5a8da41bbc4de13594e5">time.h</a>
-, <a class="el" href="time_8c.html#a52c2bf43c04d5a8da41bbc4de13594e5">time.c</a>
+: <a class="el" href="time_8c.html#a52c2bf43c04d5a8da41bbc4de13594e5">time.c</a>
+, <a class="el" href="time_8h.html#a52c2bf43c04d5a8da41bbc4de13594e5">time.h</a>
 </li>
 <li>tm_sdelta_from_rdelta()
 : <a class="el" href="time_8c.html#a36fe5f19a48263d62cb825079260f00b">time.c</a>
 , <a class="el" href="time_8h.html#a36fe5f19a48263d62cb825079260f00b">time.h</a>
 </li>
 <li>tm_sdelta_t
-: <a class="el" href="time_8h.html#a002517429af4e9b06ba81c4c8c183bf2">time.h</a>
+: <a class="el" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">time.h</a>
 </li>
 <li>tm_set_epoch()
 : <a class="el" href="time_8c.html#a6a189a7f4cdf84e3f061bb309203fb50">time.c</a>
@@ -157,7 +150,7 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 , <a class="el" href="time_8h.html#adcd940fe0a1b12b1a0c47e857bc91b6e">time.h</a>
 </li>
 <li>tm_system_t
-: <a class="el" href="time_8h.html#ad0477ef4e8c99d2a34f49fb697886c63">time.h</a>
+: <a class="el" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">time.h</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -165,7 +158,7 @@ $(document).ready(function(){initNavTree('globals.html',''); initResizable(); })
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Sep 5 2024 11:03:15 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Oct 3 2024 13:50:27 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

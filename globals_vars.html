@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ebs-time: TM_SYSTEM_t Struct Reference</title>
+<title>ebs-time: Globals</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ebs-time
-   &#160;<span id="projectnumber">0.1.1</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Time keeping and manipulation functions for embedded systems</div>
   </td>
@@ -66,7 +66,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('struct_t_m___s_y_s_t_e_m__t.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('globals_vars.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -84,44 +84,18 @@ $(document).ready(function(){initNavTree('struct_t_m___s_y_s_t_e_m__t.html','');
 </iframe>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#pub-attribs">Data Fields</a>  </div>
-  <div class="headertitle">
-<div class="title">TM_SYSTEM_t Struct Reference</div>  </div>
-</div><!--header-->
 <div class="contents">
-
-<p>System Time Storage Type.  
- <a href="struct_t_m___s_y_s_t_e_m__t.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="time_8h_source.html">time/time.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:a1f18d7303335021275dd6b21be5061d0"><td class="memItemLeft" align="right" valign="top"><a id="a1f18d7303335021275dd6b21be5061d0"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>frac</b></td></tr>
-<tr class="separator:a1f18d7303335021275dd6b21be5061d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d5694839ec935781627e5c52de21fda"><td class="memItemLeft" align="right" valign="top"><a id="a6d5694839ec935781627e5c52de21fda"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>seconds</b></td></tr>
-<tr class="separator:a6d5694839ec935781627e5c52de21fda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>System Time Storage Type. </p>
-<p>This (struct) type stores a 'system' time. The 'frac' component is based on the least count created by the system tick.</p>
-<p>The 'seconds' component is a count of the number of seconds elapsed since the epoch, defined by tm_epoch, plus the number of leap seconds defined in tm_leapseconds. </p>
-
-<p class="definition">Definition at line <a class="el" href="time_8h_source.html#l00083">83</a> of file <a class="el" href="time_8h_source.html">time.h</a>.</p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>time/<a class="el" href="time_8h_source.html">time.h</a></li>
+&#160;<ul>
+<li>tm_epoch_descriptor
+: <a class="el" href="time_8c.html#a1687bb92a3bbf9bcd535ce26d50df319">time.c</a>
+</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="struct_t_m___s_y_s_t_e_m__t.html">TM_SYSTEM_t</a></li>
-    <li class="footer">Generated on Thu Sep 5 2024 11:03:15 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Oct 3 2024 13:50:27 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -28,7 +28,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ebs-time
-   &#160;<span id="projectnumber">0.1.1</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Time keeping and manipulation functions for embedded systems</div>
   </td>
@@ -113,155 +113,162 @@ $(document).ready(function(){initNavTree('time_8h_source.html',''); initResizabl
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#ifndef TIME_H</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#define TIME_H</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;config.h&quot;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;platform/cpu.h&gt;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#define TIME_SYSTICK_PERIOD_uS          1000</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#define TIME_TICKS_PER_SECOND           (uint32_t)(1000000 / TIME_SYSTICK_PERIOD_uS)</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#define TIME_TICKS_PER_MINUTE           (TIME_TICKS_PER_SECOND * 60)</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#define TIME_TICKS_PER_HOUR             (TIME_TICKS_PER_MINUTE * 60)</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define TIME_TICKS_PER_DAY              (TIME_TICKS_PER_HOUR * 24)</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#define TIME_SECONDS_PER_MINUTE         (uint32_t)(60)</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#define TIME_SECONDS_PER_HOUR           (TIME_SECONDS_PER_MINUTE * 60)</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#define TIME_SECONDS_PER_DAY            (TIME_SECONDS_PER_HOUR * 24)</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="struct_t_m___s_y_s_t_e_m__t.html">   83</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">TM_SYSTEM_t</a>{</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    uint16_t frac;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    uint32_t seconds;</div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="time_8h.html#ad0477ef4e8c99d2a34f49fb697886c63">   86</a></span>&#160;}<a class="code" href="time_8h.html#ad0477ef4e8c99d2a34f49fb697886c63">tm_system_t</a>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="struct_t_m___s_d_e_l_t_a__t.html">   95</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">TM_SDELTA_t</a>{</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    uint16_t frac;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    uint32_t seconds;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    uint8_t sgn;</div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="time_8h.html#a002517429af4e9b06ba81c4c8c183bf2">   99</a></span>&#160;}<a class="code" href="time_8h.html#a002517429af4e9b06ba81c4c8c183bf2">tm_sdelta_t</a>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="struct_t_m___r_e_a_l__t.html">  116</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_t_m___r_e_a_l__t.html">TM_REAL_t</a>{</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    uint8_t century;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    uint8_t year;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    uint8_t month;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    uint8_t date;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    uint8_t hours;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    uint8_t minutes;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    uint8_t seconds;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    uint16_t frac; </div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="time_8h.html#a4d68c653cca64590d7af5c9434363a19">  125</a></span>&#160;}<a class="code" href="time_8h.html#a4d68c653cca64590d7af5c9434363a19">tm_real_t</a>;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="struct_t_m___r_d_e_l_t_a__t.html">  138</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">TM_RDELTA_t</a>{</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    uint8_t sgn;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    uint16_t frac;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    uint8_t seconds;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    uint8_t minutes;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    uint8_t hours;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    uint16_t days;</div>
-<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="time_8h.html#add7b65e9a7e04684743d2f45f719e7ba">  145</a></span>&#160;}<a class="code" href="time_8h.html#add7b65e9a7e04684743d2f45f719e7ba">tm_rdelta_t</a>;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">  155</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">TM_EPOCH_CHANGEHANDLER_t</a>{</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keyword">struct </span><a class="code" href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">TM_EPOCH_CHANGEHANDLER_t</a> * next;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    uint8_t priority;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    void (* func)(<a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> *);</div>
-<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="time_8h.html#adc3a4779fa0302239208634953cfc2a1">  159</a></span>&#160;}<a class="code" href="time_8h.html#adc3a4779fa0302239208634953cfc2a1">tm_epochchange_handler_t</a>;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keyword">extern</span> <span class="keyword">volatile</span> <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> tm_current;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keyword">extern</span>   <a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a> tm_epoch;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keyword">extern</span>      int8_t tm_leapseconds;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="keyword">extern</span>   <a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a> tm_internal_epoch;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="keyword">extern</span>    uint32_t tm_internal_epoch_offset;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="keyword">extern</span>     uint8_t use_epoch;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keyword">extern</span> <a class="code" href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">tm_epochchange_handler_t</a> * epoch_handlers_root;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;uint16_t <a class="code" href="time_8h.html#a130024d5ed12980fbd5e325f2d82301e">tm_init</a>(uint16_t ucdm_address);</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#ae649a29fbd008c16730d843b6da0a7fc">tm_install_descriptor</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a80e742cf4d5a15aa405e271532631cb7">tm_clear_stime</a>(<a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a>* stime);</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3">tm_clear_sdelta</a>(<a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a>* sdelta);</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#aa6bbe6f553bb851f42fb51b008ff4517">tm_clear_rtime</a>(<a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a>* rtime);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a56895961aa355ff23c287403e49833ac">tm_clear_rdelta</a>(<a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">tm_rdelta_t</a>* rdelta);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_current_time(<a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> * stime);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_current_time(<a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> * stime){</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    critical_enter();</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    memcpy((<span class="keywordtype">void</span> *)stime, (<span class="keywordtype">void</span> *)(&amp;tm_current), <span class="keyword">sizeof</span>(<a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a>));</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    critical_exit();</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;}</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;int8_t tm_cmp_stime(<a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> * t1, <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> * t2);</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#ab641ed88ef42759a236f3dccbe3192d9">tm_get_sdelta</a>(<a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> * t1, <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> * t2, <a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> * sdelta);</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#ifndef TIME_H</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#define TIME_H</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#include &quot;config.h&quot;</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#include &lt;platform/cpu.h&gt;</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#define TIME_SYSTICK_PERIOD_uS          1000</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#define TIME_TICKS_PER_SECOND           (uint32_t)(1000000 / TIME_SYSTICK_PERIOD_uS)</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#define TIME_TICKS_PER_MINUTE           (TIME_TICKS_PER_SECOND * 60)</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#define TIME_TICKS_PER_HOUR             (TIME_TICKS_PER_MINUTE * 60)</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#define TIME_TICKS_PER_DAY              (TIME_TICKS_PER_HOUR * 24)</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#define TIME_SECONDS_PER_MINUTE         (uint32_t)(60)</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#define TIME_SECONDS_PER_HOUR           (TIME_SECONDS_PER_MINUTE * 60)</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#define TIME_SECONDS_PER_DAY            (TIME_SECONDS_PER_HOUR * 24)</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">  118</a></span>&#160;<span class="keyword">typedef</span> int64_t <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a>;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">  129</a></span>&#160;<span class="keyword">typedef</span> int64_t <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="struct_t_m___r_e_a_l__t.html">  146</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_t_m___r_e_a_l__t.html">TM_REAL_t</a>{</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    uint8_t century;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    uint8_t year;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    uint8_t month;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    uint8_t date;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    uint8_t hours;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    uint8_t minutes;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    uint8_t seconds;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    uint16_t millis; </div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="time_8h.html#a4d68c653cca64590d7af5c9434363a19">  155</a></span>&#160;} <a class="code" href="time_8h.html#a4d68c653cca64590d7af5c9434363a19">tm_real_t</a>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="struct_t_m___r_d_e_l_t_a__t.html">  167</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">TM_RDELTA_t</a>{</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    uint8_t sgn;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    uint16_t millis;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    uint8_t seconds;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    uint8_t minutes;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    uint8_t hours;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    uint16_t days;</div>
+<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="time_8h.html#add7b65e9a7e04684743d2f45f719e7ba">  174</a></span>&#160;} <a class="code" href="time_8h.html#add7b65e9a7e04684743d2f45f719e7ba">tm_rdelta_t</a>;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">  204</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">TM_EPOCH_CHANGEHANDLER_t</a>{</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keyword">struct </span><a class="code" href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">TM_EPOCH_CHANGEHANDLER_t</a> * next;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    uint8_t priority;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    void (* func)(<a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> *);</div>
+<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="time_8h.html#adc3a4779fa0302239208634953cfc2a1">  208</a></span>&#160;}<a class="code" href="time_8h.html#adc3a4779fa0302239208634953cfc2a1">tm_epochchange_handler_t</a>;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="keyword">extern</span> <span class="keyword">volatile</span> <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> tm_current;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="keyword">extern</span>   <a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a> tm_epoch;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="keyword">extern</span>      int8_t tm_leapseconds;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keyword">extern</span>   <a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a> tm_internal_epoch;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="keyword">extern</span>     int64_t tm_internal_epoch_offset;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="keyword">extern</span>     uint8_t use_epoch;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword">extern</span> <a class="code" href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">tm_epochchange_handler_t</a> * epoch_handlers_root;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;uint16_t <a class="code" href="time_8h.html#a130024d5ed12980fbd5e325f2d82301e">tm_init</a>(uint16_t ucdm_address);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#ae649a29fbd008c16730d843b6da0a7fc">tm_install_descriptor</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a80e742cf4d5a15aa405e271532631cb7">tm_clear_stime</a>(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a>* stime);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3">tm_clear_sdelta</a>(<a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a>* sdelta);</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a95f5459a905bec06152d9194ef56f557">tm_apply_sdelta</a>(<a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> * t, <a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> * sdelta);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a36fe5f19a48263d62cb825079260f00b">tm_sdelta_from_rdelta</a>(<a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">tm_rdelta_t</a>* rdelta, <a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a>* sdelta);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a70da36517cb7cbe622604c69c21dafaa">tm_rdelta_from_sdelta</a>(<a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a>* sdelta, <a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">tm_rdelta_t</a> * rdelta);</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_apply_rdelta(<a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> * t, <a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">tm_rdelta_t</a> * rdelta);</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_apply_rdelta(<a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> * t, <a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">tm_rdelta_t</a> * rdelta){</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> sdelta;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <a class="code" href="time_8h.html#a36fe5f19a48263d62cb825079260f00b">tm_sdelta_from_rdelta</a>(rdelta, &amp;sdelta);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <a class="code" href="time_8h.html#a95f5459a905bec06152d9194ef56f557">tm_apply_sdelta</a>(t, &amp;sdelta);</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#aa6bbe6f553bb851f42fb51b008ff4517">tm_clear_rtime</a>(<a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a>* rtime);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a56895961aa355ff23c287403e49833ac">tm_clear_rdelta</a>(<a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">tm_rdelta_t</a>* rdelta);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_current_time(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * stime);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_current_time(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * stime){</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    critical_enter();</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    *stime = tm_current;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    critical_exit();</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;}</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> int8_t tm_cmp_stime(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t1, <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t2);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> int8_t tm_cmp_stime(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t1, <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t2){</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordflow">if</span> (t1 &lt; t2){</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="keywordflow">return</span> (-1);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    }</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (t1 &gt; t2){</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keywordflow">return</span> (1);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    }</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;}</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#adcd940fe0a1b12b1a0c47e857bc91b6e">tm_stime_from_rtime</a>(<a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a>* rtime, <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a>* stime);</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a52c2bf43c04d5a8da41bbc4de13594e5">tm_rtime_from_stime</a>(<a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a>* stime, <a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a>* rtime);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_get_sdelta(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t1, <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t2, <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * sdelta);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_get_sdelta(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t1, <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t2, <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * sdelta){</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    *sdelta = (*t2 - *t1);</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;}</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_apply_sdelta(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t, <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * sdelta);</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_apply_sdelta(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t, <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * sdelta){</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    *t = *t + *sdelta;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;}</div>
 <div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a6a189a7f4cdf84e3f061bb309203fb50">tm_set_epoch</a>(<a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a>* rtime, uint8_t follow);</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a542af40054156e483d8394af15fc0ac4">tm_register_epoch_change_handler</a>(<a class="code" href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">tm_epochchange_handler_t</a> * handler);</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="astruct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t_html"><div class="ttname"><a href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">TM_EPOCH_CHANGEHANDLER_t</a></div><div class="ttdoc">Epoch Change Handler Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00155">time.h:155</a></div></div>
-<div class="ttc" id="astruct_t_m___r_d_e_l_t_a__t_html"><div class="ttname"><a href="struct_t_m___r_d_e_l_t_a__t.html">TM_RDELTA_t</a></div><div class="ttdoc">Real Timedelta Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00138">time.h:138</a></div></div>
-<div class="ttc" id="astruct_t_m___r_e_a_l__t_html"><div class="ttname"><a href="struct_t_m___r_e_a_l__t.html">TM_REAL_t</a></div><div class="ttdoc">Real Time Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00116">time.h:116</a></div></div>
-<div class="ttc" id="astruct_t_m___s_d_e_l_t_a__t_html"><div class="ttname"><a href="struct_t_m___s_d_e_l_t_a__t.html">TM_SDELTA_t</a></div><div class="ttdoc">System Timedelta Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00095">time.h:95</a></div></div>
-<div class="ttc" id="astruct_t_m___s_y_s_t_e_m__t_html"><div class="ttname"><a href="struct_t_m___s_y_s_t_e_m__t.html">TM_SYSTEM_t</a></div><div class="ttdoc">System Time Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00083">time.h:83</a></div></div>
-<div class="ttc" id="atime_8h_html_a002517429af4e9b06ba81c4c8c183bf2"><div class="ttname"><a href="time_8h.html#a002517429af4e9b06ba81c4c8c183bf2">tm_sdelta_t</a></div><div class="ttdeci">struct TM_SDELTA_t tm_sdelta_t</div><div class="ttdoc">System Timedelta Storage Type.</div></div>
-<div class="ttc" id="atime_8h_html_a00a5692ee3a8cab2cb079ce7e2c8c5e3"><div class="ttname"><a href="time_8h.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3">tm_clear_sdelta</a></div><div class="ttdeci">void tm_clear_sdelta(tm_sdelta_t *sdelta)</div><div class="ttdoc">Clear a time_sdelta_t instance.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00087">time.c:87</a></div></div>
-<div class="ttc" id="atime_8h_html_a130024d5ed12980fbd5e325f2d82301e"><div class="ttname"><a href="time_8h.html#a130024d5ed12980fbd5e325f2d82301e">tm_init</a></div><div class="ttdeci">uint16_t tm_init(uint16_t ucdm_address)</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00069">time.c:69</a></div></div>
-<div class="ttc" id="atime_8h_html_a36fe5f19a48263d62cb825079260f00b"><div class="ttname"><a href="time_8h.html#a36fe5f19a48263d62cb825079260f00b">tm_sdelta_from_rdelta</a></div><div class="ttdeci">void tm_sdelta_from_rdelta(tm_rdelta_t *rdelta, tm_sdelta_t *sdelta)</div><div class="ttdoc">Convert a time_delta_t instance into systick units.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00181">time.c:181</a></div></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a36fe5f19a48263d62cb825079260f00b">tm_sdelta_from_rdelta</a>(<a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">tm_rdelta_t</a>* rdelta, <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a>* sdelta);</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a70da36517cb7cbe622604c69c21dafaa">tm_rdelta_from_sdelta</a>(<a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a>* sdelta, <a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">tm_rdelta_t</a> * rdelta);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_apply_rdelta(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t, <a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">tm_rdelta_t</a> * rdelta);</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> tm_apply_rdelta(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * t, <a class="code" href="struct_t_m___r_d_e_l_t_a__t.html">tm_rdelta_t</a> * rdelta){</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> sdelta;</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    <a class="code" href="time_8h.html#a36fe5f19a48263d62cb825079260f00b">tm_sdelta_from_rdelta</a>(rdelta, &amp;sdelta);</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    tm_apply_sdelta(t, &amp;sdelta);</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;}</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#adcd940fe0a1b12b1a0c47e857bc91b6e">tm_stime_from_rtime</a>(<a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a>* rtime, <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a>* stime);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160; </div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a52c2bf43c04d5a8da41bbc4de13594e5">tm_rtime_from_stime</a>(<a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a>* stime, <a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a>* rtime);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160; </div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160; </div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a6a189a7f4cdf84e3f061bb309203fb50">tm_set_epoch</a>(<a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a>* rtime, uint8_t follow);</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160; </div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="keywordtype">void</span> <a class="code" href="time_8h.html#a542af40054156e483d8394af15fc0ac4">tm_register_epoch_change_handler</a>(<a class="code" href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">tm_epochchange_handler_t</a> * handler);</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160; </div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="astruct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t_html"><div class="ttname"><a href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">TM_EPOCH_CHANGEHANDLER_t</a></div><div class="ttdoc">Epoch Change Handler Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00204">time.h:204</a></div></div>
+<div class="ttc" id="astruct_t_m___r_d_e_l_t_a__t_html"><div class="ttname"><a href="struct_t_m___r_d_e_l_t_a__t.html">TM_RDELTA_t</a></div><div class="ttdoc">Real Timedelta Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00167">time.h:167</a></div></div>
+<div class="ttc" id="astruct_t_m___r_e_a_l__t_html"><div class="ttname"><a href="struct_t_m___r_e_a_l__t.html">TM_REAL_t</a></div><div class="ttdoc">Real Time Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00146">time.h:146</a></div></div>
+<div class="ttc" id="atime_8h_html_a00a5692ee3a8cab2cb079ce7e2c8c5e3"><div class="ttname"><a href="time_8h.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3">tm_clear_sdelta</a></div><div class="ttdeci">void tm_clear_sdelta(tm_sdelta_t *sdelta)</div><div class="ttdoc">Clear a time_sdelta_t instance.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00096">time.c:96</a></div></div>
+<div class="ttc" id="atime_8h_html_a130024d5ed12980fbd5e325f2d82301e"><div class="ttname"><a href="time_8h.html#a130024d5ed12980fbd5e325f2d82301e">tm_init</a></div><div class="ttdeci">uint16_t tm_init(uint16_t ucdm_address)</div><div class="ttdoc">Intitialize time library constructs.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00071">time.c:71</a></div></div>
+<div class="ttc" id="atime_8h_html_a36fe5f19a48263d62cb825079260f00b"><div class="ttname"><a href="time_8h.html#a36fe5f19a48263d62cb825079260f00b">tm_sdelta_from_rdelta</a></div><div class="ttdeci">void tm_sdelta_from_rdelta(tm_rdelta_t *rdelta, tm_sdelta_t *sdelta)</div><div class="ttdoc">Convert a tm_rdelta_t instance into systick units.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00123">time.c:123</a></div></div>
+<div class="ttc" id="atime_8h_html_a3d5cc3f465acf62651c6b24795249de6"><div class="ttname"><a href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a></div><div class="ttdeci">int64_t tm_sdelta_t</div><div class="ttdoc">System Timedelta Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00129">time.h:129</a></div></div>
 <div class="ttc" id="atime_8h_html_a4d68c653cca64590d7af5c9434363a19"><div class="ttname"><a href="time_8h.html#a4d68c653cca64590d7af5c9434363a19">tm_real_t</a></div><div class="ttdeci">struct TM_REAL_t tm_real_t</div><div class="ttdoc">Real Time Storage Type.</div></div>
-<div class="ttc" id="atime_8h_html_a52c2bf43c04d5a8da41bbc4de13594e5"><div class="ttname"><a href="time_8h.html#a52c2bf43c04d5a8da41bbc4de13594e5">tm_rtime_from_stime</a></div><div class="ttdeci">void tm_rtime_from_stime(tm_system_t *stime, tm_real_t *rtime)</div><div class="ttdoc">Get the real time from a system timestamp against the current epoch.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00253">time.c:253</a></div></div>
-<div class="ttc" id="atime_8h_html_a542af40054156e483d8394af15fc0ac4"><div class="ttname"><a href="time_8h.html#a542af40054156e483d8394af15fc0ac4">tm_register_epoch_change_handler</a></div><div class="ttdeci">void tm_register_epoch_change_handler(tm_epochchange_handler_t *handler)</div><div class="ttdoc">Register a callback for changes to the epoch.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00320">time.c:320</a></div></div>
-<div class="ttc" id="atime_8h_html_a56895961aa355ff23c287403e49833ac"><div class="ttname"><a href="time_8h.html#a56895961aa355ff23c287403e49833ac">tm_clear_rdelta</a></div><div class="ttdeci">void tm_clear_rdelta(tm_rdelta_t *rdelta)</div><div class="ttdoc">Clear a time_delta_t instance.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00106">time.c:106</a></div></div>
-<div class="ttc" id="atime_8h_html_a6a189a7f4cdf84e3f061bb309203fb50"><div class="ttname"><a href="time_8h.html#a6a189a7f4cdf84e3f061bb309203fb50">tm_set_epoch</a></div><div class="ttdeci">void tm_set_epoch(tm_real_t *rtime, uint8_t follow)</div><div class="ttdoc">Set the epoch time from an external real time source.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00291">time.c:291</a></div></div>
-<div class="ttc" id="atime_8h_html_a70da36517cb7cbe622604c69c21dafaa"><div class="ttname"><a href="time_8h.html#a70da36517cb7cbe622604c69c21dafaa">tm_rdelta_from_sdelta</a></div><div class="ttdeci">void tm_rdelta_from_sdelta(tm_sdelta_t *sdelta, tm_rdelta_t *rdelta)</div><div class="ttdoc">Convert a time difference in systick units into a real time difference.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00191">time.c:191</a></div></div>
-<div class="ttc" id="atime_8h_html_a80e742cf4d5a15aa405e271532631cb7"><div class="ttname"><a href="time_8h.html#a80e742cf4d5a15aa405e271532631cb7">tm_clear_stime</a></div><div class="ttdeci">void tm_clear_stime(tm_system_t *stime)</div><div class="ttdoc">Clear a time_system_t instance.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00081">time.c:81</a></div></div>
-<div class="ttc" id="atime_8h_html_a95f5459a905bec06152d9194ef56f557"><div class="ttname"><a href="time_8h.html#a95f5459a905bec06152d9194ef56f557">tm_apply_sdelta</a></div><div class="ttdeci">void tm_apply_sdelta(tm_system_t *t, tm_sdelta_t *sdelta)</div><div class="ttdoc">Apply a time difference to a time in system time.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00159">time.c:159</a></div></div>
-<div class="ttc" id="atime_8h_html_aa6bbe6f553bb851f42fb51b008ff4517"><div class="ttname"><a href="time_8h.html#aa6bbe6f553bb851f42fb51b008ff4517">tm_clear_rtime</a></div><div class="ttdeci">void tm_clear_rtime(tm_real_t *rtime)</div><div class="ttdoc">Clear a time_real_t instance.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00094">time.c:94</a></div></div>
-<div class="ttc" id="atime_8h_html_ab641ed88ef42759a236f3dccbe3192d9"><div class="ttname"><a href="time_8h.html#ab641ed88ef42759a236f3dccbe3192d9">tm_get_sdelta</a></div><div class="ttdeci">void tm_get_sdelta(tm_system_t *t1, tm_system_t *t2, tm_sdelta_t *sdelta)</div><div class="ttdoc">Get the difference between two system times as a system time delta (t2 - t1)</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00134">time.c:134</a></div></div>
-<div class="ttc" id="atime_8h_html_ad0477ef4e8c99d2a34f49fb697886c63"><div class="ttname"><a href="time_8h.html#ad0477ef4e8c99d2a34f49fb697886c63">tm_system_t</a></div><div class="ttdeci">struct TM_SYSTEM_t tm_system_t</div><div class="ttdoc">System Time Storage Type.</div></div>
+<div class="ttc" id="atime_8h_html_a52c2bf43c04d5a8da41bbc4de13594e5"><div class="ttname"><a href="time_8h.html#a52c2bf43c04d5a8da41bbc4de13594e5">tm_rtime_from_stime</a></div><div class="ttdeci">void tm_rtime_from_stime(tm_system_t *stime, tm_real_t *rtime)</div><div class="ttdoc">Get the real time from a system timestamp against the current epoch.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00202">time.c:202</a></div></div>
+<div class="ttc" id="atime_8h_html_a542af40054156e483d8394af15fc0ac4"><div class="ttname"><a href="time_8h.html#a542af40054156e483d8394af15fc0ac4">tm_register_epoch_change_handler</a></div><div class="ttdeci">void tm_register_epoch_change_handler(tm_epochchange_handler_t *handler)</div><div class="ttdoc">Register a callback for changes to the epoch.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00316">time.c:316</a></div></div>
+<div class="ttc" id="atime_8h_html_a56895961aa355ff23c287403e49833ac"><div class="ttname"><a href="time_8h.html#a56895961aa355ff23c287403e49833ac">tm_clear_rdelta</a></div><div class="ttdeci">void tm_clear_rdelta(tm_rdelta_t *rdelta)</div><div class="ttdoc">Clear a time_delta_t instance.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00113">time.c:113</a></div></div>
+<div class="ttc" id="atime_8h_html_a6431d9bc028f3b054654b0b326ca6e97"><div class="ttname"><a href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a></div><div class="ttdeci">int64_t tm_system_t</div><div class="ttdoc">System Time Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00118">time.h:118</a></div></div>
+<div class="ttc" id="atime_8h_html_a6a189a7f4cdf84e3f061bb309203fb50"><div class="ttname"><a href="time_8h.html#a6a189a7f4cdf84e3f061bb309203fb50">tm_set_epoch</a></div><div class="ttdeci">void tm_set_epoch(tm_real_t *rtime, uint8_t follow)</div><div class="ttdoc">Set the epoch time from an external real time source.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00281">time.c:281</a></div></div>
+<div class="ttc" id="atime_8h_html_a70da36517cb7cbe622604c69c21dafaa"><div class="ttname"><a href="time_8h.html#a70da36517cb7cbe622604c69c21dafaa">tm_rdelta_from_sdelta</a></div><div class="ttdeci">void tm_rdelta_from_sdelta(tm_sdelta_t *sdelta, tm_rdelta_t *rdelta)</div><div class="ttdoc">Convert a time difference in systick units into a real time difference.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00136">time.c:136</a></div></div>
+<div class="ttc" id="atime_8h_html_a80e742cf4d5a15aa405e271532631cb7"><div class="ttname"><a href="time_8h.html#a80e742cf4d5a15aa405e271532631cb7">tm_clear_stime</a></div><div class="ttdeci">void tm_clear_stime(tm_system_t *stime)</div><div class="ttdoc">Clear a time_system_t instance.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00091">time.c:91</a></div></div>
+<div class="ttc" id="atime_8h_html_aa6bbe6f553bb851f42fb51b008ff4517"><div class="ttname"><a href="time_8h.html#aa6bbe6f553bb851f42fb51b008ff4517">tm_clear_rtime</a></div><div class="ttdeci">void tm_clear_rtime(tm_real_t *rtime)</div><div class="ttdoc">Clear a time_real_t instance.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00101">time.c:101</a></div></div>
 <div class="ttc" id="atime_8h_html_adc3a4779fa0302239208634953cfc2a1"><div class="ttname"><a href="time_8h.html#adc3a4779fa0302239208634953cfc2a1">tm_epochchange_handler_t</a></div><div class="ttdeci">struct TM_EPOCH_CHANGEHANDLER_t tm_epochchange_handler_t</div><div class="ttdoc">Epoch Change Handler Type.</div></div>
-<div class="ttc" id="atime_8h_html_adcd940fe0a1b12b1a0c47e857bc91b6e"><div class="ttname"><a href="time_8h.html#adcd940fe0a1b12b1a0c47e857bc91b6e">tm_stime_from_rtime</a></div><div class="ttdeci">void tm_stime_from_rtime(tm_real_t *rtime, tm_system_t *stime)</div><div class="ttdoc">Get a system timestamp from a real time, against the current epoch.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00219">time.c:219</a></div></div>
+<div class="ttc" id="atime_8h_html_adcd940fe0a1b12b1a0c47e857bc91b6e"><div class="ttname"><a href="time_8h.html#adcd940fe0a1b12b1a0c47e857bc91b6e">tm_stime_from_rtime</a></div><div class="ttdeci">void tm_stime_from_rtime(tm_real_t *rtime, tm_system_t *stime)</div><div class="ttdoc">Get a system timestamp from a real time, against the current epoch.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00169">time.c:169</a></div></div>
 <div class="ttc" id="atime_8h_html_add7b65e9a7e04684743d2f45f719e7ba"><div class="ttname"><a href="time_8h.html#add7b65e9a7e04684743d2f45f719e7ba">tm_rdelta_t</a></div><div class="ttdeci">struct TM_RDELTA_t tm_rdelta_t</div><div class="ttdoc">Real Timedelta Storage Type.</div></div>
-<div class="ttc" id="atime_8h_html_ae649a29fbd008c16730d843b6da0a7fc"><div class="ttname"><a href="time_8h.html#ae649a29fbd008c16730d843b6da0a7fc">tm_install_descriptor</a></div><div class="ttdeci">void tm_install_descriptor(void)</div><div class="ttdoc">Install the time library descriptor to the application.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00061">time.c:61</a></div></div>
+<div class="ttc" id="atime_8h_html_ae649a29fbd008c16730d843b6da0a7fc"><div class="ttname"><a href="time_8h.html#ae649a29fbd008c16730d843b6da0a7fc">tm_install_descriptor</a></div><div class="ttdeci">void tm_install_descriptor(void)</div><div class="ttdoc">Install the time library descriptor to the application.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00063">time.c:63</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="time_8h.html">time.h</a></li>
-    <li class="footer">Generated on Thu Sep 5 2024 11:03:15 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Oct 3 2024 13:50:27 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

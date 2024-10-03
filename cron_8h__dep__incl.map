@@ -1,4 +1,5 @@
 <map id="time/cron.h" name="time/cron.h">
-<area shape="rect" id="node1" title="Cron&#45;like scheduling framework for embebedded systems." alt="" coords="5,5,101,32"/>
-<area shape="rect" id="node2" href="$cron_8c.html" title="Cron&#45;like scheduling framework implementations." alt="" coords="6,80,101,107"/>
+<area shape="rect" id="node1" title="Cron&#45;like scheduling framework for embebedded systems." alt="" coords="65,5,161,32"/>
+<area shape="rect" id="node2" href="$cron_8c.html" title="Cron&#45;like scheduling framework implementations." alt="" coords="5,80,100,107"/>
+<area shape="rect" id="node3" href="$time_8c.html" title="Time related function implementations." alt="" coords="124,80,221,107"/>
 </map>

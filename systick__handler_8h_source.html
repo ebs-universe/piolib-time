@@ -28,7 +28,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ebs-time
-   &#160;<span id="projectnumber">0.1.1</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Time keeping and manipulation functions for embedded systems</div>
   </td>
@@ -118,14 +118,8 @@ $(document).ready(function(){initNavTree('systick__handler_8h_source.html',''); 
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> time_systick_handler(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> time_systick_handler(<span class="keywordtype">void</span>){</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span> (tm_current.frac == TIME_TICKS_PER_SECOND - 1){</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        tm_current.seconds ++;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        tm_current.frac = 0;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        tm_current.frac ++;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    tm_current ++;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
 <div class="ttc" id="atime_8h_html"><div class="ttname"><a href="time_8h.html">time.h</a></div><div class="ttdoc">Time related functions for embebedded systems.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -133,7 +127,7 @@ $(document).ready(function(){initNavTree('systick__handler_8h_source.html',''); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="systick__handler_8h.html">systick_handler.h</a></li>
-    <li class="footer">Generated on Thu Sep 5 2024 11:03:15 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Oct 3 2024 13:50:27 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

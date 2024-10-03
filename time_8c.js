@@ -2,13 +2,10 @@ var time_8c =
 [
     [ "TM_UCDM_RTIME_LEN", "time_8c.html#a412795d952de12045fe0330791782ca5", null ],
     [ "TM_UCDM_STIME_LEN", "time_8c.html#ab67e2f92d178b4ad417ad885845ec4ce", null ],
-    [ "tm_apply_sdelta", "time_8c.html#a95f5459a905bec06152d9194ef56f557", null ],
     [ "tm_clear_rdelta", "time_8c.html#a56895961aa355ff23c287403e49833ac", null ],
     [ "tm_clear_rtime", "time_8c.html#aa6bbe6f553bb851f42fb51b008ff4517", null ],
     [ "tm_clear_sdelta", "time_8c.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3", null ],
     [ "tm_clear_stime", "time_8c.html#a80e742cf4d5a15aa405e271532631cb7", null ],
-    [ "tm_cmp_stime", "time_8c.html#a12dd355f5018bb07b616bf964c86b5e5", null ],
-    [ "tm_get_sdelta", "time_8c.html#ab641ed88ef42759a236f3dccbe3192d9", null ],
     [ "tm_init", "time_8c.html#a130024d5ed12980fbd5e325f2d82301e", null ],
     [ "tm_install_descriptor", "time_8c.html#ae649a29fbd008c16730d843b6da0a7fc", null ],
     [ "tm_rdelta_from_sdelta", "time_8c.html#a70da36517cb7cbe622604c69c21dafaa", null ],
@@ -22,7 +19,7 @@ var time_8c =
     [ "tm_epoch", "time_8c.html#a07ba4f32f6991c9a4e14570a1f1c09c2", null ],
     [ "tm_epoch_descriptor", "time_8c.html#a1687bb92a3bbf9bcd535ce26d50df319", null ],
     [ "tm_internal_epoch", "time_8c.html#a81951a50eece8e5c647b52b00f199be9", null ],
-    [ "tm_internal_epoch_offset", "time_8c.html#a8fa687f887557bec86fb537836e43508", null ],
+    [ "tm_internal_epoch_offset", "time_8c.html#a2b0f098b0913d8dde383c713b7a2b931", null ],
     [ "tm_leapseconds", "time_8c.html#a8da100e3faad3170e19b84f90f9073d4", null ],
     [ "use_epoch", "time_8c.html#ac46cbce2f63dae1d24205fd6fbcc2ab3", null ]
 ];

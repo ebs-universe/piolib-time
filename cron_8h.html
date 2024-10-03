@@ -28,7 +28,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ebs-time
-   &#160;<span id="projectnumber">0.1.1</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Time keeping and manipulation functions for embedded systems</div>
   </td>
@@ -108,7 +108,7 @@ Include dependency graph for cron.h:</div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="cron_8h__dep__incl.svg" width="107" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="cron_8h__dep__incl.svg" width="227" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -134,10 +134,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_cron_init</b> (voi
 void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_cron_clear_job</b> (<a class="el" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> *job_p)</td></tr>
 <tr class="separator:ad6420545adbb6aee58100ea948b847c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ae8afbebc0998d4fa6bb927b7348634"><td class="memItemLeft" align="right" valign="top"><a id="a9ae8afbebc0998d4fa6bb927b7348634"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_cron_create_job_abs</b> (<a class="el" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> *job_p, void handler(void), <a class="el" href="time_8h.html#ad0477ef4e8c99d2a34f49fb697886c63">tm_system_t</a> *texec_p, <a class="el" href="time_8h.html#a002517429af4e9b06ba81c4c8c183bf2">tm_sdelta_t</a> *tafter_p)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_cron_create_job_abs</b> (<a class="el" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> *job_p, void handler(void), <a class="el" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> *texec_p, <a class="el" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> *tafter_p)</td></tr>
 <tr class="separator:a9ae8afbebc0998d4fa6bb927b7348634"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c2e85fb4b19fa8d232072c56f5636ed"><td class="memItemLeft" align="right" valign="top"><a id="a5c2e85fb4b19fa8d232072c56f5636ed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_cron_create_job_rel</b> (<a class="el" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> *job_p, void handler(void), <a class="el" href="time_8h.html#a002517429af4e9b06ba81c4c8c183bf2">tm_sdelta_t</a> *trelexec_p, <a class="el" href="time_8h.html#a002517429af4e9b06ba81c4c8c183bf2">tm_sdelta_t</a> *tafter_p)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_cron_create_job_rel</b> (<a class="el" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> *job_p, void handler(void), <a class="el" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> *trelexec_p, <a class="el" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> *tafter_p)</td></tr>
 <tr class="separator:a5c2e85fb4b19fa8d232072c56f5636ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf90aa38172b4830afeb0a113be640eb"><td class="memItemLeft" align="right" valign="top"><a id="abf90aa38172b4830afeb0a113be640eb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_cron_insert_job</b> (<a class="el" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> *job_p)</td></tr>
@@ -149,7 +149,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_cron_cancel_job</b
 void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_cron_poll</b> (void)</td></tr>
 <tr class="separator:aba0331747ce8989a513b91f8f7b5fc0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06c6fee9a7455d6bb00266a0d3da9906"><td class="memItemLeft" align="right" valign="top"><a id="a06c6fee9a7455d6bb00266a0d3da9906"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_cron_epoch_change_handler</b> (<a class="el" href="time_8h.html#a002517429af4e9b06ba81c4c8c183bf2">tm_sdelta_t</a> *offset)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_cron_epoch_change_handler</b> (<a class="el" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> *offset)</td></tr>
 <tr class="separator:a06c6fee9a7455d6bb00266a0d3da9906"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -170,7 +170,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="cron_8h.html">cron.h</a></li>
-    <li class="footer">Generated on Thu Sep 5 2024 11:03:15 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Oct 3 2024 13:50:27 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

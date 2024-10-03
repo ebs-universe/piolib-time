@@ -28,7 +28,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ebs-time
-   &#160;<span id="projectnumber">0.1.1</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Time keeping and manipulation functions for embedded systems</div>
   </td>
@@ -88,9 +88,7 @@ $(document).ready(function(){initNavTree('sync_8h.html',''); initResizable(); })
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">sync.h File Reference</div>  </div>
 </div><!--header-->
@@ -109,7 +107,7 @@ Include dependency graph for sync.h:</div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="sync_8h__dep__incl.svg" width="230" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="sync_8h__dep__incl.svg" width="375" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -131,11 +129,14 @@ Macros</h2></td></tr>
 <tr class="memitem:a538a417d25ccaa6cbf6fc33e0f37c7f6"><td class="memItemLeft" align="right" valign="top"><a id="a538a417d25ccaa6cbf6fc33e0f37c7f6"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TM_SYNC_STATE_WAIT_HOST</b>&#160;&#160;&#160;2</td></tr>
 <tr class="separator:a538a417d25ccaa6cbf6fc33e0f37c7f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a296c28a81c59e20065ac8d695e94a3a3"><td class="memItemLeft" align="right" valign="top"><a id="a296c28a81c59e20065ac8d695e94a3a3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TM_SYNC_STATE_WAIT_FOLLOW_UP</b>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a296c28a81c59e20065ac8d695e94a3a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5464ab835f2582881afe36596fa55554"><td class="memItemLeft" align="right" valign="top"><a id="a5464ab835f2582881afe36596fa55554"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>TM_SYNC_STATE_WAIT_DELAY_IN</b>&#160;&#160;&#160;3</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TM_SYNC_STATE_WAIT_DELAY_IN</b>&#160;&#160;&#160;4</td></tr>
 <tr class="separator:a5464ab835f2582881afe36596fa55554"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ab15dd924aca07e954923ec8b1af341"><td class="memItemLeft" align="right" valign="top"><a id="a4ab15dd924aca07e954923ec8b1af341"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>TM_SYNC_STATE_WAIT_DELAY_OUT</b>&#160;&#160;&#160;4</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TM_SYNC_STATE_WAIT_DELAY_OUT</b>&#160;&#160;&#160;5</td></tr>
 <tr class="separator:a4ab15dd924aca07e954923ec8b1af341"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -143,30 +144,6 @@ Typedefs</h2></td></tr>
 <tr class="memitem:abb7f3c8f19e844952b6057619da95ae9"><td class="memItemLeft" align="right" valign="top"><a id="abb7f3c8f19e844952b6057619da95ae9"></a>
 typedef struct <a class="el" href="struct_t_m___s_y_n_c___s_m__t.html">TM_SYNC_SM_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>tm_sync_sm_t</b></td></tr>
 <tr class="separator:abb7f3c8f19e844952b6057619da95ae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:af6e941dead4a29cea2fa67a097cf2a50"><td class="memItemLeft" align="right" valign="top"><a id="af6e941dead4a29cea2fa67a097cf2a50"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_sync_init</b> (uint16_t ucdm_next_address)</td></tr>
-<tr class="separator:af6e941dead4a29cea2fa67a097cf2a50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94cb48a6c8e97edcb35a5cd4fb9bb058"><td class="memItemLeft" align="right" valign="top"><a id="a94cb48a6c8e97edcb35a5cd4fb9bb058"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_sync_request_host</b> (void)</td></tr>
-<tr class="separator:a94cb48a6c8e97edcb35a5cd4fb9bb058"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39163d1008e141876374703577331c48"><td class="memItemLeft" align="right" valign="top"><a id="a39163d1008e141876374703577331c48"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_sync_handler</b> (uint16_t addr)</td></tr>
-<tr class="separator:a39163d1008e141876374703577331c48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a834c2c9495e1144959556e6ade22218e"><td class="memItemLeft" align="right" valign="top"><a id="a834c2c9495e1144959556e6ade22218e"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_sync_current_to_rtc</b> (void)</td></tr>
-<tr class="separator:a834c2c9495e1144959556e6ade22218e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab1a8a9181d9d011c6f33ce3c6d87489"><td class="memItemLeft" align="right" valign="top"><a id="aab1a8a9181d9d011c6f33ce3c6d87489"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_sync_current_from_rtc</b> (void)</td></tr>
-<tr class="separator:aab1a8a9181d9d011c6f33ce3c6d87489"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a99c0fcd3fc731bba88bba4bdb66ef792"><td class="memItemLeft" align="right" valign="top"><a id="a99c0fcd3fc731bba88bba4bdb66ef792"></a>
-avlt_node_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_avlt_sync_handler_node</b></td></tr>
-<tr class="separator:a99c0fcd3fc731bba88bba4bdb66ef792"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Time synchonization functions for embebedded systems. </p>
@@ -176,6 +153,10 @@ avlt_node_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_avlt_sync_h
 <p>This implementation also assumes that the following pieces of information are known to both the host and the device :</p><ul>
 <li>epoch, as in <code>tm_epoch</code></li>
 <li>resolution of the frac, as in <code>TIME_SYSTICKS_PER_SECOND</code></li>
+</ul>
+<p>Applications enabling this functionality must ensure TIME_ENABLE_SYNC is defined and non-zero. TM_BASE_ADDRESS as provided to <code>tm_init</code> should be known.</p>
+<p>The following is the general synchronization process host-side applications must implement to use this interface:</p><ul>
+<li>master must initiate the synchronization process by writing a timestamp to the appropriate UCDM registers.UCDM</li>
 </ul>
 <p>Utilization of this library is typically in one of three ways :</p>
 <ul>
@@ -192,10 +173,10 @@ avlt_node_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_avlt_sync_h
 <p class="startli">This is likely the optimal use of this implementation. In this kind of application, time is synchonized at specific 'safe' points of the application. In order to use this implementation, the host must know when the device is safely able to synchonize. This synchronization will hold until the next sychronization happens, after which the system is more or less reset to a known temporal state. At the next synchronization, any stored timstamps within the application should effectively be invalidated, or be offset by a degree equal to that of the offset synchonized.</p>
 </li>
 <li><p class="startli">Continuous Time Synchonization</p>
-<p class="startli">This is the most complicated use of this implementation, with serious implications to system performance. When time is synchonized, this implementation will pass along the offset to all subsystems which have stored timestamps, and all of them must apply these offsets for all timestamps they have which require this precision. This kind of synchonization is likely to have dangerous consequences to scheduled events and temporally marked data streams.</p>
+<p class="startli">This is the most complicated use of this implementation, with serious implications to system performance. When time is synchonized, this implementation will pass along the offset to all subsystems which have stored timestamps, and all of them must apply these offsets to all timestamps they store which require this precision. This kind of synchonization is likely to have dangerous consequences to scheduled events and temporally marked data streams.</p>
 </li>
 </ol>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="sync_8c.html" title="Time synchonization function implementations.">sync.c</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="sync_8c.html" title="Time synchonization function implementation.">sync.c</a> </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="sync_8h_source.html">sync.h</a>.</p>
 </div></div><!-- contents -->
@@ -204,7 +185,7 @@ avlt_node_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_avlt_sync_h
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="sync_8h.html">sync.h</a></li>
-    <li class="footer">Generated on Thu Sep 5 2024 11:03:15 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Oct 3 2024 13:50:27 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

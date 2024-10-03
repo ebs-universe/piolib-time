@@ -28,7 +28,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ebs-time
-   &#160;<span id="projectnumber">0.1.1</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Time keeping and manipulation functions for embedded systems</div>
   </td>
@@ -85,15 +85,12 @@ $(document).ready(function(){initNavTree('sync_8c.html',''); initResizable(); })
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">sync.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Time synchonization function implementations.  
+<p>Time synchonization function implementation.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;ucdm/ucdm.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="time_8h_source.html">time.h</a>&quot;</code><br />
@@ -106,30 +103,16 @@ Include dependency graph for sync.c:</div>
 </div>
 </div>
 <p><a href="sync_8c_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:af5034d5982f7b0067afaf95c82617137"><td class="memItemLeft" align="right" valign="top"><a id="af5034d5982f7b0067afaf95c82617137"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_sync_init</b> (uint16_t ucdm_address)</td></tr>
-<tr class="separator:af5034d5982f7b0067afaf95c82617137"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94cb48a6c8e97edcb35a5cd4fb9bb058"><td class="memItemLeft" align="right" valign="top"><a id="a94cb48a6c8e97edcb35a5cd4fb9bb058"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_sync_request_host</b> (void)</td></tr>
-<tr class="separator:a94cb48a6c8e97edcb35a5cd4fb9bb058"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39163d1008e141876374703577331c48"><td class="memItemLeft" align="right" valign="top"><a id="a39163d1008e141876374703577331c48"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tm_sync_handler</b> (uint16_t addr)</td></tr>
-<tr class="separator:a39163d1008e141876374703577331c48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a99c0fcd3fc731bba88bba4bdb66ef792"><td class="memItemLeft" align="right" valign="top"><a id="a99c0fcd3fc731bba88bba4bdb66ef792"></a>
-avlt_node_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_avlt_sync_handler_node</b></td></tr>
-<tr class="separator:a99c0fcd3fc731bba88bba4bdb66ef792"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addd10638c09df6f8300982cfd595a891"><td class="memItemLeft" align="right" valign="top"><a id="addd10638c09df6f8300982cfd595a891"></a>
-<a class="el" href="struct_t_m___s_y_n_c___s_m__t.html">tm_sync_sm_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>tm_sync_sm</b></td></tr>
-<tr class="separator:addd10638c09df6f8300982cfd595a891"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Time synchonization function implementations. </p>
+<div class="textblock"><p>Time synchonization function implementation. </p>
+<p>Time synchronization is implemented as a state machine. The time synchronization state is stored in tm_sync_sm, and contains the state as a uint8_t and the following timestamps as tm_system_t:</p><ul>
+<li>t1 - first sync timestamp provided by the master</li>
+<li>t1p - local time on receipt of the first sync timestamp</li>
+<li>t2 - timestamp read by the master for delay calculation</li>
+<li>t2p - master timestamped reception of t2</li>
+</ul>
+<p>The state machine is executed on reciept of the last synchronization register from the host.</p>
+<p>When the delay out timestamp is read from the host (t2), it needs to read one extra register. The final register read is the trigger we use to record our copy.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="sync_8h.html" title="Time synchonization functions for embebedded systems.">sync.h</a> </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="sync_8c_source.html">sync.c</a>.</p>
@@ -139,7 +122,7 @@ avlt_node_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_avlt_sync_h
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="sync_8c.html">sync.c</a></li>
-    <li class="footer">Generated on Thu Sep 5 2024 11:03:15 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Oct 3 2024 13:50:27 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

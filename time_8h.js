@@ -1,7 +1,5 @@
 var time_8h =
 [
-    [ "TM_SYSTEM_t", "struct_t_m___s_y_s_t_e_m__t.html", "struct_t_m___s_y_s_t_e_m__t" ],
-    [ "TM_SDELTA_t", "struct_t_m___s_d_e_l_t_a__t.html", "struct_t_m___s_d_e_l_t_a__t" ],
     [ "TM_REAL_t", "struct_t_m___r_e_a_l__t.html", "struct_t_m___r_e_a_l__t" ],
     [ "TM_RDELTA_t", "struct_t_m___r_d_e_l_t_a__t.html", "struct_t_m___r_d_e_l_t_a__t" ],
     [ "TM_EPOCH_CHANGEHANDLER_t", "struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html", "struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t" ],
@@ -16,15 +14,12 @@ var time_8h =
     [ "tm_epochchange_handler_t", "time_8h.html#adc3a4779fa0302239208634953cfc2a1", null ],
     [ "tm_rdelta_t", "time_8h.html#add7b65e9a7e04684743d2f45f719e7ba", null ],
     [ "tm_real_t", "time_8h.html#a4d68c653cca64590d7af5c9434363a19", null ],
-    [ "tm_sdelta_t", "time_8h.html#a002517429af4e9b06ba81c4c8c183bf2", null ],
-    [ "tm_system_t", "time_8h.html#ad0477ef4e8c99d2a34f49fb697886c63", null ],
-    [ "tm_apply_sdelta", "time_8h.html#a95f5459a905bec06152d9194ef56f557", null ],
+    [ "tm_sdelta_t", "time_8h.html#a3d5cc3f465acf62651c6b24795249de6", null ],
+    [ "tm_system_t", "time_8h.html#a6431d9bc028f3b054654b0b326ca6e97", null ],
     [ "tm_clear_rdelta", "time_8h.html#a56895961aa355ff23c287403e49833ac", null ],
     [ "tm_clear_rtime", "time_8h.html#aa6bbe6f553bb851f42fb51b008ff4517", null ],
     [ "tm_clear_sdelta", "time_8h.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3", null ],
     [ "tm_clear_stime", "time_8h.html#a80e742cf4d5a15aa405e271532631cb7", null ],
-    [ "tm_cmp_stime", "time_8h.html#a12dd355f5018bb07b616bf964c86b5e5", null ],
-    [ "tm_get_sdelta", "time_8h.html#ab641ed88ef42759a236f3dccbe3192d9", null ],
     [ "tm_init", "time_8h.html#a130024d5ed12980fbd5e325f2d82301e", null ],
     [ "tm_install_descriptor", "time_8h.html#ae649a29fbd008c16730d843b6da0a7fc", null ],
     [ "tm_rdelta_from_sdelta", "time_8h.html#a70da36517cb7cbe622604c69c21dafaa", null ],
@@ -37,7 +32,7 @@ var time_8h =
     [ "tm_current", "time_8h.html#a72ab6a2cf1cec6454e36bb7823fd83f0", null ],
     [ "tm_epoch", "time_8h.html#a07ba4f32f6991c9a4e14570a1f1c09c2", null ],
     [ "tm_internal_epoch", "time_8h.html#a81951a50eece8e5c647b52b00f199be9", null ],
-    [ "tm_internal_epoch_offset", "time_8h.html#a8fa687f887557bec86fb537836e43508", null ],
+    [ "tm_internal_epoch_offset", "time_8h.html#a2b0f098b0913d8dde383c713b7a2b931", null ],
     [ "tm_leapseconds", "time_8h.html#a8da100e3faad3170e19b84f90f9073d4", null ],
     [ "use_epoch", "time_8h.html#ac46cbce2f63dae1d24205fd6fbcc2ab3", null ]
 ];

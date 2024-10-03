@@ -1,5 +1,5 @@
 <map id="time/sync.c" name="time/sync.c">
-<area shape="rect" id="node1" title="Time synchonization function implementations." alt="" coords="135,5,232,32"/>
+<area shape="rect" id="node1" title="Time synchonization function implementation." alt="" coords="135,5,232,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="35,80,145,107"/>
 <area shape="rect" id="node3" href="$time_8h.html" title="Time related functions for embebedded systems." alt="" coords="151,155,215,181"/>
 <area shape="rect" id="node9" href="$sync_8h.html" title="Time synchonization functions for embebedded systems." alt="" coords="221,80,285,107"/>

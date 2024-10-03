@@ -28,7 +28,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ebs-time
-   &#160;<span id="projectnumber">0.1.1</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Time keeping and manipulation functions for embedded systems</div>
   </td>
@@ -121,9 +121,9 @@ $(document).ready(function(){initNavTree('cron_8h_source.html',''); initResizabl
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="struct_c_r_o_n___j_o_b__t.html">   45</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_c_r_o_n___j_o_b__t.html">CRON_JOB_t</a>{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a>   texec;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a>   texec;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    uint8_t       active;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> * tafter_p;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * tafter_p;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">struct </span><a class="code" href="struct_c_r_o_n___j_o_b__t.html">CRON_JOB_t</a> * nextjob;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">struct </span><a class="code" href="struct_c_r_o_n___j_o_b__t.html">CRON_JOB_t</a> * prevjob;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    void (* handler)(void);</div>
@@ -136,10 +136,10 @@ $(document).ready(function(){initNavTree('cron_8h_source.html',''); initResizabl
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> tm_cron_clear_job(<a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a>* job_p);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keywordtype">void</span> tm_cron_create_job_abs(<a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * job_p, <span class="keywordtype">void</span> handler(<span class="keywordtype">void</span>), </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                            <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> * texec_p, <a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> * tafter_p);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                            <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * texec_p, <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * tafter_p);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">void</span> tm_cron_create_job_rel(<a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * job_p, <span class="keywordtype">void</span> handler(<span class="keywordtype">void</span>), </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                            <a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> * trelexec_p, <a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> * tafter_p);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                            <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * trelexec_p, <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * tafter_p);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> tm_cron_insert_job(<a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * job_p);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
@@ -156,20 +156,20 @@ $(document).ready(function(){initNavTree('cron_8h_source.html',''); initResizabl
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">void</span> tm_cron_poll(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">void</span> tm_cron_epoch_change_handler(<a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> * offset);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">void</span> tm_cron_epoch_change_handler(<a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * offset);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="astruct_c_r_o_n___j_o_b__t_html"><div class="ttname"><a href="struct_c_r_o_n___j_o_b__t.html">CRON_JOB_t</a></div><div class="ttdef"><b>Definition:</b> <a href="cron_8h_source.html#l00045">cron.h:45</a></div></div>
-<div class="ttc" id="astruct_t_m___s_d_e_l_t_a__t_html"><div class="ttname"><a href="struct_t_m___s_d_e_l_t_a__t.html">TM_SDELTA_t</a></div><div class="ttdoc">System Timedelta Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00095">time.h:95</a></div></div>
-<div class="ttc" id="astruct_t_m___s_y_s_t_e_m__t_html"><div class="ttname"><a href="struct_t_m___s_y_s_t_e_m__t.html">TM_SYSTEM_t</a></div><div class="ttdoc">System Time Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00083">time.h:83</a></div></div>
 <div class="ttc" id="atime_8h_html"><div class="ttname"><a href="time_8h.html">time.h</a></div><div class="ttdoc">Time related functions for embebedded systems.</div></div>
+<div class="ttc" id="atime_8h_html_a3d5cc3f465acf62651c6b24795249de6"><div class="ttname"><a href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a></div><div class="ttdeci">int64_t tm_sdelta_t</div><div class="ttdoc">System Timedelta Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00129">time.h:129</a></div></div>
+<div class="ttc" id="atime_8h_html_a6431d9bc028f3b054654b0b326ca6e97"><div class="ttname"><a href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a></div><div class="ttdeci">int64_t tm_system_t</div><div class="ttdoc">System Time Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00118">time.h:118</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="cron_8h.html">cron.h</a></li>
-    <li class="footer">Generated on Thu Sep 5 2024 11:03:15 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Oct 3 2024 13:50:27 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

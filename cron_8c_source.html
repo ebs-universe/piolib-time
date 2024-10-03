@@ -28,7 +28,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ebs-time
-   &#160;<span id="projectnumber">0.1.1</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Time keeping and manipulation functions for embedded systems</div>
   </td>
@@ -131,64 +131,64 @@ $(document).ready(function(){initNavTree('cron_8c_source.html',''); initResizabl
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    job_p-&gt;nextjob = NULL;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    job_p-&gt;prevjob = NULL;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    job_p-&gt;tafter_p = NULL;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    job_p-&gt;texec.seconds = 0;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    job_p-&gt;texec.frac = 0;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    job_p-&gt;active = 0;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    job_p-&gt;texec = 0;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    job_p-&gt;active = 0;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordtype">void</span> tm_cron_create_job_abs(<a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * job_p, <span class="keywordtype">void</span> handler(<span class="keywordtype">void</span>), </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                         <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> * texec_p, <a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> * tafter_p){</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    job_p-&gt;handler = handler;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    job_p-&gt;tafter_p = tafter_p;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    job_p-&gt;texec.seconds = texec_p-&gt;seconds;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    job_p-&gt;texec.frac = texec_p-&gt;frac;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    tm_cron_insert_job(job_p);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">void</span> tm_cron_create_job_rel(<a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * job_p, <span class="keywordtype">void</span> handler(<span class="keywordtype">void</span>), </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                         <a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> * trelexec_p, <a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> * tafter_p){</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    job_p-&gt;handler = handler;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    job_p-&gt;tafter_p = tafter_p;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    tm_current_time(&amp;(job_p-&gt;texec));</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="time_8c.html#a95f5459a905bec06152d9194ef56f557">tm_apply_sdelta</a>(&amp;(job_p-&gt;texec), trelexec_p);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    tm_cron_insert_job(job_p);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">void</span> tm_cron_insert_job(<a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * job_p){</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * walker = cron_nextjob_p;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    job_p-&gt;active = 1;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span>(walker == NULL){</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        cron_nextjob_p = job_p;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        job_p-&gt;prevjob = NULL;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        job_p-&gt;nextjob = NULL;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">while</span>(walker){</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">if</span> (tm_cmp_stime(&amp;(walker-&gt;texec), &amp;(job_p-&gt;texec)) == 1){</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            job_p-&gt;nextjob = walker;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            job_p-&gt;prevjob = walker-&gt;prevjob;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">if</span>(walker-&gt;prevjob){</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                walker-&gt;prevjob-&gt;nextjob = job_p;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                cron_nextjob_p = job_p;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            walker-&gt;prevjob = job_p;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">if</span> (!(walker-&gt;nextjob)){</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            walker-&gt;nextjob = job_p;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            job_p-&gt;prevjob = walker;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            job_p-&gt;nextjob = NULL;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        walker = walker-&gt;nextjob;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    };</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span> tm_cron_create_job_abs(<a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * job_p, <span class="keywordtype">void</span> handler(<span class="keywordtype">void</span>), </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                         <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> * texec_p, <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * tafter_p){</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    job_p-&gt;handler = handler;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    job_p-&gt;tafter_p = tafter_p;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    job_p-&gt;texec = *texec_p;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    tm_cron_insert_job(job_p);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordtype">void</span> tm_cron_create_job_rel(<a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * job_p, <span class="keywordtype">void</span> handler(<span class="keywordtype">void</span>), </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                         <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * trelexec_p, <a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * tafter_p){</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    job_p-&gt;handler = handler;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    job_p-&gt;tafter_p = tafter_p;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    tm_current_time(&amp;(job_p-&gt;texec));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    tm_apply_sdelta(&amp;(job_p-&gt;texec), trelexec_p);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    tm_cron_insert_job(job_p);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">void</span> tm_cron_insert_job(<a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * job_p){</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * walker = cron_nextjob_p;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    critical_enter();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    job_p-&gt;active = 1;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span>(walker == NULL){</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        cron_nextjob_p = job_p;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        job_p-&gt;prevjob = NULL;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        job_p-&gt;nextjob = NULL;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">while</span>(walker){</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordflow">if</span> (tm_cmp_stime(&amp;(walker-&gt;texec), &amp;(job_p-&gt;texec)) == 1){</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            job_p-&gt;nextjob = walker;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            job_p-&gt;prevjob = walker-&gt;prevjob;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordflow">if</span>(walker-&gt;prevjob){</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                walker-&gt;prevjob-&gt;nextjob = job_p;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                cron_nextjob_p = job_p;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            walker-&gt;prevjob = job_p;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">if</span> (!(walker-&gt;nextjob)){</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            walker-&gt;nextjob = job_p;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            job_p-&gt;prevjob = walker;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            job_p-&gt;nextjob = NULL;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        walker = walker-&gt;nextjob;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    };</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    critical_exit();</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
@@ -211,13 +211,13 @@ $(document).ready(function(){initNavTree('cron_8c_source.html',''); initResizabl
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span> (!cron_nextjob_p){</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    }</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="struct_t_m___s_y_s_t_e_m__t.html">tm_system_t</a> current;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> current;</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    tm_current_time(&amp;current);</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">if</span> (tm_cmp_stime(&amp;(cron_nextjob_p-&gt;texec), &amp;current) &lt;= 0){</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        cron_nextjob_p-&gt;handler();</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">if</span> (cron_nextjob_p-&gt;tafter_p){</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <a class="code" href="time_8c.html#a95f5459a905bec06152d9194ef56f557">tm_apply_sdelta</a>(&amp;(cron_nextjob_p-&gt;texec), cron_nextjob_p-&gt;tafter_p);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            tm_apply_sdelta(&amp;(cron_nextjob_p-&gt;texec), cron_nextjob_p-&gt;tafter_p);</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            tm_cron_replace_job(cron_nextjob_p);</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        }</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordflow">else</span>{</div>
@@ -228,27 +228,26 @@ $(document).ready(function(){initNavTree('cron_8c_source.html',''); initResizabl
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    }</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keywordtype">void</span> tm_cron_epoch_change_handler(<a class="code" href="struct_t_m___s_d_e_l_t_a__t.html">tm_sdelta_t</a> * offset){</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keywordtype">void</span> tm_cron_epoch_change_handler(<a class="code" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> * offset){</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <a class="code" href="struct_c_r_o_n___j_o_b__t.html">cron_job_t</a> * walker = cron_nextjob_p;</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordflow">while</span> (walker){</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <a class="code" href="time_8c.html#a95f5459a905bec06152d9194ef56f557">tm_apply_sdelta</a>(&amp;(walker-&gt;texec), offset);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        tm_apply_sdelta(&amp;(walker-&gt;texec), offset);</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        walker = walker-&gt;nextjob;</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    }</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div>
 <div class="ttc" id="acron_8h_html"><div class="ttname"><a href="cron_8h.html">cron.h</a></div><div class="ttdoc">Cron-like scheduling framework for embebedded systems.</div></div>
 <div class="ttc" id="astruct_c_r_o_n___j_o_b__t_html"><div class="ttname"><a href="struct_c_r_o_n___j_o_b__t.html">CRON_JOB_t</a></div><div class="ttdef"><b>Definition:</b> <a href="cron_8h_source.html#l00045">cron.h:45</a></div></div>
-<div class="ttc" id="astruct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t_html"><div class="ttname"><a href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">TM_EPOCH_CHANGEHANDLER_t</a></div><div class="ttdoc">Epoch Change Handler Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00155">time.h:155</a></div></div>
-<div class="ttc" id="astruct_t_m___s_d_e_l_t_a__t_html"><div class="ttname"><a href="struct_t_m___s_d_e_l_t_a__t.html">TM_SDELTA_t</a></div><div class="ttdoc">System Timedelta Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00095">time.h:95</a></div></div>
-<div class="ttc" id="astruct_t_m___s_y_s_t_e_m__t_html"><div class="ttname"><a href="struct_t_m___s_y_s_t_e_m__t.html">TM_SYSTEM_t</a></div><div class="ttdoc">System Time Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00083">time.h:83</a></div></div>
-<div class="ttc" id="atime_8c_html_a542af40054156e483d8394af15fc0ac4"><div class="ttname"><a href="time_8c.html#a542af40054156e483d8394af15fc0ac4">tm_register_epoch_change_handler</a></div><div class="ttdeci">void tm_register_epoch_change_handler(tm_epochchange_handler_t *handler)</div><div class="ttdoc">Register a callback for changes to the epoch.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00320">time.c:320</a></div></div>
-<div class="ttc" id="atime_8c_html_a95f5459a905bec06152d9194ef56f557"><div class="ttname"><a href="time_8c.html#a95f5459a905bec06152d9194ef56f557">tm_apply_sdelta</a></div><div class="ttdeci">void tm_apply_sdelta(tm_system_t *t, tm_sdelta_t *sdelta)</div><div class="ttdoc">Apply a time difference to a time in system time.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00159">time.c:159</a></div></div>
+<div class="ttc" id="astruct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t_html"><div class="ttname"><a href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">TM_EPOCH_CHANGEHANDLER_t</a></div><div class="ttdoc">Epoch Change Handler Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00204">time.h:204</a></div></div>
+<div class="ttc" id="atime_8c_html_a542af40054156e483d8394af15fc0ac4"><div class="ttname"><a href="time_8c.html#a542af40054156e483d8394af15fc0ac4">tm_register_epoch_change_handler</a></div><div class="ttdeci">void tm_register_epoch_change_handler(tm_epochchange_handler_t *handler)</div><div class="ttdoc">Register a callback for changes to the epoch.</div><div class="ttdef"><b>Definition:</b> <a href="time_8c_source.html#l00316">time.c:316</a></div></div>
+<div class="ttc" id="atime_8h_html_a3d5cc3f465acf62651c6b24795249de6"><div class="ttname"><a href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a></div><div class="ttdeci">int64_t tm_sdelta_t</div><div class="ttdoc">System Timedelta Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00129">time.h:129</a></div></div>
+<div class="ttc" id="atime_8h_html_a6431d9bc028f3b054654b0b326ca6e97"><div class="ttname"><a href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a></div><div class="ttdeci">int64_t tm_system_t</div><div class="ttdoc">System Time Storage Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00118">time.h:118</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="cron_8c.html">cron.c</a></li>
-    <li class="footer">Generated on Thu Sep 5 2024 11:03:15 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Oct 3 2024 13:50:27 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
