@@ -47,8 +47,7 @@ void tm_cron_clear_job(cron_job_t * job_p){
     job_p->nextjob = NULL;
     job_p->prevjob = NULL;
     job_p->tafter_p = NULL;
-    job_p->texec.seconds = 0;
-    job_p->texec.frac = 0;
+    job_p->texec = 0;
     job_p->active = 0;
 }
 
@@ -57,8 +56,7 @@ void tm_cron_create_job_abs(cron_job_t * job_p, void handler(void),
                          tm_system_t * texec_p, tm_sdelta_t * tafter_p){
     job_p->handler = handler;
     job_p->tafter_p = tafter_p;
-    job_p->texec.seconds = texec_p->seconds;
-    job_p->texec.frac = texec_p->frac;
+    job_p->texec = *texec_p;
     tm_cron_insert_job(job_p);
     return;
 }
@@ -77,6 +75,7 @@ void tm_cron_create_job_rel(cron_job_t * job_p, void handler(void),
 
 void tm_cron_insert_job(cron_job_t * job_p){
     cron_job_t * walker = cron_nextjob_p;
+    critical_enter();
     job_p->active = 1;
     if(walker == NULL){
         cron_nextjob_p = job_p;
@@ -105,6 +104,7 @@ void tm_cron_insert_job(cron_job_t * job_p){
         }
         walker = walker->nextjob;
     };
+    critical_exit();
 }
 
 

@@ -48,6 +48,30 @@
     #define DESCRIPTOR_TAG_TIME_EPOCH       0x02
 #endif
 
+#if defined EBS_TIME_ENABLE_SYNC
+    #define TIME_ENABLE_SYNC                EBS_TIME_ENABLE_SYNC
+#elif defined APP_ENABLE_TIME_SYNC
+    #define TIME_ENABLE_SYNC                APP_ENABLE_TIME_SYNC
+#else
+    #define TIME_ENABLE_SYNC                0
+#endif
+
+#if defined APP_ENABLE_RTC
+    #define TIME_ENABLE_SYNC_RTC            APP_ENABLE_RTC
+#else
+    #define TIME_ENABLE_SYNC_RTC            0
+#endif
+
+
+#if defined EBS_TIME_ENABLE_CRON
+    #define TIME_ENABLE_CRON                EBS_TIME_ENABLE_CRON
+#elif defined APP_ENABLE_TIME_CRON
+    #define TIME_ENABLE_CRON                APP_ENABLE_TIME_CRON
+#else
+    #define TIME_ENABLE_CRON                0
+#endif
+
+
 /**@}*/ 
 
 

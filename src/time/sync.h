@@ -49,6 +49,15 @@
  *   - epoch, as in `tm_epoch`
  *   - resolution of the frac, as in `TIME_SYSTICKS_PER_SECOND`
  * 
+ * Applications enabling this functionality must ensure TIME_ENABLE_SYNC 
+ * is defined and non-zero. TM_BASE_ADDRESS as provided to `tm_init` should 
+ * be known. 
+ * 
+ * The following is the general synchronization process host-side 
+ * applications must implement to use this interface: 
+ *   - master must initiate the synchronization process by writing a 
+ *     timestamp to the appropriate UCDM registers.UCDM
+ * 
  * Utilization of this library is typically in one of three ways :
  * 
  *   - Time Initialization
@@ -83,8 +92,8 @@
  *   This is the most complicated use of this implementation, with serious 
  *   implications to system performance. When time is synchonized, this 
  *   implementation will pass along the offset to all subsystems which have 
- *   stored timestamps, and all of them must apply these offsets for all 
- *   timestamps they have which require this precision. This kind of 
+ *   stored timestamps, and all of them must apply these offsets to all 
+ *   timestamps they store which require this precision. This kind of 
  *   synchonization is likely to have dangerous consequences to scheduled 
  *   events and temporally marked data streams. 
  * 
@@ -97,8 +106,9 @@
 #define TM_SYNC_STATE_PREINIT        0
 #define TM_SYNC_STATE_IDLE           1   
 #define TM_SYNC_STATE_WAIT_HOST      2
-#define TM_SYNC_STATE_WAIT_DELAY_IN  3
-#define TM_SYNC_STATE_WAIT_DELAY_OUT 4
+#define TM_SYNC_STATE_WAIT_FOLLOW_UP 3
+#define TM_SYNC_STATE_WAIT_DELAY_IN  4
+#define TM_SYNC_STATE_WAIT_DELAY_OUT 5
 
 #include <ds/avltree.h>
 #include "time.h"
@@ -109,15 +119,19 @@ typedef struct TM_SYNC_SM_t{
     tm_system_t t1p;
     tm_system_t t2;
     tm_system_t t2p;
-}tm_sync_sm_t;
+} tm_sync_sm_t;
 
+#if TIME_ENABLE_SYNC
 uint16_t tm_sync_init(uint16_t ucdm_next_address);
 void tm_sync_request_host(void);
 void tm_sync_handler(uint16_t addr);
+extern avlt_node_t  tm_avlt_sync_handler_node;
+#endif
 
+#if TIME_ENABLE_SYNC_RTC
 uint8_t tm_sync_current_to_rtc(void);
 uint8_t tm_sync_current_from_rtc(void);
-
-extern avlt_node_t  tm_avlt_sync_handler_node;
+#endif
 
 #endif
+

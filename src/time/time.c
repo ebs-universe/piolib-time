@@ -39,17 +39,19 @@
 #include "time.h"
 #include "systick.h"
 #include "sync.h"
+#include "cron.h"
 
 
-volatile tm_system_t tm_current = {0, 0};
+volatile tm_system_t tm_current = 0;
 tm_real_t tm_epoch =          {19, 70, 1, 1, 0, 0, 0, 0};
 tm_real_t tm_internal_epoch = {19, 69, 3, 1, 0, 0, 0, 0};
-uint32_t tm_internal_epoch_offset =  26438400;
+int64_t tm_internal_epoch_offset =  26438400 * 1000LL;
 uint8_t use_epoch = 1;
 int8_t tm_leapseconds = 0;
 
 tm_epochchange_handler_t * epoch_handlers_root = NULL;
 
+/** @brief Time Library Epoch Descriptor */
 descriptor_custom_t tm_epoch_descriptor = {NULL, DESCRIPTOR_TAG_TIME_EPOCH, 
     sizeof(tm_real_t), DESCRIPTOR_ACCTYPE_PTR, {&tm_epoch}};
 
@@ -64,35 +66,40 @@ void tm_install_descriptor(void)
 }    
 
 #define TM_UCDM_STIME_LEN     (sizeof(tm_system_t) / 2 + (sizeof(tm_system_t) % 2 != 0))
-#define TM_UCDM_RTIME_LEN     (sizeof(tm_real_t)   / 2 + (sizeof(tm_real_t) % 2 != 0))
+#define TM_UCDM_RTIME_LEN     (sizeof(tm_real_t)   / 2 + (sizeof(tm_real_t)   % 2 != 0))
 
 uint16_t tm_init(uint16_t ucdm_address){
-    tm_current.seconds = 0;
-    tm_current.frac = 0;
+    tm_current = 0;
     for (uint8_t i=0; i < TM_UCDM_STIME_LEN; i ++, ucdm_address++){
         ucdm_redirect_regr_ptr(ucdm_address, 
                                ((uint16_t *)(void *)(&tm_current) + i));
     }
+
+    #if TIME_ENABLE_SYNC
+    ucdm_address = tm_sync_init(ucdm_address);
+    #endif
+
+    #if TIME_ENABLE_CRON
+    tm_cron_init();
+    #endif
+
     descriptor_install(&tm_epoch_descriptor);
     tm_systick_init();
     return ucdm_address;
 }
 
 void tm_clear_stime(tm_system_t* stime){
-    stime->seconds = 0;
-    stime->frac = 0;
+    *stime = 0;
     return;
 }
 
 void tm_clear_sdelta(tm_sdelta_t* sdelta){
-    sdelta->seconds = 0;
-    sdelta->frac = 0;
-    sdelta->sgn = 0;
+    *sdelta = 0;
     return;
 }
 
 void tm_clear_rtime(tm_real_t* rtime){
-    rtime->frac = 0;
+    rtime->millis = 0;
     rtime->seconds = 0;
     rtime->minutes = 0;
     rtime->hours = 0;
@@ -108,102 +115,45 @@ void tm_clear_rdelta(tm_rdelta_t* rdelta){
     rdelta->hours = 0;
     rdelta->minutes = 0;
     rdelta->seconds = 0;
-    rdelta->frac = 0;
+    rdelta->millis = 0;
     rdelta->sgn = 0;
     return;
 }
 
-int8_t tm_cmp_stime(tm_system_t * t1, tm_system_t * t2){
-    if (t1->seconds < t2->seconds){
-        return (-1);
-    }
-    else if (t1->seconds > t2->seconds){
-        return (1);
-    }
-    else if (t1->frac < t2->frac){
-        return (-1);
-    }
-    else if (t1->frac > t2->frac){
-        return (1);
-    }
-    else{
-        return 0;
-    }
-}
-
-void tm_get_sdelta(tm_system_t * t1, tm_system_t * t2, tm_sdelta_t * sdelta){
-    uint8_t cfrac = 0;
-    if (t2->frac > t1->frac){
-        cfrac = 0;
-        sdelta->frac = t2->frac - t1->frac;
-    }
-    else{
-        cfrac = 1;
-        sdelta->frac = t1->frac - t2->frac;
-    }
-    
-    if (t2->seconds == t1->seconds){
-        sdelta->seconds = 0; 
-        sdelta->sgn = cfrac;
-    }
-    else if (t2->seconds > t1->seconds){
-        sdelta->sgn = 0;
-        sdelta->seconds = t2->seconds - t1->seconds - cfrac;
-    }
-    else{
-        sdelta->sgn = 1;
-        sdelta->seconds = t1->seconds - t2->seconds + cfrac - 1;
-    }
-}
-
-void tm_apply_sdelta(tm_system_t * t, tm_sdelta_t * sdelta){
-    if (sdelta->sgn == 0){
-        t->seconds += sdelta->seconds;
-        t->frac += sdelta->frac;
-        if (t->frac >= TIME_TICKS_PER_SECOND){
-            t->frac -= TIME_TICKS_PER_SECOND;
-            t->seconds += 1;
-        }
-    }
-    else{
-        t->seconds -= sdelta->seconds;
-        if (t->frac < sdelta->frac){
-            t->frac = TIME_TICKS_PER_SECOND - (sdelta->frac - t->frac);
-            t->seconds -= 1;
-        }
-        else{
-            t->frac -= sdelta->frac;
-        }
-    }
-    return;
-}
-
 void tm_sdelta_from_rdelta(tm_rdelta_t* rdelta, tm_sdelta_t* sdelta){
-    sdelta->seconds  = rdelta->days    * TIME_SECONDS_PER_DAY;
-    sdelta->seconds += rdelta->hours   * TIME_SECONDS_PER_HOUR;
-    sdelta->seconds += rdelta->minutes * TIME_SECONDS_PER_MINUTE;
-    sdelta->seconds += rdelta->seconds;
-    sdelta->frac = rdelta->frac;
-    sdelta->sgn = rdelta->sgn;
-    return;
+    uint64_t result;
+    result  = rdelta->days    * TIME_SECONDS_PER_DAY * 1000;
+    result += rdelta->hours   * TIME_SECONDS_PER_HOUR * 1000;
+    result += rdelta->minutes * TIME_SECONDS_PER_MINUTE * 1000;
+    result += rdelta->seconds * 1000;
+    result += rdelta->millis;
+    if (rdelta->sgn) {
+        result = result * -1;
+    }
+    *sdelta = result;
 }
 
 void tm_rdelta_from_sdelta(tm_sdelta_t* sdelta, tm_rdelta_t* rdelta){
     tm_clear_rdelta(rdelta);
+    tm_sdelta_t sdelta_copy = *sdelta;
+
+    if (sdelta < 0){
+        rdelta->sgn = 1; 
+    }
     
-    rdelta->sgn = sdelta->sgn;
+    rdelta->days = sdelta_copy / (TIME_SECONDS_PER_DAY * 1000);
+    sdelta_copy -= rdelta->days * (TIME_SECONDS_PER_DAY * 1000);
     
-    rdelta->days = sdelta->seconds / (TIME_SECONDS_PER_DAY);
-    sdelta->seconds -= rdelta->days * TIME_SECONDS_PER_DAY;
+    rdelta->hours = sdelta_copy / (TIME_SECONDS_PER_HOUR * 1000);
+    sdelta_copy -= rdelta->hours * (TIME_SECONDS_PER_HOUR * 1000);
     
-    rdelta->hours = sdelta->seconds / (TIME_SECONDS_PER_HOUR);
-    sdelta->seconds -= rdelta->hours * TIME_SECONDS_PER_HOUR;
+    rdelta->minutes = sdelta_copy / (TIME_SECONDS_PER_MINUTE * 1000);
+    sdelta_copy -= rdelta->minutes * (TIME_SECONDS_PER_MINUTE * 1000);
     
-    rdelta->minutes = sdelta->seconds / (TIME_SECONDS_PER_MINUTE);
-    sdelta->seconds -= rdelta->minutes * TIME_SECONDS_PER_MINUTE;
+    rdelta->seconds = sdelta_copy / 1000;
+    sdelta_copy -= rdelta->seconds * 1000;
     
-    rdelta->seconds = sdelta->seconds;
-    rdelta->frac = sdelta->frac;
+    rdelta->millis = sdelta_copy;
     return;
 }
 
@@ -224,7 +174,6 @@ void tm_stime_from_rtime(tm_real_t* rtime, tm_system_t * stime){
     if (!use_epoch){
         return;
     }
-    stime->frac = rtime->frac;
     
     days += days_to_month[rtime->month];
     syear = gyear(&tm_internal_epoch);
@@ -242,24 +191,65 @@ void tm_stime_from_rtime(tm_real_t* rtime, tm_system_t * stime){
         years --;
     }
     
-    stime->seconds = ((          days * TIME_SECONDS_PER_DAY    )+
-                      (  rtime->hours * TIME_SECONDS_PER_HOUR   )+
-                      (rtime->minutes * TIME_SECONDS_PER_MINUTE )+ 
-                      (rtime->seconds) + (tm_leapseconds)       );
-    stime->seconds -= tm_internal_epoch_offset;
-    return;
+    *stime = ((          days * TIME_SECONDS_PER_DAY * 1000)    +
+              (  rtime->hours * TIME_SECONDS_PER_HOUR * 1000)   +
+              (rtime->minutes * TIME_SECONDS_PER_MINUTE * 1000) + 
+              (rtime->seconds * 1000) + rtime->millis + 
+              tm_leapseconds - tm_internal_epoch_offset);
 }
 
+// TODO Untested. Horribly unoptimized.
 void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime){
     if (!use_epoch){
         return;
     }
+
+    *rtime = tm_internal_epoch;
+    tm_system_t stime_internal = *stime + tm_internal_epoch_offset - tm_leapseconds;
+
+    uint32_t days = stime_internal / (TIME_SECONDS_PER_DAY * 1000);
+    uint32_t remaining_ms = stime_internal % (TIME_SECONDS_PER_DAY * 1000);
+
+    rtime->hours = remaining_ms / (TIME_SECONDS_PER_HOUR * 1000);
+    remaining_ms %= (TIME_SECONDS_PER_HOUR * 1000);
+    rtime->minutes = remaining_ms / (TIME_SECONDS_PER_MINUTE * 1000);
+    remaining_ms %= (TIME_SECONDS_PER_MINUTE * 1000);
+    rtime->seconds = remaining_ms / 1000;
+    rtime->millis = remaining_ms % 1000;
+
+    uint16_t year = gyear(&tm_internal_epoch);
+    while (days >= 365) {
+        uint16_t leap_adjustment = ((!(year % 4) && (year % 100)) || !(year % 400)) ? 366 : 365;
+        if (days < leap_adjustment) break;
+        days -= leap_adjustment;
+        year++;
+    }
+
+    rtime->year = year % 100;
+    rtime->century = year / 100;
+
+    // TODO
+    rtime->month = 0;
+    rtime->date = 0; 
 }
 
+/*
+ * The internal epoch is used to allow arbitrary epoch setting. 
+ * All our calculations related to rtime conversions are based on 
+ * an epoch at midnight, the 1st of March. When another epoch is 
+ * set, we choose a point just before the chosen epoch which has  
+ * the needed characteristics as the internal epoch. We also 
+ * maintain the offset between the actual epoch and the internal 
+ * epoch. 
+ * 
+ * Timestamps in the system are all stored against the 
+ * configured epoch. The internal epoch is only used ephemerally 
+ * while converting between the tm_system_t and tm_real_t.
+ */
 static void tm_set_internal_epoch(tm_real_t* rtime);
 
 static void tm_set_internal_epoch(tm_real_t* rtime){
-    tm_internal_epoch.frac = 0;
+    tm_internal_epoch.millis = 0;
     tm_internal_epoch.seconds = 0;
     tm_internal_epoch.minutes = 0;
     tm_internal_epoch.hours = 0;
@@ -281,10 +271,10 @@ static void tm_set_internal_epoch(tm_real_t* rtime){
     }
     uint16_t days = rtime->date - 1;
     days += days_to_month[rtime->month];
-    tm_internal_epoch_offset = ((          days * TIME_SECONDS_PER_DAY    )+
-                                (  rtime->hours * TIME_SECONDS_PER_HOUR   )+
-                                (rtime->minutes * TIME_SECONDS_PER_MINUTE )+ 
-                                (rtime->seconds                           ));
+    tm_internal_epoch_offset = ((          days * TIME_SECONDS_PER_DAY    ) +
+                                (  rtime->hours * TIME_SECONDS_PER_HOUR   ) +
+                                (rtime->minutes * TIME_SECONDS_PER_MINUTE ) + 
+                                (rtime->seconds                           )) * 1000 ;
     return;
 }
 
@@ -292,21 +282,25 @@ void tm_set_epoch(tm_real_t* rtime, uint8_t follow){
     tm_sdelta_t sdelta;
     tm_system_t original_epoch;
     tm_system_t new_epoch;
+
+    
     if (follow){
         tm_stime_from_rtime(&tm_epoch, &original_epoch);
         tm_stime_from_rtime(rtime, &new_epoch);
         tm_get_sdelta(&original_epoch, &new_epoch, &sdelta);
+        critical_enter();
+        tm_apply_sdelta((tm_system_t *)&tm_current, &sdelta);
     }
     else{
         tm_clear_sdelta(&sdelta);
+        critical_enter();
+        tm_clear_stime((tm_system_t *)&tm_current);
+        tm_current = tm_internal_epoch_offset;
     }
+
     memcpy((void*)(&tm_epoch), (void*)rtime, sizeof(tm_real_t));
     tm_set_internal_epoch(rtime);
-    // TODO This seems quite incomplete! It may have been left uncompleted at 
-    // the last major rewrite. The current time seems to be lost entirely, and 
-    // set instead to the epoch point itself. 
-    tm_clear_stime(&tm_current);
-    tm_current.seconds = tm_internal_epoch_offset;
+    
     use_epoch = 1;
     
     tm_epochchange_handler_t * echandler = epoch_handlers_root;
@@ -314,6 +308,8 @@ void tm_set_epoch(tm_real_t* rtime, uint8_t follow){
         echandler -> func(&sdelta);
         echandler = echandler->next;
     }
+
+    critical_exit();
     return;
 }
 

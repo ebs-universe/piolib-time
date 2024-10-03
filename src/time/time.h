@@ -26,6 +26,42 @@
  * @file time.h
  * @brief Time related functions for embebedded systems.
  * 
+ * While this library uses int64_t with the intent to support
+ * negative timestamps, most functions would do not support this and 
+ * will break.
+ * 
+ * This library uses the following UCDM registers: 
+ * 
+ * Base Address: TIME_BASE_ADDRESS
+ * 
+ * System Time is the current time of the device. This is returned directly
+ * from the system time in the same format, ie, int64_t.
+ * 
+ * Address | Description             | Access Type
+ * --------|-------------------------|--------------
+ *    0    | System Time, Register 0 | Read, Pointer
+ *    1    | System Time, Register 1 | Read, Pointer
+ *    2    | System Time, Register 2 | Read, Pointer
+ *    3    | System Time, Register 3 | Read, POinter
+ * 
+ * If synchronization is enabled by TIME_ENABLE_SYNC, the following additional
+ * registers are used
+ *
+ * Address | Description             | Access Type
+ * --------|-------------------------|--------------
+ *    4    | System Time Read Hook   | Read, Func
+ *    5    | Reserved                | None
+ *    6    | Time Sync Register 1    | Write
+ *    7    | Time Sync Register 2    | Write
+ *    8    | Time Sync Register 3    | Write
+ *    9    | Time Sync Register 4    | Write, Handle
+ * 
+ * 
+ * This library provides the following descriptors: 
+ * 
+ * DESCRIPTOR_TAG_LIBVERSION : Time Library Version, per EBS version format
+ * DESCRIPTOR_TAG_TIME_EPOCH : Configured Epoch Time
+ * 
  * @see time.c
  */
 
@@ -72,39 +108,33 @@
 /**
  * @brief System Time Storage Type
  * 
- * This (struct) type stores a 'system' time. The 'frac' component is 
- * based on the least count created by the system tick. 
+ * A signed int64_t type, stores a 'system' time as number of milliseconds 
+ * since the epoch.  
  * 
- * The 'seconds' component is a count of the number of seconds elapsed 
- * since the epoch, defined by tm_epoch, plus the number of leap seconds
- * defined in tm_leapseconds.
+ * The least count is based on the least count created by the system 
+ * tick, and is expected to be 1ms.
  * 
  */
-typedef struct TM_SYSTEM_t{
-    uint16_t frac;
-    uint32_t seconds;
-}tm_system_t;
+typedef int64_t tm_system_t;
 
 /**
  * @brief System Timedelta Storage Type
  * 
- * This (struct) type stores a 'system' time difference. The 'frac' 
- * component is based on the least count created by the system tick. 
+ * This type stores a 'system' time difference. 
+ * 
+ * The least count is based on the least count created by the system 
+ * tick, and is expected to be 1ms. 
  * 
  */
-typedef struct TM_SDELTA_t{
-    uint16_t frac;
-    uint32_t seconds;
-    uint8_t sgn;
-}tm_sdelta_t;
+typedef int64_t tm_sdelta_t;
 
 
 /**
  * @brief Real Time Storage Type
  * 
  * This (struct) type stores a 'real' time. This type does not depend on 
- * the epoch and is independent of system time.
- * 
+ * the epoch and is independent of system time. 
+ *
  * This form of time storage is always going to be expensive, and should
  * therefore be used sparingly. 
  * 
@@ -121,15 +151,14 @@ typedef struct TM_REAL_t{
     uint8_t hours;
     uint8_t minutes;
     uint8_t seconds;
-    uint16_t frac; 
-}tm_real_t;
+    uint16_t millis; 
+} tm_real_t;
 
 
 /**
  * @brief Real Timedelta Storage Type
  * 
- * This (struct) type stores a 'real' time difference. The 'residual' 
- * component is based on the least count created by the system tick. 
+ * This (struct) type stores a 'real' time difference. 
  * 
  * This form of time storage is always going to be expensive, and 
  * should therefore be used sparingly. 
@@ -137,19 +166,39 @@ typedef struct TM_REAL_t{
  */
 typedef struct TM_RDELTA_t{
     uint8_t sgn;
-    uint16_t frac;
+    uint16_t millis;
     uint8_t seconds;
     uint8_t minutes;
     uint8_t hours;
     uint16_t days;
-}tm_rdelta_t;
+} tm_rdelta_t;
 
 
 /**
  * @brief Epoch Change Handler Type
  * 
- * This (struct) type stores an epoch change handler, and must be instantiated
- * and registerd by consumers requiring epoch change notifications. 
+ * This (struct) type stores an epoch change handler, and must be 
+ * instantiated and registered by consumers requiring epoch change 
+ * notifications. 
+ * 
+ * Generally, an epoch change should be considered a rare occurence.
+ * If an application is expecting epoch changes, then the application
+ * can use the time delta provided to the handler to shift any stored
+ * timestamps to the new epoch. This remains largely untested.
+ * 
+ * If the epoch change is not to be followed, then the change handler
+ * will be provided 0 as the time delta. In such cases, applications 
+ * must discard any stored timestamps. This usually would happen if 
+ * the two epochs are fundamentally incompatible, or if the change 
+ * involves more than just a shift in the epoch.
+ * 
+ * Note that epoch change handlers are run in an interrupt-disabled 
+ * context, so they should be as quick as possible. 
+ * 
+ * The epoch change handlers should be called in increasing order of 
+ * the priority member, and this could, in principle, be used by the 
+ * application to sequence shifts of related timestamps. This is not 
+ * implemented. 
  * 
  */
 typedef struct TM_EPOCH_CHANGEHANDLER_t{
@@ -171,7 +220,7 @@ extern volatile tm_system_t tm_current;
 extern   tm_real_t tm_epoch;
 extern      int8_t tm_leapseconds;
 extern   tm_real_t tm_internal_epoch;
-extern    uint32_t tm_internal_epoch_offset;
+extern     int64_t tm_internal_epoch_offset;
 extern     uint8_t use_epoch;
 extern tm_epochchange_handler_t * epoch_handlers_root;
 
@@ -181,10 +230,17 @@ extern tm_epochchange_handler_t * epoch_handlers_root;
  * @name Time Initialization and Maintenance Functions
  * 
  */
-/**@{*/ 
+/**@{*/
 
 /**
- * Intitialize time library constructs
+ * @brief Intitialize time library constructs. 
+ * 
+ * The address provided to this function will be called TIME_BASE_ADDRESS for
+ * the purposes of this library, though EBS applications using the devicemap 
+ * may choose to call it DMAP_TIME_BASE_ADDRESS instead. All other UCDM 
+ * addresses discussed in this library will be referenced to this base address
+ * unless otherwise specified. 
+ * 
  */
 uint16_t tm_init(uint16_t ucdm_address);
 
@@ -249,12 +305,22 @@ static inline void tm_current_time(tm_system_t * stime);
 
 static inline void tm_current_time(tm_system_t * stime){
     critical_enter();
-    memcpy((void *)stime, (void *)(&tm_current), sizeof(tm_system_t));
+    *stime = tm_current;
     critical_exit();
     return;
 }
 
-int8_t tm_cmp_stime(tm_system_t * t1, tm_system_t * t2);
+static inline int8_t tm_cmp_stime(tm_system_t * t1, tm_system_t * t2);
+
+static inline int8_t tm_cmp_stime(tm_system_t * t1, tm_system_t * t2){
+    if (t1 < t2){
+        return (-1);
+    }
+    else if (t1 > t2){
+        return (1);
+    }
+    return 0;
+}
 
 /**
  * @brief Get the difference between two system times as a system 
@@ -266,7 +332,11 @@ int8_t tm_cmp_stime(tm_system_t * t1, tm_system_t * t2);
  * @param t2 Pointer to the second timestamp (*tm_system_t)
  * @param sdelta Poiter to the location where the delta should be stored
  */
-void tm_get_sdelta(tm_system_t * t1, tm_system_t * t2, tm_sdelta_t * sdelta);
+static inline void tm_get_sdelta(tm_system_t * t1, tm_system_t * t2, tm_sdelta_t * sdelta);
+
+static inline void tm_get_sdelta(tm_system_t * t1, tm_system_t * t2, tm_sdelta_t * sdelta){
+    *sdelta = (*t2 - *t1);
+}
 
 
 /**
@@ -275,7 +345,11 @@ void tm_get_sdelta(tm_system_t * t1, tm_system_t * t2, tm_sdelta_t * sdelta);
  * @param t Pointer to (a copy of) the original timestamp. This will be overwritten.
  * @param sdelta Pointer to the time difference to apply 
  */
-void tm_apply_sdelta(tm_system_t * t, tm_sdelta_t * sdelta);
+static inline void tm_apply_sdelta(tm_system_t * t, tm_sdelta_t * sdelta);
+
+static inline void tm_apply_sdelta(tm_system_t * t, tm_sdelta_t * sdelta){
+    *t = *t + *sdelta;
+}
 
 /**@}*/ 
 
@@ -292,7 +366,7 @@ void tm_apply_sdelta(tm_system_t * t, tm_sdelta_t * sdelta);
 /**@{*/ 
 
 /**
- * @brief Convert a time_delta_t instance into systick units.
+ * @brief Convert a tm_rdelta_t instance into systick units.
  * 
  * @param rdelta Pointer to the time difference in real time units.
  * @param sdelta Pointer to the tm_sdelta_t in which to store the result.
@@ -344,7 +418,7 @@ void tm_stime_from_rtime(tm_real_t* rtime, tm_system_t* stime);
  * 
  * @todo Align to gmtime
  * 
- * @param stime The system time (as a pointer to a time_system_t instance)
+ * @param stime The system time (as a pointer to a tm_system_t instance)
  * @param rtime Pointer to the tm_real_t in which to store the result.
  *              represented by stime.
  */
@@ -358,7 +432,7 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime);
  * 
  * Functions to manipule the Epoch. These functions should be avoided in 
  * all but the most demanding of applications. The default configuration
- * of the library uses the Unix Epoch and can handle times upto 2038 AD. 
+ * of the library uses the Unix Epoch. 
  * 
  * Variable Epochs will most likely be useful in cases where a second time 
  * reference is maintained relative to the primary Epoch. This type of use
@@ -367,7 +441,7 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime);
  * to make it far more expensive than it already is. 
  * 
  * These implementations are here for the sake of completeness. If you 
- * don't actually used the functions, the compiler with get rid of them. 
+ * don't actually used the functions, the compiler will get rid of them. 
  * 
  * In the future, it may be possible to adapt these implementations to 
  * provide one or more of the following : 
@@ -385,7 +459,11 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime);
  * @brief Set the epoch time from an external real time source. 
  * 
  * Note that for 'follow' to work, both the new epoch and the old one 
- * should be representable against the old epoch.
+ * should be representable against the old epoch. 
+ * 
+ * Because this function touches timestamps across the system, and the
+ * time variables are likely in an inconsistent state over the course 
+ * of this operation, this function disables interrupts. 
  * 
  * @param rtime Pointer to the time_real_t in which the desired epoch
  *               is stored
