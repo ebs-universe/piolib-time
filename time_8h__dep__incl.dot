@@ -22,7 +22,5 @@ digraph "time/time.h"
   Node6 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node8 [label="time/systick_handler.h",height=0.2,width=0.4,color="black",URL="$systick__handler_8h.html",tooltip="Interrupt handler for the system tick for static inclusion in the application."];
-  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node9 [label="time/systick.c",height=0.2,width=0.4,color="black",URL="$systick_8c_source.html",tooltip=" "];
   Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

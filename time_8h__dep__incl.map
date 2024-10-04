@@ -1,11 +1,10 @@
 <map id="time/time.h" name="time/time.h">
-<area shape="rect" id="node1" title="Time related functions for embebedded systems." alt="" coords="265,5,363,32"/>
-<area shape="rect" id="node2" href="$cron_8h.html" title="Cron&#45;like scheduling framework for embebedded systems." alt="" coords="94,80,190,107"/>
+<area shape="rect" id="node1" title="Time related functions for embebedded systems." alt="" coords="257,5,355,32"/>
+<area shape="rect" id="node2" href="$cron_8h.html" title="Cron&#45;like scheduling framework for embebedded systems." alt="" coords="86,80,182,107"/>
 <area shape="rect" id="node4" href="$time_8c.html" title="Time related function implementations." alt="" coords="124,155,221,181"/>
 <area shape="rect" id="node5" href="$sync_8c.html" title="Time synchonization function implementation." alt="" coords="391,155,488,181"/>
-<area shape="rect" id="node6" href="$sync_8h.html" title="Time synchonization functions for embebedded systems." alt="" coords="265,80,363,107"/>
-<area shape="rect" id="node8" href="$systick__handler_8h.html" title="Interrupt handler for the system tick for static inclusion in the application." alt="" coords="476,80,645,107"/>
+<area shape="rect" id="node6" href="$sync_8h.html" title="Time synchonization functions for embebedded systems." alt="" coords="257,80,355,107"/>
+<area shape="rect" id="node8" href="$systick__handler_8h.html" title="Interrupt handler for the system tick for static inclusion in the application." alt="" coords="431,80,600,107"/>
 <area shape="rect" id="node3" href="$cron_8c.html" title="Cron&#45;like scheduling framework implementations." alt="" coords="5,155,100,181"/>
 <area shape="rect" id="node7" href="$sync__rtc_8c_source.html" title=" " alt="" coords="245,155,367,181"/>
-<area shape="rect" id="node9" href="$systick_8c_source.html" title=" " alt="" coords="512,155,625,181"/>
 </map>
