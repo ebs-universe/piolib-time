@@ -1,10 +1,12 @@
 
 
-#include <hal/uc/rtc.h>
 #include "sync.h"
 
-tm_real_t rtc_buffer;
+#if TIME_ENABLE_SYNC_RTC
 
+#include <hal/uc/rtc.h>
+
+tm_real_t rtc_buffer;
 
 void tm_sync_rtc_wcb(void){
     ;
@@ -26,3 +28,5 @@ void tm_sync_rtc_rcb(void){
 uint8_t tm_sync_current_from_rtc(void){
     return rtc_read(&rtc_buffer, &tm_sync_rtc_rcb);
 }
+
+#endif

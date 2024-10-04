@@ -3,7 +3,7 @@
 #ifndef TIME_CONFIG_H
 #define TIME_CONFIG_H
 
-#define TIME_VERSION       "0.1.0"
+#define TIME_VERSION       "0.2.1"
 
 #include <application.h>
 
@@ -47,6 +47,8 @@
 #else
     #define DESCRIPTOR_TAG_TIME_EPOCH       0x02
 #endif
+/**@}*/ 
+
 
 #if defined EBS_TIME_ENABLE_SYNC
     #define TIME_ENABLE_SYNC                EBS_TIME_ENABLE_SYNC
@@ -72,8 +74,36 @@
 #endif
 
 
-/**@}*/ 
+#ifndef APP_ENABLE_SYSTICK
+#define APP_ENABLE_SYSTICK                  1
+#endif
 
+#ifndef APP_USE_CORE_SYSTICK
+#define APP_USE_CORE_SYSTICK                0
+#endif 
+
+#ifndef APP_USE_TIMER_SYSTICK
+#define APP_USE_TIMER_SYSTICK               0
+#endif
+
+#if APP_USE_CORE_SYSTICK && APP_USE_TIMER_SYSTICK
+#error "Both Core and Timer Systick Enabled."
+#endif
+
+#if APP_ENABLE_SYSTICK && !(APP_USE_CORE_SYSTICK + APP_USE_TIMER_SYSTICK)
+#error "Systick enabled but no Systick selected."
+#endif
+
+#if APP_ENABLE_SYSTICK && APP_USE_CORE_SYSTICK
+#define TIME_USE_CORE_SYSTICK               1
+#define TIME_USE_TIMER_SYSTICK              0
+#elif APP_ENABLE_SYSTICK && APP_USE_TIMER_SYSTICK
+#define TIME_USE_TIMER_SYSTICK              1
+#define TIME_USE_CORE_SYSTICK               0
+#else
+#define TIME_USE_CORE_SYSTICK               0
+#define TIME_USE_TIMER_SYSTICK              0
+#endif
 
 #endif
 
