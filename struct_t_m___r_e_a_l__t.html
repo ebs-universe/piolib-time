@@ -128,9 +128,11 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>millis</b></td></
 <div class="textblock"><p>Real Time Storage Type. </p>
 <p>This (struct) type stores a 'real' time. This type does not depend on the epoch and is independent of system time.</p>
 <p>This form of time storage is always going to be expensive, and should therefore be used sparingly.</p>
-<p>This type is not time-zone aware, and should always be interpreted as UTC time (GMT+0000). See the documentation of <a class="el" href="time_8h.html" title="Time related functions for embebedded systems.">time.h</a> for further detail about the interpretation of time by this library. </p>
+<p>This type is not time-zone aware, and should always be interpreted as UTC time (GMT+0000). See the documentation of <a class="el" href="time_8h.html" title="Time related functions for embebedded systems.">time.h</a> for further detail about the interpretation of time by this library.</p>
+<p>This library does no implicit validation of the data provided, and values outside expected ranges of each component of the real time can cause unexpected behaviour and crashes. If applications use uexternal or unsanitized sources to initizalize this type, then the application must also validate the input. One option to do so would be to initialize the tm_real_t and then use <a class="el" href="time_8c.html#acbcb06aff9710476f3813a37507b61fc" title="Validate a tm_real_t instance.">tm_check_invalid_rtime()</a>. <br  />
+ </p>
 
-<p class="definition">Definition at line <a class="el" href="time_8h_source.html#l00146">146</a> of file <a class="el" href="time_8h_source.html">time.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8h_source.html#l00153">153</a> of file <a class="el" href="time_8h_source.html">time.h</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>time/<a class="el" href="time_8h_source.html">time.h</a></li>
 </ul>
@@ -140,7 +142,7 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>millis</b></td></
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="struct_t_m___r_e_a_l__t.html">TM_REAL_t</a></li>
-    <li class="footer">Generated on Fri Oct 4 2024 16:40:32 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Oct 7 2024 09:49:33 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

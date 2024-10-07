@@ -2,6 +2,7 @@ var time_8c =
 [
     [ "TM_UCDM_RTIME_LEN", "time_8c.html#a412795d952de12045fe0330791782ca5", null ],
     [ "TM_UCDM_STIME_LEN", "time_8c.html#ab67e2f92d178b4ad417ad885845ec4ce", null ],
+    [ "tm_check_invalid_rtime", "time_8c.html#acbcb06aff9710476f3813a37507b61fc", null ],
     [ "tm_clear_rdelta", "time_8c.html#a56895961aa355ff23c287403e49833ac", null ],
     [ "tm_clear_rtime", "time_8c.html#aa6bbe6f553bb851f42fb51b008ff4517", null ],
     [ "tm_clear_sdelta", "time_8c.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3", null ],

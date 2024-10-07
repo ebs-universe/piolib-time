@@ -96,7 +96,8 @@ $(document).ready(function(){initNavTree('time_8c.html',''); initResizable(); })
 
 <p>Time related function implementations.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;ds/sllist.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;ds/sllist.h&gt;</code><br />
 <code>#include &lt;ucdm/ucdm.h&gt;</code><br />
 <code>#include &lt;ucdm/descriptor.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
@@ -131,17 +132,20 @@ Functions</h2></td></tr>
 <tr class="memdesc:a130024d5ed12980fbd5e325f2d82301e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intitialize time library constructs.  <a href="time_8c.html#a130024d5ed12980fbd5e325f2d82301e">More...</a><br /></td></tr>
 <tr class="separator:a130024d5ed12980fbd5e325f2d82301e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80e742cf4d5a15aa405e271532631cb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a80e742cf4d5a15aa405e271532631cb7">tm_clear_stime</a> (<a class="el" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> *stime)</td></tr>
-<tr class="memdesc:a80e742cf4d5a15aa405e271532631cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a time_system_t instance.  <a href="time_8c.html#a80e742cf4d5a15aa405e271532631cb7">More...</a><br /></td></tr>
+<tr class="memdesc:a80e742cf4d5a15aa405e271532631cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a tm_system_t instance.  <a href="time_8c.html#a80e742cf4d5a15aa405e271532631cb7">More...</a><br /></td></tr>
 <tr class="separator:a80e742cf4d5a15aa405e271532631cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00a5692ee3a8cab2cb079ce7e2c8c5e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3">tm_clear_sdelta</a> (<a class="el" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> *sdelta)</td></tr>
-<tr class="memdesc:a00a5692ee3a8cab2cb079ce7e2c8c5e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a time_sdelta_t instance.  <a href="time_8c.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3">More...</a><br /></td></tr>
+<tr class="memdesc:a00a5692ee3a8cab2cb079ce7e2c8c5e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a tm_sdelta_t instance.  <a href="time_8c.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3">More...</a><br /></td></tr>
 <tr class="separator:a00a5692ee3a8cab2cb079ce7e2c8c5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6bbe6f553bb851f42fb51b008ff4517"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#aa6bbe6f553bb851f42fb51b008ff4517">tm_clear_rtime</a> (<a class="el" href="time_8h.html#a4d68c653cca64590d7af5c9434363a19">tm_real_t</a> *rtime)</td></tr>
-<tr class="memdesc:aa6bbe6f553bb851f42fb51b008ff4517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a time_real_t instance.  <a href="time_8c.html#aa6bbe6f553bb851f42fb51b008ff4517">More...</a><br /></td></tr>
+<tr class="memdesc:aa6bbe6f553bb851f42fb51b008ff4517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a tm_real_t instance.  <a href="time_8c.html#aa6bbe6f553bb851f42fb51b008ff4517">More...</a><br /></td></tr>
 <tr class="separator:aa6bbe6f553bb851f42fb51b008ff4517"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56895961aa355ff23c287403e49833ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a56895961aa355ff23c287403e49833ac">tm_clear_rdelta</a> (<a class="el" href="time_8h.html#add7b65e9a7e04684743d2f45f719e7ba">tm_rdelta_t</a> *rdelta)</td></tr>
-<tr class="memdesc:a56895961aa355ff23c287403e49833ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a time_delta_t instance.  <a href="time_8c.html#a56895961aa355ff23c287403e49833ac">More...</a><br /></td></tr>
+<tr class="memdesc:a56895961aa355ff23c287403e49833ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a tm_rdelta_t instance.  <a href="time_8c.html#a56895961aa355ff23c287403e49833ac">More...</a><br /></td></tr>
 <tr class="separator:a56895961aa355ff23c287403e49833ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbcb06aff9710476f3813a37507b61fc"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#acbcb06aff9710476f3813a37507b61fc">tm_check_invalid_rtime</a> (<a class="el" href="time_8h.html#a4d68c653cca64590d7af5c9434363a19">tm_real_t</a> *rtime)</td></tr>
+<tr class="memdesc:acbcb06aff9710476f3813a37507b61fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate a tm_real_t instance.  <a href="time_8c.html#acbcb06aff9710476f3813a37507b61fc">More...</a><br /></td></tr>
+<tr class="separator:acbcb06aff9710476f3813a37507b61fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36fe5f19a48263d62cb825079260f00b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a36fe5f19a48263d62cb825079260f00b">tm_sdelta_from_rdelta</a> (<a class="el" href="time_8h.html#add7b65e9a7e04684743d2f45f719e7ba">tm_rdelta_t</a> *rdelta, <a class="el" href="time_8h.html#a3d5cc3f465acf62651c6b24795249de6">tm_sdelta_t</a> *sdelta)</td></tr>
 <tr class="memdesc:a36fe5f19a48263d62cb825079260f00b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a tm_rdelta_t instance into systick units.  <a href="time_8c.html#a36fe5f19a48263d62cb825079260f00b">More...</a><br /></td></tr>
 <tr class="separator:a36fe5f19a48263d62cb825079260f00b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,6 +199,35 @@ int8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_leapseconds</b> 
 
 <p class="definition">Definition in file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="acbcb06aff9710476f3813a37507b61fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbcb06aff9710476f3813a37507b61fc">&#9670;&nbsp;</a></span>tm_check_invalid_rtime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t tm_check_invalid_rtime </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="time_8h.html#a4d68c653cca64590d7af5c9434363a19">tm_real_t</a> *&#160;</td>
+          <td class="paramname"><em>rtime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validate a tm_real_t instance. </p>
+<p>Returns 0 for valid tm_real_t, non-zero for out of bounds.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rtime</td><td>Pointer to the tm_rtime_t to validate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00124">124</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+
+</div>
+</div>
 <a id="a56895961aa355ff23c287403e49833ac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a56895961aa355ff23c287403e49833ac">&#9670;&nbsp;</a></span>tm_clear_rdelta()</h2>
 
@@ -211,7 +244,7 @@ int8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_leapseconds</b> 
       </table>
 </div><div class="memdoc">
 
-<p>Clear a time_delta_t instance. </p>
+<p>Clear a tm_rdelta_t instance. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">rdelta</td><td>Pointer to the time_delta_t to clear. </td></tr>
@@ -219,9 +252,9 @@ int8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tm_leapseconds</b> 
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00113">113</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00114">114</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="time_8c_source.html#l00136">tm_rdelta_from_sdelta()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="time_8c_source.html#l00168">tm_rdelta_from_sdelta()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -247,7 +280,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Clear a time_real_t instance. </p>
+<p>Clear a tm_real_t instance. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">rtime</td><td>Pointer to the time_real_t to clear. </td></tr>
@@ -255,7 +288,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00101">101</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00102">102</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -275,7 +308,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Clear a time_sdelta_t instance. </p>
+<p>Clear a tm_sdelta_t instance. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sdelta</td><td>Pointer to the time_sdelta_t to clear. </td></tr>
@@ -283,7 +316,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00096">96</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00097">97</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -303,15 +336,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Clear a time_system_t instance. </p>
+<p>Clear a tm_system_t instance. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stime</td><td>Pointer to the time_system_t to clear. </td></tr>
+    <tr><td class="paramname">stime</td><td>Pointer to the tm_system_t to clear. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00091">91</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00092">92</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -334,7 +367,7 @@ Here is the caller graph for this function:</div>
 <p>Intitialize time library constructs. </p>
 <p>The address provided to this function will be called TIME_BASE_ADDRESS for the purposes of this library, though EBS applications using the devicemap may choose to call it DMAP_TIME_BASE_ADDRESS instead. All other UCDM addresses discussed in this library will be referenced to this base address unless otherwise specified. </p>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00071">71</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00072">72</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -358,7 +391,7 @@ Here is the caller graph for this function:</div>
 <p>The time application descriptor contains the library version number and is installed to the application descriptors with the tag specified in UCDM's descriptor header as DESCRIPTOR_TAG_LIBVERSION.</p>
 <p>This does not effect the functionality of the time library in any way. </p>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00063">63</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00064">64</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -397,9 +430,9 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00136">136</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00168">168</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
-<p class="reference">References <a class="el" href="time_8c_source.html#l00113">tm_clear_rdelta()</a>.</p>
+<p class="reference">References <a class="el" href="time_8c_source.html#l00114">tm_clear_rdelta()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -436,7 +469,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00316">316</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00382">382</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -478,7 +511,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00202">202</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00252">252</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -517,7 +550,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00123">123</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00155">155</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -558,9 +591,9 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00281">281</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00347">347</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
-<p class="reference">References <a class="el" href="time_8c_source.html#l00169">tm_stime_from_rtime()</a>.</p>
+<p class="reference">References <a class="el" href="time_8c_source.html#l00206">tm_stime_from_rtime()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -607,9 +640,9 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00169">169</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00206">206</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="time_8c_source.html#l00281">tm_set_epoch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="time_8c_source.html#l00347">tm_set_epoch()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -637,7 +670,7 @@ Here is the caller graph for this function:</div>
 </div><!-- fragment -->
 <p>Time Library Epoch Descriptor. </p>
 
-<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00055">55</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="time_8c_source.html#l00056">56</a> of file <a class="el" href="time_8c_source.html">time.c</a>.</p>
 
 </div>
 </div>
@@ -647,7 +680,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="time_8c.html">time.c</a></li>
-    <li class="footer">Generated on Fri Oct 4 2024 16:40:32 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Oct 7 2024 09:49:33 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

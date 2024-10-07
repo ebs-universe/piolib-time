@@ -6,7 +6,7 @@ digraph "tm_clear_rdelta"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="RL";
-  Node1 [label="tm_clear_rdelta",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Clear a time_delta_t instance."];
+  Node1 [label="tm_clear_rdelta",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Clear a tm_rdelta_t instance."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="tm_rdelta_from_sdelta",height=0.2,width=0.4,color="black",URL="$time_8c.html#a70da36517cb7cbe622604c69c21dafaa",tooltip="Convert a time difference in systick units into a real time difference."];
 }

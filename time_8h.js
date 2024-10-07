@@ -16,6 +16,7 @@ var time_8h =
     [ "tm_real_t", "time_8h.html#a4d68c653cca64590d7af5c9434363a19", null ],
     [ "tm_sdelta_t", "time_8h.html#a3d5cc3f465acf62651c6b24795249de6", null ],
     [ "tm_system_t", "time_8h.html#a6431d9bc028f3b054654b0b326ca6e97", null ],
+    [ "tm_check_invalid_rtime", "time_8h.html#acbcb06aff9710476f3813a37507b61fc", null ],
     [ "tm_clear_rdelta", "time_8h.html#a56895961aa355ff23c287403e49833ac", null ],
     [ "tm_clear_rtime", "time_8h.html#aa6bbe6f553bb851f42fb51b008ff4517", null ],
     [ "tm_clear_sdelta", "time_8h.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3", null ],
