@@ -3,7 +3,7 @@
 #ifndef TIME_CONFIG_H
 #define TIME_CONFIG_H
 
-#define TIME_VERSION       "0.2.1"
+#define TIME_VERSION       "0.2.2"
 
 #include <application.h>
 

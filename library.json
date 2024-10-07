@@ -1,6 +1,6 @@
 {
     "name": "ebs-time",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "Time keeping and manipulation functions for embedded systems",
     "keywords": "ebs",
     "repository": {
