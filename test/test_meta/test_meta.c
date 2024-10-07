@@ -13,7 +13,7 @@ void test_descriptor_version(void) {
     TEST_ASSERT_NOT_NULL(desc);
     TEST_ASSERT_EQUAL(6, desc->length);
     descriptor_read(desc, &readbuffer);
-    TEST_ASSERT_EQUAL_STRING("0.2.1", readbuffer);
+    TEST_ASSERT_EQUAL_STRING("0.2.2", readbuffer);
     return;
 }
 
