@@ -58,6 +58,16 @@
     #define TIME_ENABLE_SYNC                0
 #endif
 
+#ifndef APP_EXPOSE_TIME_UCDM
+#define APP_EXPOSE_TIME_UCDM                1
+#endif
+
+#if APP_EXPOSE_TIME_UCDM || TIME_ENABLE_SYNC
+    #define TIME_EXPOSE_UCDM                1
+#else
+    #define TIME_EXPOSE_UCDM                0
+#endif
+
 #if defined APP_ENABLE_RTC
     #define TIME_ENABLE_SYNC_RTC            APP_ENABLE_RTC
 #else

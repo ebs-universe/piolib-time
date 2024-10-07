@@ -32,7 +32,6 @@
  * @see time.h
  */
 
-#include <stdio.h>
 #include <ds/sllist.h>
 #include <ucdm/ucdm.h>
 #include <ucdm/descriptor.h>
@@ -71,10 +70,14 @@ void tm_install_descriptor(void)
 
 uint16_t tm_init(uint16_t ucdm_address){
     tm_current = 0;
+
+    #if TIME_EXPOSE_UCDM
     for (uint8_t i=0; i < TM_UCDM_STIME_LEN; i ++, ucdm_address++){
         ucdm_redirect_regr_ptr(ucdm_address, 
                                ((uint16_t *)(void *)(&tm_current) + i));
     }
+    descriptor_install(&tm_epoch_descriptor);
+    #endif
 
     #if TIME_ENABLE_SYNC
     ucdm_address = tm_sync_init(ucdm_address);
@@ -84,7 +87,6 @@ uint16_t tm_init(uint16_t ucdm_address){
     tm_cron_init();
     #endif
 
-    descriptor_install(&tm_epoch_descriptor);
     tm_systick_init();
     return ucdm_address;
 }
