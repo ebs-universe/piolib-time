@@ -18,6 +18,5 @@ void tearDown(void) {
 // expected to be reentrant or reversible, consider using
 // setUp and tearDown instead. 
 void libinit(void){
-    tm_install_descriptor();
     tm_init(0);
 }

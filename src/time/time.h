@@ -87,12 +87,12 @@
 
 #define TIME_SYSTICK_PERIOD_uS          1000
 
-#define TIME_TICKS_PER_SECOND           (uint32_t)(1000000 / TIME_SYSTICK_PERIOD_uS)
+#define TIME_TICKS_PER_SECOND           (int32_t)(1000000 / TIME_SYSTICK_PERIOD_uS)
 #define TIME_TICKS_PER_MINUTE           (TIME_TICKS_PER_SECOND * 60)
 #define TIME_TICKS_PER_HOUR             (TIME_TICKS_PER_MINUTE * 60)
 #define TIME_TICKS_PER_DAY              (TIME_TICKS_PER_HOUR * 24)
 
-#define TIME_SECONDS_PER_MINUTE         (uint32_t)(60)
+#define TIME_SECONDS_PER_MINUTE         (int32_t)(60)
 #define TIME_SECONDS_PER_HOUR           (TIME_SECONDS_PER_MINUTE * 60)
 #define TIME_SECONDS_PER_DAY            (TIME_SECONDS_PER_HOUR * 24)
 
@@ -142,6 +142,13 @@ typedef int64_t tm_sdelta_t;
  * UTC time (GMT+0000). See the documentation of time.h for further detail
  * about the interpretation of time by this library.
  * 
+ * This library does no implicit validation of the data provided, and 
+ * values outside expected ranges of each component of the real time 
+ * can cause unexpected behaviour and crashes. If applications use 
+ * uexternal or unsanitized sources to initizalize this type, then the 
+ * application must also validate the input. One option to do so would
+ * be to initialize the tm_real_t and then use tm_check_invalid_rtime().   
+ * 
  */
 typedef struct TM_REAL_t{
     uint8_t century;
@@ -166,11 +173,11 @@ typedef struct TM_REAL_t{
  */
 typedef struct TM_RDELTA_t{
     uint8_t sgn;
-    uint16_t millis;
     uint8_t seconds;
     uint8_t minutes;
     uint8_t hours;
     uint16_t days;
+    uint16_t millis;
 } tm_rdelta_t;
 
 
@@ -256,32 +263,43 @@ uint16_t tm_init(uint16_t ucdm_address);
 void tm_install_descriptor(void);
 
 /**
- * @brief Clear a time_system_t instance.
+ * @brief Clear a tm_system_t instance.
  * 
- * @param stime Pointer to the time_system_t to clear.
+ * @param stime Pointer to the tm_system_t to clear.
  */
 void tm_clear_stime(tm_system_t* stime);
 
 /**
- * @brief Clear a time_sdelta_t instance.
+ * @brief Clear a tm_sdelta_t instance.
  * 
  * @param sdelta Pointer to the time_sdelta_t to clear.
  */
 void tm_clear_sdelta(tm_sdelta_t* sdelta);
 
 /**
- * @brief Clear a time_real_t instance.
+ * @brief Clear a tm_real_t instance.
  * 
  * @param rtime Pointer to the time_real_t to clear.
  */
 void tm_clear_rtime(tm_real_t* rtime);
 
 /**
- * @brief Clear a time_delta_t instance.
+ * @brief Clear a tm_rdelta_t instance.
  * 
  * @param rdelta Pointer to the time_delta_t to clear.
  */
 void tm_clear_rdelta(tm_rdelta_t* rdelta);
+
+
+/**
+ * @brief Validate a tm_real_t instance.
+ * 
+ * Returns 0 for valid tm_real_t, non-zero for 
+ * out of bounds.
+ * 
+ * @param rtime Pointer to the tm_rtime_t to validate.
+ */
+uint8_t tm_check_invalid_rtime(tm_real_t* rtime);
 
 /**@}*/ 
 
@@ -313,10 +331,10 @@ static inline void tm_current_time(tm_system_t * stime){
 static inline int8_t tm_cmp_stime(tm_system_t * t1, tm_system_t * t2);
 
 static inline int8_t tm_cmp_stime(tm_system_t * t1, tm_system_t * t2){
-    if (t1 < t2){
+    if (*t1 < *t2){
         return (-1);
     }
-    else if (t1 > t2){
+    else if (*t1 > *t2){
         return (1);
     }
     return 0;

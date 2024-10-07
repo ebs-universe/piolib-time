@@ -32,6 +32,7 @@
  * @see time.h
  */
 
+#include <stdio.h>
 #include <ds/sllist.h>
 #include <ucdm/ucdm.h>
 #include <ucdm/descriptor.h>
@@ -120,12 +121,43 @@ void tm_clear_rdelta(tm_rdelta_t* rdelta){
     return;
 }
 
+uint8_t tm_check_invalid_rtime(tm_real_t* rtime){
+    if (rtime->century > 24) {
+        return 1;
+    } 
+    if (rtime->year > 99) {
+        return 2;
+    }
+    if (rtime->month < 1 || rtime->month > 12) {
+        return 3;
+    }
+    if (rtime->date < 1 || rtime->date > 31) {
+        // This should actually check based on month 
+        // and year
+        return 4;
+    }
+    if (rtime->hours > 23) {
+        return 5;
+    }
+    if (rtime->minutes > 59) {
+        return 6;
+    }
+    if (rtime->seconds > 59) {
+        return 7;
+    }
+    if (rtime->millis > 999) {
+        return 8;
+    }
+    return 0;
+}
+
+
 void tm_sdelta_from_rdelta(tm_rdelta_t* rdelta, tm_sdelta_t* sdelta){
     uint64_t result;
-    result  = rdelta->days    * TIME_SECONDS_PER_DAY * 1000;
-    result += rdelta->hours   * TIME_SECONDS_PER_HOUR * 1000;
-    result += rdelta->minutes * TIME_SECONDS_PER_MINUTE * 1000;
-    result += rdelta->seconds * 1000;
+    result  = rdelta->days    * TIME_SECONDS_PER_DAY * 1000LL;
+    result += rdelta->hours   * TIME_SECONDS_PER_HOUR * 1000LL;
+    result += rdelta->minutes * TIME_SECONDS_PER_MINUTE * 1000LL;
+    result += rdelta->seconds * 1000LL;
     result += rdelta->millis;
     if (rdelta->sgn) {
         result = result * -1;
@@ -136,22 +168,23 @@ void tm_sdelta_from_rdelta(tm_rdelta_t* rdelta, tm_sdelta_t* sdelta){
 void tm_rdelta_from_sdelta(tm_sdelta_t* sdelta, tm_rdelta_t* rdelta){
     tm_clear_rdelta(rdelta);
     tm_sdelta_t sdelta_copy = *sdelta;
-
-    if (sdelta < 0){
+    
+    if (sdelta_copy < 0){
         rdelta->sgn = 1; 
+        sdelta_copy *= -1;
     }
+
+    rdelta->days = sdelta_copy / (TIME_SECONDS_PER_DAY * 1000LL);
+    sdelta_copy -= rdelta->days * (TIME_SECONDS_PER_DAY * 1000LL);
+
+    rdelta->hours = sdelta_copy / (TIME_SECONDS_PER_HOUR * 1000LL);
+    sdelta_copy -= rdelta->hours * (TIME_SECONDS_PER_HOUR * 1000LL);
+
+    rdelta->minutes = sdelta_copy / (TIME_SECONDS_PER_MINUTE * 1000LL);
+    sdelta_copy -= rdelta->minutes * (TIME_SECONDS_PER_MINUTE * 1000LL);
     
-    rdelta->days = sdelta_copy / (TIME_SECONDS_PER_DAY * 1000);
-    sdelta_copy -= rdelta->days * (TIME_SECONDS_PER_DAY * 1000);
-    
-    rdelta->hours = sdelta_copy / (TIME_SECONDS_PER_HOUR * 1000);
-    sdelta_copy -= rdelta->hours * (TIME_SECONDS_PER_HOUR * 1000);
-    
-    rdelta->minutes = sdelta_copy / (TIME_SECONDS_PER_MINUTE * 1000);
-    sdelta_copy -= rdelta->minutes * (TIME_SECONDS_PER_MINUTE * 1000);
-    
-    rdelta->seconds = sdelta_copy / 1000;
-    sdelta_copy -= rdelta->seconds * 1000;
+    rdelta->seconds = sdelta_copy / 1000LL;
+    sdelta_copy -= rdelta->seconds * 1000LL;
     
     rdelta->millis = sdelta_copy;
     return;
@@ -160,16 +193,20 @@ void tm_rdelta_from_sdelta(tm_sdelta_t* sdelta, tm_rdelta_t* rdelta){
 static const int16_t days_to_month[]=
     {0, 306, 337, 0, 31, 61, 92, 122, 153, 184, 214, 245, 275};
 
+static const int8_t days_in_month[]=
+    {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
 static uint16_t gyear(tm_real_t * rtime);
 
 static uint16_t gyear(tm_real_t * rtime){
-    return ((uint16_t)(rtime->century) * 100 + rtime->year);
+    uint16_t result = (uint16_t)(rtime->century) * 100 + rtime->year;
+    return (result);
 }
 
 void tm_stime_from_rtime(tm_real_t* rtime, tm_system_t * stime){
-    uint16_t days = rtime->date - 1;
+    int32_t days = rtime->date - 1;
     uint16_t syear = 0;
-    uint8_t years = 0;
+    int16_t years = 0;
     
     if (!use_epoch){
         return;
@@ -177,28 +214,41 @@ void tm_stime_from_rtime(tm_real_t* rtime, tm_system_t * stime){
     
     days += days_to_month[rtime->month];
     syear = gyear(&tm_internal_epoch);
-    years = (uint8_t)(gyear(rtime) - syear);
+    years = (int16_t)(gyear(rtime) - syear);
     if (rtime->month < 3){
         years --;
+    } else {
+        uint16_t lyear = gyear(rtime);
+        if ((!(lyear % 4) && (lyear % 100)) || !(lyear % 400)){
+            days ++;
+        }
     }
+
     days += (years * 365);
-    
-    while (years){
+
+    while (years > 0){
         if ((!(syear % 4) && (syear % 100)) || !(syear % 400)){
             days ++;
         }
         syear ++;
         years --;
     }
-    
-    *stime = ((          days * TIME_SECONDS_PER_DAY * 1000)    +
-              (  rtime->hours * TIME_SECONDS_PER_HOUR * 1000)   +
-              (rtime->minutes * TIME_SECONDS_PER_MINUTE * 1000) + 
-              (rtime->seconds * 1000) + rtime->millis + 
+    while (years < 0){
+        if ((!(syear % 4) && (syear % 100)) || !(syear % 400)){
+            days --;
+        }
+        syear --;
+        years ++;
+    }
+
+    *stime = ((          days * TIME_SECONDS_PER_DAY * 1000LL)    +
+              (  rtime->hours * TIME_SECONDS_PER_HOUR * 1000LL)   +
+              (rtime->minutes * TIME_SECONDS_PER_MINUTE * 1000LL) + 
+              (rtime->seconds * 1000LL) + rtime->millis + 
               tm_leapseconds - tm_internal_epoch_offset);
 }
 
-// TODO Untested. Horribly unoptimized.
+
 void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime){
     if (!use_epoch){
         return;
@@ -206,7 +256,6 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime){
 
     *rtime = tm_internal_epoch;
     tm_system_t stime_internal = *stime + tm_internal_epoch_offset - tm_leapseconds;
-
     uint32_t days = stime_internal / (TIME_SECONDS_PER_DAY * 1000);
     uint32_t remaining_ms = stime_internal % (TIME_SECONDS_PER_DAY * 1000);
 
@@ -219,18 +268,35 @@ void tm_rtime_from_stime(tm_system_t* stime, tm_real_t* rtime){
 
     uint16_t year = gyear(&tm_internal_epoch);
     while (days >= 365) {
-        uint16_t leap_adjustment = ((!(year % 4) && (year % 100)) || !(year % 400)) ? 366 : 365;
+
+        uint16_t leap_adjustment = ((!((year+1)% 4) && ((year+1) % 100)) || !((year+1) % 400)) ? 366 : 365;
         if (days < leap_adjustment) break;
         days -= leap_adjustment;
         year++;
     }
-
+    
+    // Calculate month, starting from march
+    uint8_t next_month = 3;
+    uint8_t next_month_days = 31;
+    while (days >= next_month_days) {
+        days -= next_month_days;
+        if (next_month == 12) {
+            year ++;
+            next_month = 1;
+        } else {
+            next_month ++;
+        }
+        rtime->month = next_month;
+                
+        if (next_month == 2 && ((!(year % 4) && (year % 100)) || !(year % 400))){
+            next_month_days = 29;
+        } else {
+            next_month_days = days_in_month[next_month];
+        }
+    }
+    rtime->date = days + 1; // Days are 1-indexed 
     rtime->year = year % 100;
     rtime->century = year / 100;
-
-    // TODO
-    rtime->month = 0;
-    rtime->date = 0; 
 }
 
 /*
