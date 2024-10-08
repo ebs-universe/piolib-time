@@ -3,7 +3,7 @@
 #ifndef TIME_CONFIG_H
 #define TIME_CONFIG_H
 
-#define TIME_VERSION       "0.2.2"
+#define TIME_VERSION       "time 0.3.0"
 
 #include <application.h>
 
@@ -113,6 +113,12 @@
 #else
 #define TIME_USE_CORE_SYSTICK               0
 #define TIME_USE_TIMER_SYSTICK              0
+#endif
+
+#ifdef APP_ENABLE_LIBVERSION_DESCRIPTORS
+    #define TIME_LIBVERSION_DESCRIPTOR  APP_ENABLE_LIBVERSION_DESCRIPTORS
+#else
+    #define TIME_LIBVERSION_DESCRIPTOR  0
 #endif
 
 #endif

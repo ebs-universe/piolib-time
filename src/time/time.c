@@ -33,7 +33,6 @@
  */
 
 #include <ds/sllist.h>
-#include <ucdm/ucdm.h>
 #include <ucdm/descriptor.h>
 #include <string.h>
 #include "time.h"
@@ -55,6 +54,9 @@ tm_epochchange_handler_t * epoch_handlers_root = NULL;
 descriptor_custom_t tm_epoch_descriptor = {NULL, DESCRIPTOR_TAG_TIME_EPOCH, 
     sizeof(tm_real_t), DESCRIPTOR_ACCTYPE_PTR, {&tm_epoch}};
 
+
+#if TIME_LIBVERSION_DESCRIPTOR
+
 /** @brief Time Library Version Descriptor */
 static descriptor_custom_t time_descriptor = {NULL, DESCRIPTOR_TAG_LIBVERSION,
     sizeof(TIME_VERSION), DESCRIPTOR_ACCTYPE_PTR, {TIME_VERSION}};
@@ -65,10 +67,12 @@ void tm_install_descriptor(void)
     descriptor_install(&time_descriptor);
 }    
 
+#endif
+
 #define TM_UCDM_STIME_LEN     (sizeof(tm_system_t) / 2 + (sizeof(tm_system_t) % 2 != 0))
 #define TM_UCDM_RTIME_LEN     (sizeof(tm_real_t)   / 2 + (sizeof(tm_real_t)   % 2 != 0))
 
-uint16_t tm_init(uint16_t ucdm_address){
+ucdm_addr_t tm_init(ucdm_addr_t ucdm_address){
     tm_current = 0;
 
     #if TIME_EXPOSE_UCDM
@@ -85,6 +89,10 @@ uint16_t tm_init(uint16_t ucdm_address){
 
     #if TIME_ENABLE_CRON
     tm_cron_init();
+    #endif
+
+    #if TIME_LIBVERSION_DESCRIPTOR
+    tm_install_descriptor();
     #endif
 
     tm_systick_init();

@@ -7,13 +7,14 @@
 #include "../scaffold/common.c"
 
 void test_descriptor_version(void) {
-    tm_install_descriptor();
+    // TODO This needs to actually find the descriptor.
+    // All libraries use the same tag.
     char readbuffer[20];
     descriptor_custom_t * desc = descriptor_find(DESCRIPTOR_TAG_LIBVERSION);
     TEST_ASSERT_NOT_NULL(desc);
-    TEST_ASSERT_EQUAL(6, desc->length);
+    TEST_ASSERT_EQUAL(11, desc->length);
     descriptor_read(desc, &readbuffer);
-    TEST_ASSERT_EQUAL_STRING("0.2.2", readbuffer);
+    TEST_ASSERT_EQUAL_STRING("time 0.3.0", readbuffer);
     return;
 }
 

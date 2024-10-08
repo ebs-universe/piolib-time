@@ -122,9 +122,9 @@ typedef struct TM_SYNC_SM_t{
 } tm_sync_sm_t;
 
 #if TIME_ENABLE_SYNC
-uint16_t tm_sync_init(uint16_t ucdm_next_address);
+ucdm_addr_t tm_sync_init(ucdm_addr_t ucdm_next_address);
 void tm_sync_request_host(void);
-void tm_sync_handler(uint16_t addr);
+void tm_sync_handler(ucdm_addr_t addr);
 extern avlt_node_t  tm_avlt_sync_handler_node;
 #endif
 

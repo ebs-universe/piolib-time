@@ -72,6 +72,7 @@
 #include <string.h>
 #include "config.h"
 #include <platform/cpu.h>
+#include <ucdm/ucdm.h>
 
 /**
  * @name Time Tick Calculations
@@ -249,7 +250,7 @@ extern tm_epochchange_handler_t * epoch_handlers_root;
  * unless otherwise specified. 
  * 
  */
-uint16_t tm_init(uint16_t ucdm_address);
+ucdm_addr_t tm_init(ucdm_addr_t ucdm_address);
 
 /**
  * @brief Install the time library descriptor to the application.

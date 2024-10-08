@@ -1,4 +1,7 @@
 
+#define APP_UCDM_MAX_REGISTERS              20
+#define APP_ENABLE_LIBVERSION_DESCRIPTORS   1
+
 /**
  * @name Application Systick and Time Configuration
  */

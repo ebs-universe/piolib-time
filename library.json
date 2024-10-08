@@ -1,6 +1,6 @@
 {
     "name": "ebs-time",
-    "version": "0.2.2",
+    "version": "0.3.0",
     "description": "Time keeping and manipulation functions for embedded systems",
     "keywords": "ebs",
     "repository": {
@@ -26,7 +26,7 @@
         { 
             "owner": "chintal",
             "name": "ebs-ucdm",
-            "version": "^0.2.0"
+            "version": "^0.3.0"
         },
         { 
             "owner": "chintal",

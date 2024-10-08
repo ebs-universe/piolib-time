@@ -45,8 +45,6 @@
  * @see sync.h
  */
 
-
-#include <ucdm/ucdm.h>
 #include "time.h"
 #include "sync.h"
 
@@ -54,14 +52,15 @@
 
 avlt_node_t  tm_avlt_sync_handler_node;
 tm_sync_sm_t tm_sync_sm;
-uint16_t tm_sync_host_read_hook(uint16_t address);
+uint16_t tm_sync_host_read_hook(ucdm_addr_t address);
+ucdm_addr_t ucdm_addr_sync_host_ts;
 
-
-uint16_t tm_sync_init(uint16_t ucdm_address){
+ucdm_addr_t tm_sync_init(ucdm_addr_t ucdm_address){
     // Setup System Time Read Hook
     ucdm_redirect_regr_func(ucdm_address, &tm_sync_host_read_hook);
     ucdm_address += 2;
     
+    ucdm_addr_sync_host_ts = ucdm_address;
     // Setup Host Interface Registers
     for(uint8_t i=0; i<(sizeof(tm_system_t)/2); i++, ucdm_address++){
         ucdm_enable_regw(ucdm_address + i);        
@@ -102,7 +101,7 @@ static inline void tm_sync_apply(void){
     }
 }
 
-uint16_t tm_sync_host_read_hook(uint16_t address){
+uint16_t tm_sync_host_read_hook(ucdm_addr_t address){
     if (tm_sync_sm.state == TM_SYNC_STATE_WAIT_DELAY_OUT){
         tm_sync_sm.state = TM_SYNC_STATE_WAIT_DELAY_IN;
         // Host read our timestamp for delay calculation.
@@ -112,7 +111,13 @@ uint16_t tm_sync_host_read_hook(uint16_t address){
     return 0;
 }
 
-void tm_sync_handler(uint16_t addr){
+static inline void tm_redirect_next_host_ts(tm_system_t * target){
+    for (uint8_t i=0; i < (sizeof(tm_system_t) / 2); i++){
+        ucdm_register[ucdm_addr_sync_host_ts + i].ptr = (uint16_t *)target + i;
+    }
+}
+
+void tm_sync_handler(ucdm_addr_t addr){
     switch(tm_sync_sm.state){
         case TM_SYNC_STATE_PREINIT:
             break;
@@ -120,11 +125,7 @@ void tm_sync_handler(uint16_t addr){
             if (ucdm_register[addr].data){
                 // Got sync with timestamp from the host. 
                 tm_sync_sm.state = TM_SYNC_STATE_WAIT_DELAY_OUT;
-                memcpy(
-                    &tm_sync_sm.t1, 
-                    (void *)&ucdm_register[addr - (sizeof(tm_system_t) / 2) + 1], 
-                    sizeof(tm_system_t)
-                );
+                tm_redirect_next_host_ts(&tm_sync_sm.t2p);
             } else { 
                 // Got sync without timestamp from the host. 
                 tm_sync_sm.state = TM_SYNC_STATE_WAIT_FOLLOW_UP;
@@ -134,11 +135,7 @@ void tm_sync_handler(uint16_t addr){
         case TM_SYNC_STATE_WAIT_FOLLOW_UP:
             // Got the sync timestamp from the host. 
             tm_sync_sm.state = TM_SYNC_STATE_WAIT_DELAY_OUT;
-            memcpy(
-                &tm_sync_sm.t1, 
-                (void *)&ucdm_register[addr - (sizeof(tm_system_t) / 2) + 1], 
-                sizeof(tm_system_t)
-            );
+            tm_redirect_next_host_ts(&tm_sync_sm.t2p);
             break;
         case TM_SYNC_STATE_WAIT_DELAY_OUT:
             // This is handled in the register read function for the 
@@ -146,11 +143,7 @@ void tm_sync_handler(uint16_t addr){
             break;
         case TM_SYNC_STATE_WAIT_DELAY_IN:
             // Host returned its timestamp for delay calculation.
-            memcpy(
-                &tm_sync_sm.t2p, 
-                (void *)&ucdm_register[addr - (sizeof(tm_system_t) / 2) + 1], 
-                sizeof(tm_system_t)
-            );
+            tm_redirect_next_host_ts(&tm_sync_sm.t1);
             tm_sync_sm.state = TM_SYNC_STATE_IDLE;
             // All information is now available. Calculate and apply.
             tm_sync_apply();
