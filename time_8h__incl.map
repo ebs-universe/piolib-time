@@ -1,8 +1,9 @@
 <map id="time/time.h" name="time/time.h">
-<area shape="rect" id="node1" title="Time related functions for embebedded systems." alt="" coords="134,5,233,32"/>
+<area shape="rect" id="node1" title="Time related functions for embebedded systems." alt="" coords="182,5,281,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,76,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="100,80,171,107"/>
 <area shape="rect" id="node4" href="$config_8h_source.html" title=" " alt="" coords="195,80,268,107"/>
 <area shape="rect" id="node6" title=" " alt="" coords="293,80,410,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="435,80,545,107"/>
 <area shape="rect" id="node5" title=" " alt="" coords="178,155,285,181"/>
 </map>

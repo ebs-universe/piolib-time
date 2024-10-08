@@ -1,12 +1,12 @@
 <map id="time/sync.c" name="time/sync.c">
-<area shape="rect" id="node1" title="Time synchonization function implementation." alt="" coords="135,5,232,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="35,80,145,107"/>
-<area shape="rect" id="node3" href="$time_8h.html" title="Time related functions for embebedded systems." alt="" coords="151,155,215,181"/>
-<area shape="rect" id="node9" href="$sync_8h.html" title="Time synchonization functions for embebedded systems." alt="" coords="221,80,285,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,229,76,256"/>
-<area shape="rect" id="node5" title=" " alt="" coords="100,229,171,256"/>
-<area shape="rect" id="node6" href="$config_8h_source.html" title=" " alt="" coords="195,229,268,256"/>
-<area shape="rect" id="node8" title=" " alt="" coords="293,229,410,256"/>
-<area shape="rect" id="node7" title=" " alt="" coords="178,304,285,331"/>
-<area shape="rect" id="node10" title=" " alt="" coords="239,155,338,181"/>
+<area shape="rect" id="node1" title="Time synchonization function implementation." alt="" coords="217,5,315,32"/>
+<area shape="rect" id="node2" href="$time_8h.html" title="Time related functions for embebedded systems." alt="" coords="199,155,263,181"/>
+<area shape="rect" id="node9" href="$sync_8h.html" title="Time synchonization functions for embebedded systems." alt="" coords="269,80,333,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,229,76,256"/>
+<area shape="rect" id="node4" title=" " alt="" coords="100,229,171,256"/>
+<area shape="rect" id="node5" href="$config_8h_source.html" title=" " alt="" coords="195,229,268,256"/>
+<area shape="rect" id="node7" title=" " alt="" coords="293,229,410,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="435,229,545,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="178,304,285,331"/>
+<area shape="rect" id="node10" title=" " alt="" coords="287,155,386,181"/>
 </map>

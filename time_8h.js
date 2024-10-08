@@ -21,7 +21,7 @@ var time_8h =
     [ "tm_clear_rtime", "time_8h.html#aa6bbe6f553bb851f42fb51b008ff4517", null ],
     [ "tm_clear_sdelta", "time_8h.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3", null ],
     [ "tm_clear_stime", "time_8h.html#a80e742cf4d5a15aa405e271532631cb7", null ],
-    [ "tm_init", "time_8h.html#a130024d5ed12980fbd5e325f2d82301e", null ],
+    [ "tm_init", "time_8h.html#ad30ad83b20a9361d7ba12e5117b56fce", null ],
     [ "tm_install_descriptor", "time_8h.html#ae649a29fbd008c16730d843b6da0a7fc", null ],
     [ "tm_rdelta_from_sdelta", "time_8h.html#a70da36517cb7cbe622604c69c21dafaa", null ],
     [ "tm_register_epoch_change_handler", "time_8h.html#a542af40054156e483d8394af15fc0ac4", null ],

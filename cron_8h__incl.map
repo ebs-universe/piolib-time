@@ -1,10 +1,11 @@
 <map id="time/cron.h" name="time/cron.h">
-<area shape="rect" id="node1" title="Cron&#45;like scheduling framework for embebedded systems." alt="" coords="89,5,185,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="53,80,127,107"/>
-<area shape="rect" id="node3" href="$time_8h.html" title="Time related functions for embebedded systems." alt="" coords="151,80,215,107"/>
+<area shape="rect" id="node1" title="Cron&#45;like scheduling framework for embebedded systems." alt="" coords="137,5,233,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="101,80,175,107"/>
+<area shape="rect" id="node3" href="$time_8h.html" title="Time related functions for embebedded systems." alt="" coords="199,80,263,107"/>
 <area shape="rect" id="node4" title=" " alt="" coords="5,155,76,181"/>
 <area shape="rect" id="node5" title=" " alt="" coords="100,155,171,181"/>
 <area shape="rect" id="node6" href="$config_8h_source.html" title=" " alt="" coords="195,155,268,181"/>
 <area shape="rect" id="node8" title=" " alt="" coords="293,155,410,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="435,155,545,181"/>
 <area shape="rect" id="node7" title=" " alt="" coords="178,229,285,256"/>
 </map>
