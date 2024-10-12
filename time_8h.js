@@ -11,6 +11,7 @@ var time_8h =
     [ "TIME_TICKS_PER_HOUR", "time_8h.html#a2fef002f838d2490e2f0df494686ac1d", null ],
     [ "TIME_TICKS_PER_MINUTE", "time_8h.html#ab2ada061ca50c6d67ff85c5df6964466", null ],
     [ "TIME_TICKS_PER_SECOND", "time_8h.html#a5cb4685eb35fd7ee3bab8aef5f53c211", null ],
+    [ "TM_REAL_t_DEFINED", "time_8h.html#a8cb8cdde6a7bc8d7ad9386d9626ddddb", null ],
     [ "tm_epochchange_handler_t", "time_8h.html#adc3a4779fa0302239208634953cfc2a1", null ],
     [ "tm_rdelta_t", "time_8h.html#add7b65e9a7e04684743d2f45f719e7ba", null ],
     [ "tm_real_t", "time_8h.html#a4d68c653cca64590d7af5c9434363a19", null ],

@@ -28,7 +28,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ebs-time
-   &#160;<span id="projectnumber">0.3.0</span>
+   &#160;<span id="projectnumber">0.3.1</span>
    </div>
    <div id="projectbrief">Time keeping and manipulation functions for embedded systems</div>
   </td>
@@ -216,15 +216,16 @@ $(document).ready(function(){initNavTree('sync_8c_source.html',''); initResizabl
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="comment">// All information is now available. Calculate and apply.</span></div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            tm_sync_apply();</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            ucdm_exception_status &amp;= ~UCDM_EXST_TIMESYNC_REQ;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    }</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;}</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="astruct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t_html"><div class="ttname"><a href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">TM_EPOCH_CHANGEHANDLER_t</a></div><div class="ttdoc">Epoch Change Handler Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00212">time.h:212</a></div></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="comment">// TODO Schedule update of RTC in main loop from here</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;}</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="astruct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t_html"><div class="ttname"><a href="struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html">TM_EPOCH_CHANGEHANDLER_t</a></div><div class="ttdoc">Epoch Change Handler Type.</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00215">time.h:215</a></div></div>
 <div class="ttc" id="astruct_t_m___s_y_n_c___s_m__t_html"><div class="ttname"><a href="struct_t_m___s_y_n_c___s_m__t.html">TM_SYNC_SM_t</a></div><div class="ttdef"><b>Definition:</b> <a href="sync_8h_source.html#l00116">sync.h:116</a></div></div>
 <div class="ttc" id="async_8h_html"><div class="ttname"><a href="sync_8h.html">sync.h</a></div><div class="ttdoc">Time synchonization functions for embebedded systems.</div></div>
 <div class="ttc" id="atime_8h_html"><div class="ttname"><a href="time_8h.html">time.h</a></div><div class="ttdoc">Time related functions for embebedded systems.</div></div>
@@ -236,7 +237,7 @@ $(document).ready(function(){initNavTree('sync_8c_source.html',''); initResizabl
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="sync_8c.html">sync.c</a></li>
-    <li class="footer">Generated on Tue Oct 8 2024 14:58:56 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Oct 12 2024 05:58:57 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
