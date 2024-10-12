@@ -148,6 +148,7 @@ void tm_sync_handler(ucdm_addr_t addr){
             // All information is now available. Calculate and apply.
             tm_sync_apply();
             ucdm_exception_status &= ~UCDM_EXST_TIMESYNC_REQ;
+            // TODO Schedule update of RTC in main loop from here
             break;
         default:
             break;

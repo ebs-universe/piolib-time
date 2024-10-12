@@ -129,6 +129,8 @@ typedef int64_t tm_system_t;
  */
 typedef int64_t tm_sdelta_t;
 
+#ifndef TM_REAL_t_DEFINED
+#define TM_REAL_t_DEFINED
 
 /**
  * @brief Real Time Storage Type
@@ -162,6 +164,7 @@ typedef struct TM_REAL_t{
     uint16_t millis; 
 } tm_real_t;
 
+#endif
 
 /**
  * @brief Real Timedelta Storage Type
