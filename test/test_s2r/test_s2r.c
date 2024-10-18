@@ -1,6 +1,6 @@
 #include <unity.h>
 #include <time/time.h>
-#include "../scaffold/common.c"
+#include <scaffold.h>
 
 // Helper function to validate tm_real_t
 void assert_tm_real_equal(tm_real_t* expected, tm_real_t* actual) {
@@ -141,7 +141,7 @@ void test_tm_rdelta_from_sdelta_large_negative(void) {
 
 
 int main( int argc, char **argv) {
-    tm_init(0);
+    init();
     UNITY_BEGIN();
     RUN_TEST(test_tm_rtime_from_stime_unix_epoch);
     RUN_TEST(test_tm_rdelta_from_sdelta_zero_delta);

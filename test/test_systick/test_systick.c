@@ -6,8 +6,7 @@
 #include <time/time.h>
 #include <time/systick_handler.h>
 #include <platform/debug.h>
-
-#include "../scaffold/common.c"
+#include <scaffold.h>
 
 
 #if (defined __linux__ || defined _WIN32)
@@ -49,7 +48,7 @@ void test_systick_read(void) {
 }
 
 int main( int argc, char **argv) {
-    tm_init(0);
+    init();
     UNITY_BEGIN();
     RUN_TEST(test_systick_read);
     RUN_TEST(test_systick_basic);

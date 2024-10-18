@@ -1,6 +1,6 @@
 #include <unity.h>
 #include <time/time.h>
-#include "../scaffold/common.c"
+#include <scaffold.h>
 
 
 void test_tm_stime_from_rtime_basic_conversion(void) {
@@ -265,7 +265,7 @@ void test_tm_sdelta_from_rdelta_boundary_conditions(void) {
 }
 
 int main( int argc, char **argv) {
-    tm_init(0);
+    init();
     UNITY_BEGIN();
     RUN_TEST(test_tm_stime_from_rtime_basic_conversion);
     RUN_TEST(test_tm_stime_from_rtime_leap_year);

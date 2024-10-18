@@ -5,7 +5,7 @@
 #include <time/time.h>
 #include <platform/debug.h>
 
-#include "../scaffold/common.c"
+#include <scaffold.h>
 
 void test_stime(void) {
     TEST_ASSERT_EQUAL(sizeof(tm_system_t), 8);
@@ -207,9 +207,7 @@ void test_tm_check_invalid_rtime_invalid_millis(void) {
 
 
 int main( int argc, char **argv) {
-    tm_init(0);
-    
-
+    init();
     UNITY_BEGIN();
     RUN_TEST(test_stime);
     RUN_TEST(test_tm_cmp_stime_t1_less_than_t2);

@@ -3,8 +3,8 @@
 #include <unity.h>
 #include <time/time.h>
 #include <ucdm/descriptor.h>
+#include <scaffold.h>
 
-#include "../scaffold/common.c"
 
 void test_descriptor_version(void) {
     // TODO This needs to actually find the descriptor.
@@ -35,7 +35,7 @@ void test_descriptor_epoch(void) {
 }
 
 int main( int argc, char **argv) {
-    libinit();
+    init();
     UNITY_BEGIN();
     RUN_TEST(test_descriptor_epoch);
     RUN_TEST(test_descriptor_version);

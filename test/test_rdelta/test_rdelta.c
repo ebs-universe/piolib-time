@@ -1,6 +1,6 @@
 #include <unity.h>
 #include <time/time.h> 
-#include "../scaffold/common.c"
+#include <scaffold.h>
 
 
 void test_tm_apply_rdelta_positive_delta(void) {
@@ -144,7 +144,7 @@ void test_tm_apply_rdelta_large_mixed_negative_delta(void) {
 }
 
 int main( int argc, char **argv) {
-    tm_init(0);
+    init();
 
     UNITY_BEGIN();
     RUN_TEST(test_tm_apply_rdelta_positive_delta);
