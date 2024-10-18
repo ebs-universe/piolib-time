@@ -25,7 +25,7 @@
  */
 /**@{*/
     #ifndef APP_ENABLE_SYSTICK
-    #define APP_ENABLE_SYSTICK         1
+    #define APP_ENABLE_SYSTICK         0
     #endif
 
     #ifndef APP_ENABLE_TIME_CRON
