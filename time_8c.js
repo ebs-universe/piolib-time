@@ -15,7 +15,7 @@ var time_8c =
     [ "tm_set_epoch", "time_8c.html#a6a189a7f4cdf84e3f061bb309203fb50", null ],
     [ "tm_stime_from_rtime", "time_8c.html#adcd940fe0a1b12b1a0c47e857bc91b6e", null ],
     [ "epoch_handlers_root", "time_8c.html#a86be02fde607154c536aa3425793503b", null ],
-    [ "tm_current", "time_8c.html#a72ab6a2cf1cec6454e36bb7823fd83f0", null ],
+    [ "FASTDATA", "time_8c.html#a1a5a61d5224504b6c5268703d0d0ad91", null ],
     [ "tm_epoch", "time_8c.html#a07ba4f32f6991c9a4e14570a1f1c09c2", null ],
     [ "tm_epoch_descriptor", "time_8c.html#a1687bb92a3bbf9bcd535ce26d50df319", null ],
     [ "tm_internal_epoch", "time_8c.html#a81951a50eece8e5c647b52b00f199be9", null ],

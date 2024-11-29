@@ -120,9 +120,9 @@ $(document).ready(function(){initNavTree('time_8c_source.html',''); initResizabl
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;systick.h&quot;</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sync_8h.html">sync.h</a>&quot;</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="cron_8h.html">cron.h</a>&quot;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &lt;platform/sections.h&gt;</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">volatile</span> <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> tm_current = 0;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">volatile</span> <a class="code" href="time_8h.html#a6431d9bc028f3b054654b0b326ca6e97">tm_system_t</a> tm_current FASTDATA;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a> tm_epoch =          {19, 70, 1, 1, 0, 0, 0, 0};</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<a class="code" href="struct_t_m___r_e_a_l__t.html">tm_real_t</a> tm_internal_epoch = {19, 69, 3, 1, 0, 0, 0, 0};</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;int64_t tm_internal_epoch_offset =  26438400 * 1000LL;</div>
@@ -500,7 +500,7 @@ $(document).ready(function(){initNavTree('time_8c_source.html',''); initResizabl
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f6227287712d84441d1f97cc74cea9a5.html">time</a></li><li class="navelem"><a class="el" href="time_8c.html">time.c</a></li>
-    <li class="footer">Generated on Fri Oct 18 2024 16:20:49 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Nov 29 2024 13:11:44 for ebs-time by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
