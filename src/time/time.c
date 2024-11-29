@@ -39,9 +39,9 @@
 #include "systick.h"
 #include "sync.h"
 #include "cron.h"
+#include <platform/sections.h>
 
-
-volatile tm_system_t tm_current = 0;
+volatile tm_system_t tm_current FASTDATA;
 tm_real_t tm_epoch =          {19, 70, 1, 1, 0, 0, 0, 0};
 tm_real_t tm_internal_epoch = {19, 69, 3, 1, 0, 0, 0, 0};
 int64_t tm_internal_epoch_offset =  26438400 * 1000LL;
