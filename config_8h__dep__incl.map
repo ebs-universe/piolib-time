@@ -1,0 +1,24 @@
+<map id="time/config.h" name="time/config.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="187,5,294,31"/>
+<area shape="rect" id="Node000002" href="$systick_8c.html" title=" " alt="" coords="119,79,232,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,43,188,80,184,77,219,39"/>
+<area shape="rect" id="Node000003" href="$time_8h.html" title="Time related functions for embebedded systems." alt="" coords="257,79,355,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="263,39,297,77,293,80,259,43"/>
+<area shape="rect" id="Node000004" href="$cron_8h.html" title="Cron&#45;like scheduling framework for embebedded systems." alt="" coords="86,152,182,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="267,112,163,154,161,149,265,107"/>
+<area shape="rect" id="Node000006" href="$time_8c.html" title="Time related function implementations." alt="" coords="124,225,221,251"/>
+<area shape="poly" id="edge12_Node000003_Node000006" title=" " alt="" coords="285,115,247,154,184,227,180,223,243,150,282,112"/>
+<area shape="rect" id="Node000007" href="$sync_8c.html" title="Time synchonization function implementation." alt="" coords="391,225,488,251"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="330,112,369,150,432,223,428,227,365,154,327,115"/>
+<area shape="rect" id="Node000008" href="$sync_8h.html" title="Time synchonization functions for embebedded systems." alt="" coords="257,152,355,177"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="309,118,309,152,303,152,303,118"/>
+<area shape="rect" id="Node000010" href="$systick__handler_8h.html" title="Interrupt handler for the system tick for static inclusion in the application." alt="" coords="431,152,600,177"/>
+<area shape="poly" id="edge11_Node000003_Node000010" title=" " alt="" coords="354,106,482,149,481,154,352,111"/>
+<area shape="rect" id="Node000005" href="$cron_8c.html" title="Cron&#45;like scheduling framework implementations." alt="" coords="5,225,100,251"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="112,188,68,227,64,223,109,184"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="149,188,169,224,164,226,145,191"/>
+<area shape="poly" id="edge10_Node000008_Node000006" title=" " alt="" coords="274,186,196,227,193,223,271,181"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="341,181,419,223,416,227,338,186"/>
+<area shape="rect" id="Node000009" href="$sync__rtc_8c.html" title=" " alt="" coords="245,225,367,251"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="309,191,309,225,303,225,303,191"/>
+</map>

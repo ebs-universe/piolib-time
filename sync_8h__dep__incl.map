@@ -1,6 +1,9 @@
 <map id="time/sync.h" name="time/sync.h">
-<area shape="rect" id="node1" title="Time synchonization functions for embebedded systems." alt="" coords="138,5,237,32"/>
-<area shape="rect" id="node2" href="$sync_8c.html" title="Time synchonization function implementation." alt="" coords="5,80,103,107"/>
-<area shape="rect" id="node3" href="$sync__rtc_8c_source.html" title=" " alt="" coords="127,80,248,107"/>
-<area shape="rect" id="node4" href="$time_8c.html" title="Time related function implementations." alt="" coords="272,80,369,107"/>
+<area shape="rect" id="Node000001" title="Time synchonization functions for embebedded systems." alt="" coords="138,5,237,31"/>
+<area shape="rect" id="Node000002" href="$sync_8c.html" title="Time synchonization function implementation." alt="" coords="5,79,103,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,39,77,81,75,76,153,35"/>
+<area shape="rect" id="Node000003" href="$sync__rtc_8c.html" title=" " alt="" coords="127,79,248,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="190,44,190,79,185,79,185,44"/>
+<area shape="rect" id="Node000004" href="$time_8c.html" title="Time related function implementations." alt="" coords="272,79,369,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="222,35,300,76,298,81,219,39"/>
 </map>

@@ -1,0 +1,5 @@
+<map id="tm_sdelta_from_rdelta" name="tm_sdelta_from_rdelta">
+<area shape="rect" id="Node000001" title="Convert a tm_rdelta_t instance into systick units." alt="" coords="181,5,352,31"/>
+<area shape="rect" id="Node000002" href="$time_8h.html#a362eb0d02aef96bd2f20903c31c69364" title="Apply a real time difference to a time in systick units." alt="" coords="5,5,133,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,21,134,21,134,15,168,15"/>
+</map>

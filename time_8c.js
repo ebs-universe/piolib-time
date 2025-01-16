@@ -2,6 +2,7 @@ var time_8c =
 [
     [ "TM_UCDM_RTIME_LEN", "time_8c.html#a412795d952de12045fe0330791782ca5", null ],
     [ "TM_UCDM_STIME_LEN", "time_8c.html#ab67e2f92d178b4ad417ad885845ec4ce", null ],
+    [ "gyear", "time_8c.html#aba7781d07224c57d92365ae80f69421a", null ],
     [ "tm_check_invalid_rtime", "time_8c.html#acbcb06aff9710476f3813a37507b61fc", null ],
     [ "tm_clear_rdelta", "time_8c.html#a56895961aa355ff23c287403e49833ac", null ],
     [ "tm_clear_rtime", "time_8c.html#aa6bbe6f553bb851f42fb51b008ff4517", null ],
@@ -13,7 +14,10 @@ var time_8c =
     [ "tm_rtime_from_stime", "time_8c.html#a52c2bf43c04d5a8da41bbc4de13594e5", null ],
     [ "tm_sdelta_from_rdelta", "time_8c.html#a36fe5f19a48263d62cb825079260f00b", null ],
     [ "tm_set_epoch", "time_8c.html#a6a189a7f4cdf84e3f061bb309203fb50", null ],
+    [ "tm_set_internal_epoch", "time_8c.html#acc311702473d2c6414de107863fc6148", null ],
     [ "tm_stime_from_rtime", "time_8c.html#adcd940fe0a1b12b1a0c47e857bc91b6e", null ],
+    [ "days_in_month", "time_8c.html#ae360d5f4b48b8907724e5f32095fe540", null ],
+    [ "days_to_month", "time_8c.html#abe4e17a34d008d849469fa8a3c5fc372", null ],
     [ "epoch_handlers_root", "time_8c.html#a86be02fde607154c536aa3425793503b", null ],
     [ "FASTDATA", "time_8c.html#a1a5a61d5224504b6c5268703d0d0ad91", null ],
     [ "tm_epoch", "time_8c.html#a07ba4f32f6991c9a4e14570a1f1c09c2", null ],

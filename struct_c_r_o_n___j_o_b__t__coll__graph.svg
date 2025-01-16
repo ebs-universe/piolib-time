@@ -6,24 +6,52 @@
 <!-- Title: CRON_JOB_t Pages: 1 -->
 <svg width="143pt" height="30pt"
  viewBox="0.00 0.00 143.00 30.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<svg id="main" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" onload="init(evt)">
+<style type="text/css"><![CDATA[
+.node, .edge {opacity: 0.7;}
+.node.selected, .edge.selected {opacity: 1;}
+.edge:hover path { stroke: red; }
+.edge:hover polygon { stroke: red; fill: red; }
+]]></style>
+<script type="application/ecmascript" xlink:href="svg.min.js"/>
+<svg id="graph" class="graph">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 26)">
 <title>CRON_JOB_t</title>
 <!-- Node1 -->
-<g id="node1" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
-<polygon fill="#bfbfbf" stroke="black" points="0,-1.5 0,-20.5 77,-20.5 77,-1.5 0,-1.5"/>
+<g id="a_Node000001"><a xlink:title=" ">
+<polygon fill="#999999" stroke="#666666" points="77,-20.5 0,-20.5 0,-1.5 77,-1.5 77,-20.5"/>
 <text text-anchor="middle" x="38.5" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">CRON_JOB_t</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node1 -->
-<g id="edge1" class="edge">
+<g id="edge1_Node000001_Node000001" class="edge">
 <title>Node1&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M87.22,-14.04C91.98,-13.43 95,-12.42 95,-11 95,-8.73 87.27,-7.5 77.06,-7.28"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="86.8,-10.56 77.06,-14.72 87.26,-17.55 86.8,-10.56"/>
-<text text-anchor="middle" x="115" y="-14" font-family="Helvetica,sans-Serif" font-size="10.00"> nextjob</text>
-<text text-anchor="middle" x="115" y="-3" font-family="Helvetica,sans-Serif" font-size="10.00">prevjob</text>
+<g id="a_edge1_Node000001_Node000001"><a xlink:title=" ">
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M87.22,-13.74C91.98,-13.19 95,-12.27 95,-11 95,-8.96 87.27,-7.85 77.06,-7.65"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="86.83,-10.26 77.06,-14.35 87.25,-17.25 86.83,-10.26"/>
+</a>
+</g>
+<text text-anchor="middle" x="115" y="-14" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey"> nextjob</text>
+<text text-anchor="middle" x="115" y="-3" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">prevjob</text>
 </g>
 </g>
+</svg>
+</svg>
+
+<style type='text/css'>
+<![CDATA[
+[data-mouse-over-selected='false'] { opacity: 0.7; }
+[data-mouse-over-selected='true']  { opacity: 1.0; }
+]]>
+</style>
+<script type="application/ecmascript"><![CDATA[
+document.addEventListener('DOMContentLoaded', (event) => {
+  highlightEdges();
+  highlightAdjacentNodes();
+});
+]]></script>
 </svg>

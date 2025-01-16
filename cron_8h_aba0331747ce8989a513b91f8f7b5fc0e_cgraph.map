@@ -1,0 +1,16 @@
+<map id="tm_cron_poll" name="tm_cron_poll">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,81,112,107"/>
+<area shape="rect" id="Node000002" href="$time_8h.html#a020bc3b6a0701a332d55523b44d837ae" title="Apply a time difference to a time in system time." alt="" coords="173,5,304,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,79,159,48,193,33,195,38,161,52,89,84"/>
+<area shape="rect" id="Node000003" href="$time_8h.html#a34b852789210f305cc7bd1c68d0abb16" title=" " alt="" coords="564,107,683,132"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="112,87,291,81,404,83,516,91,567,101,566,106,516,97,403,88,291,86,112,93"/>
+<area shape="rect" id="Node000004" href="$cron_8h.html#aa4dc612a9a51f266f2344d02ab4a4da8" title=" " alt="" coords="160,107,317,132"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="113,99,147,104,146,109,112,104"/>
+<area shape="rect" id="Node000007" href="$time_8h.html#a359fb93dd777b89c84bccc983cfbba25" title="Get the current system time." alt="" coords="173,156,304,181"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="85,104,161,141,183,149,181,154,159,146,82,109"/>
+<area shape="rect" id="Node000005" href="$cron_8c.html#afe1c43d60c56c95d6cdd32b36738a401" title=" " alt="" coords="365,107,516,132"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="318,117,351,117,351,122,318,122"/>
+<area shape="rect" id="Node000006" href="$cron_8c.html#abf90aa38172b4830afeb0a113be640eb" title=" " alt="" coords="367,156,514,181"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="292,129,375,150,374,155,291,135"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="488,153,561,133,563,138,489,159"/>
+</map>

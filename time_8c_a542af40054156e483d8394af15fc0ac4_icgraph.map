@@ -1,0 +1,7 @@
+<map id="tm_register_epoch_change_handler" name="tm_register_epoch_change_handler">
+<area shape="rect" id="Node000001" title="Register a callback for changes to the epoch." alt="" coords="272,5,469,45"/>
+<area shape="rect" id="Node000002" href="$cron_8c.html#a11dc7bae47b8fb891f0af6d3f95677b3" title=" " alt="" coords="121,13,224,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="258,28,224,28,224,23,258,23"/>
+<area shape="rect" id="Node000003" href="$time_8c.html#ad30ad83b20a9361d7ba12e5117b56fce" title="Intitialize time library constructs." alt="" coords="5,13,73,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="107,28,74,28,74,23,107,23"/>
+</map>

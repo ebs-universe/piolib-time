@@ -10,5 +10,6 @@ var cron_8h =
     [ "tm_cron_init", "cron_8h.html#a11dc7bae47b8fb891f0af6d3f95677b3", null ],
     [ "tm_cron_insert_job", "cron_8h.html#abf90aa38172b4830afeb0a113be640eb", null ],
     [ "tm_cron_poll", "cron_8h.html#aba0331747ce8989a513b91f8f7b5fc0e", null ],
+    [ "tm_cron_replace_job", "cron_8h.html#aa4dc612a9a51f266f2344d02ab4a4da8", null ],
     [ "cron_nextjob_p", "cron_8h.html#ae2b82eb1eaf38c82e861d43e25687d0e", null ]
 ];

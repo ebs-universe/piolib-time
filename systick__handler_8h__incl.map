@@ -1,10 +1,17 @@
 <map id="time/systick_handler.h" name="time/systick_handler.h">
-<area shape="rect" id="node1" title="Interrupt handler for the system tick for static inclusion in the application." alt="" coords="147,5,316,32"/>
-<area shape="rect" id="node2" href="$time_8h.html" title="Time related functions for embebedded systems." alt="" coords="199,80,263,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,155,76,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="100,155,171,181"/>
-<area shape="rect" id="node5" href="$config_8h_source.html" title=" " alt="" coords="195,155,268,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="293,155,410,181"/>
-<area shape="rect" id="node8" title=" " alt="" coords="435,155,545,181"/>
-<area shape="rect" id="node6" title=" " alt="" coords="178,229,285,256"/>
+<area shape="rect" id="Node000001" title="Interrupt handler for the system tick for static inclusion in the application." alt="" coords="147,5,316,31"/>
+<area shape="rect" id="Node000002" href="$time_8h.html" title="Time related functions for embebedded systems." alt="" coords="199,79,263,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="234,31,234,65,229,65,229,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,76,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="202,107,86,149,84,144,200,102"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="100,152,171,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="217,106,164,146,161,141,214,102"/>
+<area shape="rect" id="Node000005" href="$config_8h.html" title=" " alt="" coords="195,152,268,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="234,104,234,138,229,138,229,104"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="293,152,410,177"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="252,102,321,142,318,147,249,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="435,152,545,177"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="264,99,436,146,434,151,263,104"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="178,225,285,251"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="234,178,234,212,229,212,229,178"/>
 </map>

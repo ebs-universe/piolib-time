@@ -1,0 +1,9 @@
+<map id="gyear" name="gyear">
+<area shape="rect" id="Node000001" title=" " alt="" coords="379,31,437,56"/>
+<area shape="rect" id="Node000002" href="$time_8c.html#a52c2bf43c04d5a8da41bbc4de13594e5" title="Get the real time from a system timestamp against the current epoch." alt="" coords="167,5,331,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="365,39,328,33,329,28,366,34"/>
+<area shape="rect" id="Node000003" href="$time_8c.html#adcd940fe0a1b12b1a0c47e857bc91b6e" title="Get a system timestamp from a real time, against the current epoch." alt="" coords="167,55,331,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="366,52,331,58,330,52,365,47"/>
+<area shape="rect" id="Node000004" href="$time_8c.html#a6a189a7f4cdf84e3f061bb309203fb50" title="Set the epoch time from an external real time source." alt="" coords="5,55,119,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="153,70,119,70,119,65,153,65"/>
+</map>

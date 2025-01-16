@@ -1,7 +1,23 @@
 var time_8h =
 [
-    [ "TM_REAL_t", "struct_t_m___r_e_a_l__t.html", "struct_t_m___r_e_a_l__t" ],
-    [ "TM_RDELTA_t", "struct_t_m___r_d_e_l_t_a__t.html", "struct_t_m___r_d_e_l_t_a__t" ],
+    [ "TM_REAL_t", "time_8h.html#struct_t_m___r_e_a_l__t", [
+      [ "century", "time_8h.html#ac57a5f6294dfdc3db38d630c5d589f31", null ],
+      [ "date", "time_8h.html#a30ca8635d0267ef5190a408d7a134f7e", null ],
+      [ "hours", "time_8h.html#a00a531a34a1d603329df5778f1203ab6", null ],
+      [ "millis", "time_8h.html#a71091d2af6d8f642c7bd329e1e7d87ce", null ],
+      [ "minutes", "time_8h.html#a7acca8be0094a19be6e308ac05924c4f", null ],
+      [ "month", "time_8h.html#a3e00faf7fbf9805e9ec4d2edd6339050", null ],
+      [ "seconds", "time_8h.html#a46729a903be1a03cdb248fb48d84d4f5", null ],
+      [ "year", "time_8h.html#a7af2065789bc84419b8d5fe109be83b5", null ]
+    ] ],
+    [ "TM_RDELTA_t", "time_8h.html#struct_t_m___r_d_e_l_t_a__t", [
+      [ "days", "time_8h.html#a08657383dea395d1fa1699117297015f", null ],
+      [ "hours", "time_8h.html#a00a531a34a1d603329df5778f1203ab6", null ],
+      [ "millis", "time_8h.html#a71091d2af6d8f642c7bd329e1e7d87ce", null ],
+      [ "minutes", "time_8h.html#a7acca8be0094a19be6e308ac05924c4f", null ],
+      [ "seconds", "time_8h.html#a46729a903be1a03cdb248fb48d84d4f5", null ],
+      [ "sgn", "time_8h.html#a705cda7722d312aa542b11b52b78bf54", null ]
+    ] ],
     [ "TM_EPOCH_CHANGEHANDLER_t", "struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t.html", "struct_t_m___e_p_o_c_h___c_h_a_n_g_e_h_a_n_d_l_e_r__t" ],
     [ "TIME_SECONDS_PER_DAY", "time_8h.html#af752144f9cbabcde89282e4f485176bc", null ],
     [ "TIME_SECONDS_PER_HOUR", "time_8h.html#a8da0ab08ac01140a51f9b8d70602ade2", null ],
@@ -17,11 +33,16 @@ var time_8h =
     [ "tm_real_t", "time_8h.html#a4d68c653cca64590d7af5c9434363a19", null ],
     [ "tm_sdelta_t", "time_8h.html#a3d5cc3f465acf62651c6b24795249de6", null ],
     [ "tm_system_t", "time_8h.html#a6431d9bc028f3b054654b0b326ca6e97", null ],
+    [ "tm_apply_rdelta", "time_8h.html#a362eb0d02aef96bd2f20903c31c69364", null ],
+    [ "tm_apply_sdelta", "time_8h.html#a020bc3b6a0701a332d55523b44d837ae", null ],
     [ "tm_check_invalid_rtime", "time_8h.html#acbcb06aff9710476f3813a37507b61fc", null ],
     [ "tm_clear_rdelta", "time_8h.html#a56895961aa355ff23c287403e49833ac", null ],
     [ "tm_clear_rtime", "time_8h.html#aa6bbe6f553bb851f42fb51b008ff4517", null ],
     [ "tm_clear_sdelta", "time_8h.html#a00a5692ee3a8cab2cb079ce7e2c8c5e3", null ],
     [ "tm_clear_stime", "time_8h.html#a80e742cf4d5a15aa405e271532631cb7", null ],
+    [ "tm_cmp_stime", "time_8h.html#a34b852789210f305cc7bd1c68d0abb16", null ],
+    [ "tm_current_time", "time_8h.html#a359fb93dd777b89c84bccc983cfbba25", null ],
+    [ "tm_get_sdelta", "time_8h.html#a006383f294822e9ac3115800060d1b8e", null ],
     [ "tm_init", "time_8h.html#ad30ad83b20a9361d7ba12e5117b56fce", null ],
     [ "tm_install_descriptor", "time_8h.html#ae649a29fbd008c16730d843b6da0a7fc", null ],
     [ "tm_rdelta_from_sdelta", "time_8h.html#a70da36517cb7cbe622604c69c21dafaa", null ],
